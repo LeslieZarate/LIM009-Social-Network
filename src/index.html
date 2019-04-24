@@ -5,8 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+    <script>
+       // Initialize Firebase
+    const config = {
+        apiKey: "AIzaSyCZRF-aukLeQjCo1IxyPvxuNVTeacP81nI",
+        authDomain: "primer-proyecto-88af3.firebaseapp.com",
+        databaseURL: "https://primer-proyecto-88af3.firebaseio.com",
+        projectId: "primer-proyecto-88af3",
+        storageBucket: "primer-proyecto-88af3.appspot.com",
+        messagingSenderId: "284330492894"
+      };
+      firebase.initializeApp(config);
+    </script>
 </head>
 <body>
-  <script type="module" src="main.js"></script>
+    <h1 id ="saludo"></h1>
+    <script>      
+      const saludo = document.getElementById('saludo');
+      const dbRef = firebase.database().ref().child('text');
+      dbRef.on('value', snap => saludo.innerText = snap.val()); 
+
+    </script>
+
+    
+
+
+
+  <!--<script type="module" src="main.js"></script>-->
 </body>
 </html>
