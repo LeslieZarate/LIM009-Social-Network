@@ -2,6 +2,8 @@
 
 En este proyecto nuestra tematica es enfocarnos en el publico juvenil, al cual tiene como hobbie ver doramas en sus tiempos libres, por eso pensamos en este espacio en el cual pueden compartir referencias sobre este tema.
 
+![image](https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/logo.jpg)
+
 
 Las **caraterísticas técnicas** de tu aplicación serán las siguientes:
 - Debe ser una Single-Page Application [SPA](https://dzone.com/articles/how-single-page-web-applications-actually-work) ([versión traducida](https://dzone.com/articles/how-single-page-web-applications-actually-work))
