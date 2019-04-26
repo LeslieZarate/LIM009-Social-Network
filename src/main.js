@@ -1,5 +1,5 @@
 // Punto de entrada de la aplicacion
-import { init } from "./mvc/controller/router.js";
+import { init } from "./router.js";
 
 const init = () => {
 
