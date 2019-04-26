@@ -70,6 +70,7 @@ label {
   width: 45px;
   padding: 4px 0px 0px;
   margin: 10px 4px 0px; 
+  cursor: pointer;
 }
 
  .contenedor{
