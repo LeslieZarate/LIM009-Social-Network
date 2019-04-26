@@ -16,4 +16,5 @@ const config = {
   init();
 }
 
+
 window.onload = init();
