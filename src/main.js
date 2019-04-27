@@ -1,5 +1,4 @@
 document.getElementById('oculto').style.visibility ='hidden';
-
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
@@ -12,7 +11,7 @@ const init = () =>{
     firebase.initializeApp(config);  
 }
  init();
-//Logeo de sesión
+//Logeo de sesión usuario ya registrado
 const btnAcceder=document.getElementById("btn-acceder");
 const email=document.getElementById("email");
 const  password=document.getElementById("password");
@@ -25,7 +24,7 @@ btnAcceder.addEventListener('click',()=>{
     root.innerHTML =`
     <div>
     <h1>${result.user.email}</h1>
-    <img src='${"https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579_960_720.png "}'/>
+    <img src='${"https://www.pinclipart.com/picdir/big/50-502598_icono-cliente-png-clipart.png"}'/>
     <div>
     `;
   })
