@@ -1,3 +1,17 @@
+document.getElementById('oculto').style.visibility ='hidden';
+
+const init = () =>{
+  const config = {
+      apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
+      authDomain: "db-drama-fever.firebaseapp.com",
+      databaseURL: "https://db-drama-fever.firebaseio.com",
+      projectId: "db-drama-fever",
+      storageBucket: "db-drama-fever.appspot.com",
+      messagingSenderId: "82992397174"
+    };
+    firebase.initializeApp(config);  
+}
+ init();
 //Logeo de sesión
 const btnAcceder=document.getElementById("btn-acceder");
 const email=document.getElementById("email");
@@ -41,8 +55,8 @@ const observador= ()=>{
   observador();
 
 // LOGIN CON GOOGLE
-const  provider = new firebase.auth.GoogleAuthProvider();
-const authGoogle = document.getElementById('auth-google');  // boton 
+const provider = new firebase.auth.GoogleAuthProvider();
+const authGoogle = document.getElementById('auth-google');  // boton Google
 const root = document.getElementById('root');
 
 authGoogle.addEventListener('click',()=>{
@@ -70,7 +84,35 @@ const saveUserGoogle = (user) =>{
   firebase.database().ref("usuarios/"+ user.uid).set(usuario)
 };
 
+// LOGIN CON FB
+const provider1 = new firebase.auth.FacebookAuthProvider();
+const authFacebook = document.getElementById('auth-fb');  // boton Facebook
+const root1 = document.getElementById('root');
 
+authFacebook.addEventListener('click',()=>{
+  firebase.auth().signInWithPopup(provider1) 
+    .then(result => {
+        console.log(result.user)
+        saveUserFacebook(result.user);
+        root1.innerHTML =`
+        <div>
+        <h1>${result.user.displayName}</h1>
+        <img src='${result.user.photoURL}'/>
+        <div>
+        `;
+      })
+    .catch(e => console.log(e.message))
+});
+
+const saveUserFacebook = (user) =>{
+  const usuario  = {
+    uid : user.uid,
+    name : user.displayName,
+    email:user.email,
+    photo : user.photoURL
+  }
+  firebase.database().ref("usuarios/"+ user.uid).set(usuario)
+};
 
 
 
