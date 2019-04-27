@@ -24,7 +24,7 @@ h2 {
   font-size: 20px;
 }
 
-.conteiner{
+.conteiner, .conteiner1{
   float: right;
   background-color:rgba(41, 15, 32, 0.5);
   width: 60%;
@@ -57,7 +57,7 @@ color: #11080f;
 }
 
 
-#btn-registrarse, #btn-acceder {
+#btn-registrarse, #btn-acceder, #btn-crear, #btn-back-login {
 color: rgb(44, 4, 31);
 width: 50%;
 transition: all ease .3s;
