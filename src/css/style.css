@@ -24,16 +24,28 @@ h2 {
   font-size: 20px;
 }
 
+.intro{
+  float: left;
+  margin: 120px 60px;
+  padding: 40px;
+}
+
+.img{
+  float: right;
+  margin: 120px 60px;
+  padding: 40px;
+}
+
 .conteiner, .conteiner1{
   float: right;
-  background-color:rgba(41, 15, 32, 0.5);
+  background-color:rgba(41, 15, 32, 0.1);
   width: 60%;
   padding: 40px;
   border-radius: 10px;
   border: 2px solid transparent;
   width: 66%;
   max-width: 400px;
-  margin: 120px 40px;
+  margin: 120px 80px;
   text-align: center;
   font-size: 18px;
   color: #ffffff;
@@ -85,14 +97,4 @@ width: 100%;
 margin: 20px auto;
 text-align: center;
 font-size: 15px;
-}
-
-
-@media screen and (min-width:480px) {
-
-body {
-  background: url('https://images.unsplash.com/photo-1520052205864-92d242b3a76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 }

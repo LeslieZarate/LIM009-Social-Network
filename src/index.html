@@ -9,51 +9,43 @@
   <link rel="icon" href="img/icon.png">
 </head>
 <body>
-  <div id="root">
+        <img src="img/intro.png" class="intro">
+    <div id="root">
       <div class="conteiner">
           <img alt ='logo' src="img/logo1.png" class="img-logo">
           <h2> Inicia Sesión </h2>
       
           <input class="text-field" id="email" type="email" placeholder="Email *">
-          <input class="text-field" id="password" type="password" placeholder="Contraseña *">
-          <button class="login" type="button" id="btn-acceder"> Acceder </button>
+          <input class="text-field" id="password" type="password" placeholder="Password *">
+          <button class="login" type="button" id="btn-acceder">Log In</button>
           <div>
-                <label> O ingresa desde:</label>
+                <label>O bien ingresa con...</label>
             </div>
             <div>
                 <img id="auth-google" alt="ico-google" class="ico-google" src="https://i.ibb.co/xgLXQrr/ico-gg.png" />
                 <img id="auth-fb" alt="ico-fb" class="ico-fb" src="https://i.ibb.co/NmxyWjL/ico-fb.png" />
             </div>
-            <label> Si no tienes una cuenta creala aqui:</label>
-            <button class="button" type="button" id="btn-registrarse">Regístrate</button>
+            <label>¿No tienes una cuenta?</label>
+            <button class="button" type="button" id="btn-registrarse">Check in</button>
         </div>
-    
         <div class="conteiner1" id="oculto">
           <img alt='logo' src="img/logo1.png" class="img-logo">
           <h2> Registro de usuarios </h2>
-      
           <div>
-              <label> con:</label>
-      
-              <div>
-                  <img id="auth-google" alt="ico-google" class="ico-google" src="https://i.ibb.co/xgLXQrr/ico-gg.png" />
-                  <img id="auth-fb" alt="ico-fb" class="ico-fb" src="https://i.ibb.co/NmxyWjL/ico-fb.png" />
-              </div>
-      
+              <input class="text-field" id="user" type="user" placeholder="Nick Name">
+              <input class="text-field" id="name" type="name" placeholder="Name">
+              <input class="text-field" id="email" type="email" placeholder="Email">
+              <input class="text-field" id="password" type="password" placeholder="Password *">
+              <button type="button" id="btn-crear">Check in</button>
           </div>
-      
-          <label> ó </label>
-      
           <div>
-              <input class="text-field" id="email" type="email" placeholder="Correo">
-              <input class="text-field" id="password" type="password" placeholder="Contraseña">
-              <button type="button" id="btn-crear"> Regístrate </button>
+              <label>¿Si ya tienes una cuenta?</label>
+              <button type="button" id="btn-back-login">Log In</button>
           </div>
-      
           <div>
-              <label>¿Ya tienes una cuenta?</label>
-              <button type="button" id="btn-back-login">Acceder</button>
-          </div>
+            <img id="auth-google" alt="ico-google" class="ico-google" src="https://i.ibb.co/xgLXQrr/ico-gg.png" />
+            <img id="auth-fb" alt="ico-fb" class="ico-fb" src="https://i.ibb.co/NmxyWjL/ico-fb.png" />
+        </div>
       </div>
     </div>
   
