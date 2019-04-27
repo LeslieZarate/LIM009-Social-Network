@@ -1,3 +1,5 @@
+document.getElementById('oculto').style.visibility ='hidden';
+
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
