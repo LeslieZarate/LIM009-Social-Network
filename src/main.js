@@ -1,4 +1,3 @@
-document.getElementById('oculto').style.visibility ='hidden';
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
@@ -11,26 +10,22 @@ const init = () =>{
     firebase.initializeApp(config);  
 }
  init();
-//Logeo de sesión usuario ya registrado
-const btnAcceder=document.getElementById("btn-acceder");
-const email=document.getElementById("email");
-const  password=document.getElementById("password");
 
-btnAcceder.addEventListener('click',()=>{
-  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-  .then(result => {
-    console.log(result.user)
-    saveUserGoogle(result.user);
-    root.innerHTML =`
-    <div>
-    <h1>${result.user.email}</h1>
-    <img src='${"https://www.pinclipart.com/picdir/big/50-502598_icono-cliente-png-clipart.png"}'/>
-    <div>
-    `;
-  })
-  .catch(error => console.log(error.message));
-});
+ const generalContainer =document.getElementById("general-container"); // Se mostrara todo
 
+// GUARDA SESION DE TODOS LOS INICIOS DE SESION 
+ const saveUser = (user) =>{
+  const usuario  = {
+    uid : user.uid,
+    name : user.displayName,
+    email:user.email,
+    photo : user.photoURL
+  }
+  firebase.database().ref("usuarios/"+ user.uid).set(usuario)
+};
+
+
+// vera si el usuario Inicio sesion 
 const observador= ()=>{
   firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -50,20 +45,54 @@ const observador= ()=>{
         console.log("usuario no activo");
         // ...
       }
-    });}
-  observador();
+    });
+};
+observador()
+
+
+
+// REGISTRAR NUEVO USUARIO 
+const singUp = document.getElementById('sing-up');
+const formRegister = document.getElementById('form-register'); 
+const formLogin = document.getElementById('form-login'); 
+singUp.addEventListener('click', () => {
+    formRegister.style.display = "block";
+    formLogin.style.display = "none";
+    
+
+});
+
+//LOGIN EMAIL-PASSWORD
+const btnLogin =document.getElementById("btn-login");
+const email = document.getElementById("email");
+const password =document.getElementById("password");
+
+btnLogin.addEventListener('click',()=>{
+  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+  .then(result => {
+    console.log(result.user)
+    saveUser(result.user);
+    generalContainer.innerHTML =`
+    <div>
+    <h1>${result.user.email}</h1>
+    <img src='${"https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579_960_720.png "}'/>
+    <div>
+    `;
+  })
+  .catch(error => console.log(error.message));
+});
+
 
 // LOGIN CON GOOGLE
-const provider = new firebase.auth.GoogleAuthProvider();
-const authGoogle = document.getElementById('auth-google');  // boton Google
-const root = document.getElementById('root');
+const providerGoogle = new firebase.auth.GoogleAuthProvider();
+const btnGoogle = document.getElementById('btn-google');  // boton Google
 
-authGoogle.addEventListener('click',()=>{
-  firebase.auth().signInWithPopup(provider) 
+btnGoogle.addEventListener('click',()=>{
+  firebase.auth().signInWithPopup(providerGoogle) 
     .then(result => {
         console.log(result.user)
-        saveUserGoogle(result.user);
-        root.innerHTML =`
+        saveUser(result.user);
+        generalContainer.innerHTML =`
         <div>
         <h1>${result.user.displayName}</h1>
         <img src='${result.user.photoURL}'/>
@@ -73,27 +102,17 @@ authGoogle.addEventListener('click',()=>{
     .catch(e => console.log(e.message))
 });
 
-const saveUserGoogle = (user) =>{
-  const usuario  = {
-    uid : user.uid,
-    name : user.displayName,
-    email:user.email,
-    photo : user.photoURL
-  }
-  firebase.database().ref("usuarios/"+ user.uid).set(usuario)
-};
 
 // LOGIN CON FB
-const provider1 = new firebase.auth.FacebookAuthProvider();
-const authFacebook = document.getElementById('auth-fb');  // boton Facebook
-const root1 = document.getElementById('root');
+const providerFacebook = new firebase.auth.FacebookAuthProvider();
+const btnFacebook = document.getElementById('btn-facebook');  // boton Facebook
 
-authFacebook.addEventListener('click',()=>{
-  firebase.auth().signInWithPopup(provider1) 
+btnFacebook.addEventListener('click',()=>{
+  firebase.auth().signInWithPopup(providerFacebook) 
     .then(result => {
         console.log(result.user)
-        saveUserFacebook(result.user);
-        root1.innerHTML =`
+        saveUser(result.user);
+        generalContainer.innerHTML =`
         <div>
         <h1>${result.user.displayName}</h1>
         <img src='${result.user.photoURL}'/>
@@ -103,24 +122,7 @@ authFacebook.addEventListener('click',()=>{
     .catch(e => console.log(e.message))
 });
 
-const saveUserFacebook = (user) =>{
-  const usuario  = {
-    uid : user.uid,
-    name : user.displayName,
-    email:user.email,
-    photo : user.photoURL
-  }
-  firebase.database().ref("usuarios/"+ user.uid).set(usuario)
-};
-
-
-
-
-
-
-
-
- /*
+/*
 
 // Aqui estoy leyendo la base de datos
 firebase.database().ref('usuarios')
