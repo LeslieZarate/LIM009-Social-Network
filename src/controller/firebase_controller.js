@@ -11,12 +11,12 @@ export const signInGoogle = () => {
 // LOGIN CON FACEBOOK
 export const signInFacebook = ()=>{
     const provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider);
+    return firebase.auth().signInWithPopup(provider);
 }
 
 // CREAR CUENTA 
 export const signUp = (email,password,name)=>{
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
   // Cerrar Sesión
