@@ -1,5 +1,5 @@
 import Login from './view/login.js'
-import Account from './view/account.js'
+//import Account from './view/account.js'
 
 
 const init = () =>{
@@ -12,6 +12,7 @@ const init = () =>{
       messagingSenderId: "82992397174"
     };
     firebase.initializeApp(config);  
+
 
     const root = document.getElementById('root');
     root.appendChild(Login());
