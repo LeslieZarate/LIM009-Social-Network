@@ -89,10 +89,6 @@ body{
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f1ed317fc39fe53b9637793a624ff7d7fc5d4956
 @media (min-width: 768px) {
 
   .container{
@@ -128,14 +124,4 @@ body{
   .form-group button{
     width:40%;
   }
-/*
-  .form-group input{
-   width: 60%;
-  }
-
-  .
-*/
-
 }
-
-

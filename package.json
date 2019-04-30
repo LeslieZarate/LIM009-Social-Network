@@ -10,6 +10,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "start": "npx serve src/",
     "htmlhint": "htmlhint dist/*.html ",
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage"
