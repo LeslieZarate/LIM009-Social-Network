@@ -11,7 +11,6 @@ const init = () =>{
       messagingSenderId: "82992397174"
     };
 
-    firebase.initializeApp(config);  
     const root = document.getElementById('root');
     root.appendChild(Login());
 
