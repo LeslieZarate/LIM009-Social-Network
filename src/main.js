@@ -1,5 +1,9 @@
 import Login from './view/login.js'
+<<<<<<< HEAD
 //import Account from './view/account.js'
+=======
+import Account from './view/account.js'
+>>>>>>> f1ed317fc39fe53b9637793a624ff7d7fc5d4956
 
 
 const init = () =>{
@@ -13,7 +17,10 @@ const init = () =>{
     };
     firebase.initializeApp(config);  
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1ed317fc39fe53b9637793a624ff7d7fc5d4956
     const root = document.getElementById('root');
     root.appendChild(Login());
 
