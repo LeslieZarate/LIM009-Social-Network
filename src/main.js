@@ -1,7 +1,4 @@
-import Login from './view/login.js'
-//import Account from './view/account.js'
-
-
+import {initRouter} from "./route.js"
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
@@ -12,13 +9,10 @@ const init = () =>{
       messagingSenderId: "82992397174"
     };
     firebase.initializeApp(config);  
-
-
-    const root = document.getElementById('root');
-    root.appendChild(Login());
-
+    
+    initRouter();
 }
-window.onload = init();
+ window.onload = init();
 
 
 

@@ -1,15 +1,11 @@
 // aqui exportaras las funciones que necesites
-export default ()=>{
+
+export default () => {
   const form = document.createElement('div');
   const formContent = `
-  <div class="container">
-  <p>Hola</p>
-</div>
-
+  <h1>HOLA</h1>
   `;
 
-  form.innerHTML = formContent;
-return form;
+  form.innerHTML = formContent
+  return form 
 }
-
-
