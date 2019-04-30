@@ -10,79 +10,12 @@
   <title>DramaFever</title>
 </head>
 <body>
-	<div class="container" id="general-container">
-		<section class="img-page p1 m1 h7">
-			<div class="intro">
-				<img src="img/intro.png">
-			</div>		
-		</section>
-		<section class="main m1 h7 p1">
-			<article>
-				<div class="register-login p2" id="form-login">
-					<div class="center-content">
-						<img alt ='logo' src="img/logo1.png" class="img-logo">
-					</div>
-				
-					<h2> Inicia Sesión </h2>				
-					<form id="form" class="form-login">
-						<div class="form-group">
-								<label  for="email">Email</label>
-								<input class="form-control" id="email" type="email" placeholder="Ingresa tu email"/>
-							</div>
-							<div class="form-group">
-								<label for="password">Password</label>
-								<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
-							</div>
-							<div class="form-group">
-								<button id="btn-login" type="submit">Login</button>
-							</div>                  
-					</form>
-					<p>O bien ingresa con:</p>
-
-					<div class="login-social m1">
-						<a href="#fb"  id="btn-facebook" class="login-social-item">
-							<img src="https://i.ibb.co/NmxyWjL/ico-fb.png" alt="facebook">
-						</a>
-						<a href="#gogle"  id="btn-google" class="login-social-item">
-							<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
-						</a>							
-					</div>
-
-					<p>Aun no tines cuenta <span><a href="#" id="sing-up">Registrate</a></span></p>				
-				</div>
-			</article>
-
-			<article>
-				<div class="register-login p2 none" id="form-register">
-					<div class="center-content">
-						<img alt ='logo' src="img/logo1.png" class="img-logo">
-					</div>
-				
-					<h2> Regístrate </h2>				
-					<form id="form" class="form-login">
-						<div class="form-group">
-							<label  for="name">Nombre</label>
-							<input class="form-control" id="name" type="text" placeholder="Ingresa tu nombre"/>
-						</div>
-						<div class="form-group">
-							<label  for="email-register">Email</label>
-							<input class="form-control" id="email-register" type="email" placeholder="Ingresa tu email"/>
-						</div>
-						<div class="form-group">
-							<label for="password-register">Password</label>
-							<input class="form-control" id="password-register" type="password" placeholder="Ingresa tu contraseña"/>
-						</div>
-						<div class="form-group">
-								<button id="btn-singUp" type="submit">Registrar</button>
-						</div>                  
-					</form>					
-				</div>
-			</article>
-		</section>
-	</div>
-
+	<div id="root"></div>
+	
 	<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-	<!--<script type="module" src="model/main.js"></script> -->
-	<script type="text/javascript" src="model/main.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script type="module" src="main.js"></script> 
+	
 </body>
 </html>

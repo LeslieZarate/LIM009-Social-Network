@@ -24,7 +24,7 @@ body{
   justify-content: center;
 }
 .container{
-  width: 90%
+  width: 90%;
   max-width:1000px;
   margin:auto;
   height: auto;
@@ -89,10 +89,6 @@ body{
   cursor: pointer;
 }
 
-.none{
-  display: none;
-}
-
 @media (min-width: 768px) {
 
   .container{
@@ -135,8 +131,6 @@ body{
 
   .
 */
-
-
 
 }
 
