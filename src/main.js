@@ -1,6 +1,6 @@
 import Login from './view/login.js'
 //import Account from './view/account.js'
-
+import {initRoute} from './route.js'
 
 const init = () =>{
   const config = {
@@ -11,12 +11,8 @@ const init = () =>{
       storageBucket: "db-drama-fever.appspot.com",
       messagingSenderId: "82992397174"
     };
-    firebase.initializeApp(config);  
-
-
-    const root = document.getElementById('root');
-    root.appendChild(Login());
-
+    firebase.initializeApp(config);
+    initRoute();  
 }
 window.onload = init();
 

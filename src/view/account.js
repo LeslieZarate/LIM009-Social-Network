@@ -1,4 +1,4 @@
-import {signUpSubmit} from '../view_controller'
+import {signUpSubmit} from '../view_controller.js'
 
 export default ()=>{
     const form = document.createElement('div');
