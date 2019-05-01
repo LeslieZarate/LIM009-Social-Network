@@ -1,4 +1,4 @@
-import {signUpSubmit} from '../view_controller'
+import{signUpSubmit} from "../view-controller.js"
 
 export default ()=>{
     const form = document.createElement('div');
@@ -40,8 +40,11 @@ export default ()=>{
 
     `;
 
-    const btnSingUp = document.querySelector('#btn-singUp');
-    btnSingUp.addEventListener('click',signUpSubmit)
-return form;
-}
+    form.innerHTML = formContent;
 
+    const btnSignUp = form.querySelector('#btn-singUp')
+    btnSignUp.addEventListener('click',signUpSubmit);
+
+
+    return form;
+}
