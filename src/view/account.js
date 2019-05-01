@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {signUpSubmit} from '../view_controller.js'
+=======
+import{signUpSubmit} from "../view-controller.js"
+>>>>>>> b14e59092a6032010db5b71b0200ec58d0736a32
 
 export default ()=>{
     const form = document.createElement('div');
@@ -40,8 +44,11 @@ export default ()=>{
 
     `;
 
-    const btnSingUp = document.querySelector('#btn-singUp');
-    btnSingUp.addEventListener('click',signUpSubmit)
-return form;
-}
+    form.innerHTML = formContent;
 
+    const btnSignUp = form.querySelector('#btn-singUp')
+    btnSignUp.addEventListener('click',signUpSubmit);
+
+
+    return form;
+}
