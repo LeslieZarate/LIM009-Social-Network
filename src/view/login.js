@@ -1,4 +1,4 @@
-import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../view-controller.js"
+import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../controller/view-controller.js"
 
 export default () => {
     const form = document.createElement('div');

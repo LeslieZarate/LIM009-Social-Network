@@ -1,5 +1,4 @@
 // LOGIN CON EMAIL -PASSWORD
-
 export const signIn = (email, password) =>
   firebase.auth().signInWithEmailAndPassword(email, password)
 
@@ -15,10 +14,10 @@ export const signInFacebook = ()=>{
     return firebase.auth().signInWithPopup(provider);
 }
 
-// CREAR CUENTA 
+// CREAR CUENTA
 export const signUp = (email,password)=>{
     return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
-  // Cerrar Sesión
-  export const singOut =() => firebase.auth().signOut()
+// CERRAR SESION
+export const singOut =() => firebase.auth().signOut()
