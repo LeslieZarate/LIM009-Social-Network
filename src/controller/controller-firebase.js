@@ -1,6 +1,6 @@
 // LOGIN CON EMAIL -PASSWORD
 export const signIn = (email, password) =>
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password);
 
 // LOGIN CON GOOGLE
 export const signInGoogle = () => {
@@ -14,10 +14,21 @@ export const signInFacebook = ()=>{
     return firebase.auth().signInWithPopup(provider);
 }
 
-// CREAR CUENTA
+// CREAR CUENTA 
 export const signUp = (email,password)=>{
     return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
+// Cerrar Sesión
+export const signOut = () => firebase.auth().signOut();
 
-// CERRAR SESION
-export const singOut =() => firebase.auth().signOut()
+/********************** POST  **************** */
+  export const addNote = (userName,userPhoto,textPost,privacy) => {
+    return firebase.firestore().collection('posts').add({
+      name : userName,
+      photo :  userPhoto,
+      textPost : textPost,
+      privacy : privacy,
+      date : Date(),
+      likes :0,
+    });
+  }

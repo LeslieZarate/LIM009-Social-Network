@@ -1,12 +1,14 @@
 import Login from "./view/login.js"
 import Account from "./view/account.js"
+import Header from "./view/header.js"
 import Home from "./view/home.js"
+import Profile from "./view/profile.js"
 import Error from "./view/404.js"
 
 const changeTmp = (hash) => {
     if (hash === '#/' || hash === '' || hash === '#') {
       return viewTmp('#/signIn');
-    } else if (hash === '#/signIn' || hash === '#/home' || hash ==='#/account') {
+    } else if (hash === '#/signIn' ||  hash ==='#/account' || hash === '#/home' || hash === '#/profile') {
       return viewTmp(hash);
     } else {
       return viewTmp();
@@ -26,14 +28,16 @@ const changeTmp = (hash) => {
         break;
 
         case '#/home':
+        root.appendChild(Header());
         root.appendChild(Home());
         break;
-      /*
-        case 'error':
-        root.appendChild(Error());
-        break;*/
 
-       default:
+        case '#/profile':
+        root.appendChild(Header());
+        root.appendChild(Profile());
+        break;
+       
+        default:
         root.appendChild(Error());
         break;
     }
@@ -45,4 +49,3 @@ const changeTmp = (hash) => {
     if (("onhashchange" in window)) window.onhashchange = () => changeTmp(window.location.hash)
   }
   
-
