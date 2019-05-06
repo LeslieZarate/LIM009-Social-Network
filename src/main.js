@@ -1,4 +1,5 @@
 import {initRouter} from "./route.js"
+import{observer} from "./view-controller.js"
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
@@ -11,6 +12,7 @@ const init = () =>{
     firebase.initializeApp(config);  
     
     initRouter();
+    observer();
 }
  window.onload = init();
 
