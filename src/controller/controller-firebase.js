@@ -21,6 +21,26 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
+
+/********************** DATOS DE USUARIO **************** */
+
+export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
+  return firebase.firestore().collection('users').doc(uid).set({
+    id: idDoc,
+    name: userName,
+    email: email,
+    photo: userPhoto,
+  })
+}
+
+export const getUser = (uid, tempUser) =>{
+  firebase.firestore().collection('users').doc(uid).get()  
+  .then(doc=> {
+    tempUser(doc.data())
+    console.log(doc.data())
+  })
+}
+
 /********************** POST  **************** */
   export const addNote = (userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({

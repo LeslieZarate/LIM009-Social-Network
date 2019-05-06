@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut ,addNote} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut ,addNote ,setUser} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
@@ -21,19 +21,15 @@ export const signInOnSubmit = (event) => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-  // Funcion de Login con GOOGLE
+
+// Funcion de Login con GOOGLE
 export const signInGoogleOnSubmit = () => {
   signInGoogle()
     .then(() => {
       const user = firebase.auth().currentUser;      
       if (user != null) {
         user.providerData.forEach( profile =>{
-          firebase.firestore().collection('users').doc(user.uid).set({
-            id: profile.uid,
-            name: profile.displayName,
-            email: profile.email,
-            photo: profile.photoURL,
-          })
+          setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
         })
       }
       changeHash('/home')
@@ -44,19 +40,15 @@ export const signInGoogleOnSubmit = () => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })    
 }
-  // Funcion de Login FACEBOOK
+
+// Funcion de Login FACEBOOK
 export const signInFacebookOnSubmit = () => {
 	signInFacebook()
   .then(() => {
     const user = firebase.auth().currentUser;      
     if (user != null) {
       user.providerData.forEach( profile =>{
-        firebase.firestore().collection('users').doc(user.uid).set({
-          id: profile.uid,
-          name: profile.displayName,
-          email: profile.email,
-          photo: profile.photoURL,
-        })
+        setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
       }) 
     }
     changeHash('/home')
@@ -74,17 +66,13 @@ export const signUpSubmit = (event) =>{
 	const email = document.querySelector('#email').value;
 	const password = document.querySelector('#password').value;
   const name = document.querySelector('#name').value;
+  const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
+
   signUp(email,password)	
 		.then(()=>{
       const user = firebase.auth().currentUser;
-      console.log(user);
       if(user != null){
-        firebase.firestore().collection('users').doc(user.uid).set({
-          id: user.uid,
-          name: name,
-          email: user.email,
-          photo: 'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png',
-        })
+        setUser(user.uid,name,user.email,photo,user.uid)        
       }      
       changeHash('/signIn');
     })
@@ -94,6 +82,7 @@ export const signUpSubmit = (event) =>{
         alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
+
 // Salir de la Cuenta
 export const signOutSubmit = () =>{
   signOut()
@@ -127,7 +116,7 @@ export  const addNoteSubmit = (event) =>{
   const textPost = document.querySelector('#text-post').value;
   const privacy = document.querySelector('#options-privacy').value;  
   addNote(userName,userPhoto,textPost,privacy)
-    .then(doc=>console.log(doc.data()))
+    .then(doc=>console.log(doc))
     .catch(error => {
       const errorCode = error.code;
       const  errorMessage = error.message;
