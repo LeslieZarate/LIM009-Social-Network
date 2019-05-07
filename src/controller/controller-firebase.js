@@ -42,7 +42,7 @@ export const getUser = (uid, tempUser) =>{
 }
 
 /********************** POST  **************** */
-  export const addNote = (userName,userPhoto,textPost,privacy) => {
+  /*export const addNote = (userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
       name : userName,
       photo :  userPhoto,
@@ -51,4 +51,24 @@ export const getUser = (uid, tempUser) =>{
       date : Date(),
       likes :0,
     });
-  }
+  }*/
+
+  //Crear notas
+export const addNote = (post,userName)=> {
+  return firebase.firestore().collection('post').add({
+      note: post,
+      name : userName,
+  })
+}
+
+//Leer notas
+export const readNotes =(data)=>{
+  firebase.firestore().collection('post').onSnapshot((querySnapshot)=>{
+      const posts =[];
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+          posts.push({id: doc.id,...doc.data()});
+      });
+      data(posts);
+  })
+}

@@ -107,7 +107,7 @@ export const  observer = () => {
 
 /********************** POST  **************** */
 
-export  const addNoteSubmit = (event) =>{
+/*export  const addNoteSubmit = (event) =>{
   event.preventDefault();
   const user = firebase.auth().currentUser;
   console.log(user);
@@ -123,4 +123,22 @@ export  const addNoteSubmit = (event) =>{
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 
+}*/
+
+export const addNotes =(event)=>{
+  event.preventDefault();
+  const inputNote = document.querySelector('#text-post').value;
+  if(inputNote ===""){
+    alert("escriba");
+  }
+  else{ 
+  const postN = document.querySelector('#text-post').value;
+  const user = firebase.auth().currentUser;
+  console.log(firebase.auth().currentUser);
+  const userName = user.email;
+  addNote(postN,userName)
+  .then(function(docRef){
+    console.log("Document written ID: ", docRef.id);
+  })
+  .catch((e) => console.log(e.message))}
 }
