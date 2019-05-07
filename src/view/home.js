@@ -13,15 +13,12 @@ export default () => {
   </section>	
   <!-- SECCION POST -->
   </div>
- `;
-
-      
+ `; 
   main.innerHTML = mainContent;
 
   const containerHome = main.querySelector('.container-home')
   containerHome.appendChild(Posts());
   
- 
   return main
   ;
 }

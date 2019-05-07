@@ -1,4 +1,4 @@
-import {addNoteSubmit} from "../view-controller.js"
+import {addNotes} from "../view-controller.js"
 export default () => {
     const post = document.createElement('section');  
     post.classList.add('posts-content','m1', 'p2');
@@ -14,6 +14,7 @@ export default () => {
 				</select>
 				<i id="btn-img" class="fas fa-image icons m1"></i>
 				<i id="btn-post" class="fas fa-paper-plane icons m1"></i>
+				<button id= "savePost">Guardar</button>
 						</div>               
 					</form>					
 				</article>
@@ -27,7 +28,7 @@ export default () => {
 							<i id= "btn-delete" class="fas fa-window-close icons"></i>
 						</div>
 						<form class="p2">							
-							<textarea id="text-post"  placeholder="¿Qué estas pensando?" value="https"></textarea> 
+							<textarea id="text-post-1"  placeholder="¿Qué estas pensando?" value="https"></textarea> 
 							<div class="btn-actions m1">	
 								<i id="btn-like" class="fas fa-heart icons m1">2</i>
 								<i id="btn-edit" class="fas fa-edit icons m1"></i>	
@@ -42,8 +43,8 @@ export default () => {
             
 		post.innerHTML = postContent;  
 		
-		const btnSave = post.querySelector('#btn-save');
-		btnSave.addEventListener('click',addNoteSubmit)
+		const btnSave = post.querySelector('#savePost');
+		btnSave.addEventListener('click',addNotes)
 
 		return post;
 		

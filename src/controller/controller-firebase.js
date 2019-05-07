@@ -22,7 +22,7 @@ export const signUp = (email,password)=>{
 export const signOut = () => firebase.auth().signOut();
 
 /********************** POST  **************** */
-  export const addNote = (userName,userPhoto,textPost,privacy) => {
+  /*export const addNote = (userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
       name : userName,
       photo :  userPhoto,
@@ -31,4 +31,12 @@ export const signOut = () => firebase.auth().signOut();
       date : Date(),
       likes :0,
     });
-  }
+  }*/
+
+  //Crear notas
+export const addNote = (post,userName)=> {
+  return firebase.firestore().collection('post').add({
+      note: post,
+      name : userName,
+  })
+}
