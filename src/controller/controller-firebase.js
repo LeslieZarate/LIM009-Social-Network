@@ -40,3 +40,15 @@ export const addNote = (post,userName)=> {
       name : userName,
   })
 }
+
+//Leer notas
+export const readNotes =(data)=>{
+  firebase.firestore().collection('post').onSnapshot((querySnapshot)=>{
+      const posts =[];
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+          posts.push({id: doc.id,...doc.data()});
+      });
+      data(posts);
+  })
+}

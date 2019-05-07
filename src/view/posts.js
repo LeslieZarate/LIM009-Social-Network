@@ -1,4 +1,6 @@
 import {addNotes} from "../view-controller.js"
+import {readNotes} from '../controller/controller-firebase.js'
+
 export default () => {
     const post = document.createElement('section');  
     post.classList.add('posts-content','m1', 'p2');
@@ -19,34 +21,45 @@ export default () => {
 					</form>					
 				</article>
 				<!-- POSTS -->
-				<h1>Publicaciones </h1>
-				<!-- TOTAL POST -->
-				<div class="public-posts">					
-					<article class="form-post m1 ">
-						<div class="user-post">
-							<p>Nombre user</p>
-							<i id= "btn-delete" class="fas fa-window-close icons"></i>
-						</div>
-						<form class="p2">							
-							<textarea id="text-post-1"  placeholder="¿Qué estas pensando?" value="https"></textarea> 
-							<div class="btn-actions m1">	
-								<i id="btn-like" class="fas fa-heart icons m1">2</i>
-								<i id="btn-edit" class="fas fa-edit icons m1"></i>	
-								<i id="btn-save" class="fas fa-save icons m1"></i>							
-							</div>               
-						</form>					
-					</article>				
-				</div>
-    
+				<h1>Publicaciones </h1>  
+				<p id="id-contenedorPublicaciones" class= "contenedor-publicaciones"></p>
             `;
-            
             
 		post.innerHTML = postContent;  
 		
 		const btnSave = post.querySelector('#savePost');
-		btnSave.addEventListener('click',addNotes)
+		btnSave.addEventListener('click',addNotes);
+		readNotes(templatePost);
 
 		return post;
-		
-		
   }
+
+  export const templatePost = (data) =>{
+	let listPost='';
+	data.forEach((doc)=>{
+	  const containerPost=`
+	  <!-- TOTAL POST -->
+	  <div class="public-posts">					
+		  <article class="form-post m1 ">
+			  <div class="user-post">
+				  <p>${doc.name}</p>
+				  <i id= "btn-delete" class="fas fa-window-close icons"></i>
+			  </div>
+			  <form class="p2">							
+				  <textarea id="btn-${doc.id}"  placeholder="¿Qué estas pensando?" value="https" readonly>${doc.note}</textarea> 
+				  <div class="btn-actions m1">	
+					  <i id="btn-like" class="fas fa-heart icons m1">2</i>
+					  <i id="btn-edit" class="fas fa-edit icons m1"></i>	
+					  <i id="btn-save" class="fas fa-save icons m1"></i>							
+				  </div>               
+			  </form>					
+		  </article>				
+	  </div>
+	  `;
+	  listPost+=containerPost;
+	});
+	const contenedorPublicaciones = document.getElementById('id-contenedorPublicaciones');
+	 contenedorPublicaciones.innerHTML = listPost;	 
+ }
+
+
