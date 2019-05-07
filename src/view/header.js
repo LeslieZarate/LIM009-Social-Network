@@ -21,10 +21,6 @@ export default () => {
 
 	const btnSignOut = header.querySelector('#btn-signOut')
 	btnSignOut.addEventListener('click',signOutSubmit) 
-
-
-
-	
 	
 	return header;
 }
