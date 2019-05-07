@@ -11,8 +11,9 @@ export default () => {
 							<select id="options-privacy">
                 <option value="public">Publico</option>
                 <option value="only-me">Privado</option>
-            	</select>
-							<button id="btn-save" type="submit">Publicar</button>
+				</select>
+				<i id="btn-img" class="fas fa-image icons m1"></i>
+				<i id="btn-post" class="fas fa-paper-plane icons m1"></i>
 						</div>               
 					</form>					
 				</article>
@@ -27,13 +28,10 @@ export default () => {
 						</div>
 						<form class="p2">							
 							<textarea id="text-post"  placeholder="¿Qué estas pensando?" value="https"></textarea> 
-							<div class="btn-actions m1">
-								<select id="options-privacy" class="m1">
-	                <option value="public">Publico</option>
-	                <option value="only-me">Privado</option>
-	            	</select>
-								<button id="btn-save" type="submit"><i class="fas fa-paper-plane icons m1"></i>Publicar</button>				
-								<i class="fas fa-thumbs-up icons m1">0</i>								
+							<div class="btn-actions m1">	
+								<i id="btn-like" class="fas fa-heart icons m1">2</i>
+								<i id="btn-edit" class="fas fa-edit icons m1"></i>	
+								<i id="btn-save" class="fas fa-save icons m1"></i>							
 							</div>               
 						</form>					
 					</article>				
