@@ -72,3 +72,9 @@ export const readNotes =(data)=>{
       data(posts);
   })
 }
+
+//Eliminar nota
+export const removeNote = (id)=>{
+  console.log(id);
+  return firebase.firestore().collection('post').doc(id).delete();
+}

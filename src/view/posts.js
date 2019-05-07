@@ -1,4 +1,4 @@
-import {addNotes} from "../view-controller.js"
+import {addNotes,removeNotes} from "../view-controller.js"
 import {readNotes} from '../controller/controller-firebase.js'
 
 export default () => {
@@ -43,7 +43,7 @@ export default () => {
 		  <article class="form-post m1 ">
 			  <div class="user-post">
 				  <p>${doc.name}</p>
-				  <i id= "btn-delete" class="fas fa-window-close icons"></i>
+				  <i id= "${doc.id}" class="fas fa-window-close icons"></i>
 			  </div>
 			  <form class="p2">							
 				  <textarea id="btn-${doc.id}"  placeholder="¿Qué estas pensando?" value="https" readonly>${doc.note}</textarea> 
@@ -60,6 +60,11 @@ export default () => {
 	});
 	const contenedorPublicaciones = document.getElementById('id-contenedorPublicaciones');
 	 contenedorPublicaciones.innerHTML = listPost;	 
+
+	 [...document.getElementsByClassName('fa-window-close')].forEach((e)=>{ console.log(e);
+		e.addEventListener('click',removeNotes)});
+		console.log([...document.getElementsByClassName('fa-window-close')]);
+
  }
 
 

@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut ,addNote ,setUser} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut ,addNote,removeNote} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
@@ -141,4 +141,13 @@ export const addNotes =(event)=>{
     console.log("Document written ID: ", docRef.id);
   })
   .catch((e) => console.log(e.message))}
+}
+
+export const removeNotes=(event)=>{
+  event.preventDefault();
+  console.log(event.target.id);
+  removeNote(event.target.id)
+  .then(function() {
+    console.log("Document successfully deleted!");
+  }).catch((e) => console.log(e.message))
 }
