@@ -21,8 +21,29 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
+
+/********************** DATOS DE USUARIO **************** */
+
+export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
+  return firebase.firestore().collection('users').doc(uid).set({
+    id: idDoc,
+    name: userName,
+    email: email,
+    photo: userPhoto,
+  })
+}
+
+export const getUser = (uid, tempUser) =>{
+  firebase.firestore().collection('users').doc(uid).get()  
+  .then(doc=> {
+    tempUser(doc.data())
+    console.log(doc.data())
+  })
+}
+
+
 /********************** POST  **************** */
-  /*export const addNote = (userName,userPhoto,textPost,privacy) => {
+  export const addNote = (userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
       name : userName,
       photo :  userPhoto,
@@ -31,30 +52,19 @@ export const signOut = () => firebase.auth().signOut();
       date : Date(),
       likes :0,
     });
-  }*/
+  }
 
-  //Crear notas
-export const addNote = (post,userName)=> {
-  return firebase.firestore().collection('post').add({
-      note: post,
-      name : userName,
-  })
+  export const getPost =(callback)=>{
+    firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+        const posts =[];
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data().name}`);
+            posts.push({id: doc.id,...doc.data()});
+        });
+        console.log(posts)
+        callback(posts);
+    })
 }
-
-//Leer notas
-export const readNotes =(data)=>{
-  firebase.firestore().collection('post').onSnapshot((querySnapshot)=>{
-      const posts =[];
-      querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-          posts.push({id: doc.id,...doc.data()});
-      });
-      data(posts);
-  })
-}
-
-//Eliminar nota
-export const removeNote = (id)=>{
-  console.log(id);
-  return firebase.firestore().collection('post').doc(id).delete();
+export const deleteNote = (idNote)=>{
+  return firebase.firestore().collection('posts').doc(idNote).delete()
 }
