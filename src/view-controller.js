@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote, getUser,getUser2} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser,getUser2} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
@@ -21,7 +21,6 @@ export const signInOnSubmit = (event) => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-
 // Funcion de Login con GOOGLE
 export const signInGoogleOnSubmit = () => {
   signInGoogle()
@@ -38,7 +37,6 @@ export const signInGoogleOnSubmit = () => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })    
 }
-
 // Funcion de Login FACEBOOK
 export const signInFacebookOnSubmit = () => {
   signInFacebook()
@@ -76,7 +74,6 @@ export const signUpSubmit = (event) =>{
         alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-
 // Salir de la Cuenta
 export const signOutSubmit = () =>{
   signOut()
@@ -87,7 +84,7 @@ export const signOutSubmit = () =>{
   })
 } 
 
-// OBTENER DATOS DEL USUARIO 
+/********** OBTENER DATOS DEL USUARIO ****/
 
 export const userData = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
@@ -107,7 +104,6 @@ export const userData = (callback) =>{
     
   });
 }
-
 export const userData2 = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -117,7 +113,6 @@ export const userData2 = (callback) =>{
     }
   })  
 }
-
 // OBSERVADOR 
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
@@ -128,9 +123,6 @@ export const  observer = () => {
     }    
   }) 
 }
-
-
-
 
 /********************** POST  **************** */
 
@@ -197,5 +189,18 @@ export const deleteNoteSubmit = (event) =>{
       const  errorMessage = error.message;
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
+}
 
+export const updateNoteSubmit = (event) => {
+  const btnId = event.target.id;
+  const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
+  const textNote = document.querySelector(`#post-${idNote}`)
+  textNote.readOnly = false;  
+  const btnSave = document.querySelector(`#btn-save-${idNote}`)
+  btnSave.addEventListener('click',()=>{
+    const  note = {
+      textPost : textNote.value
+    }
+    updateNote(idNote,note)
+  })
 }

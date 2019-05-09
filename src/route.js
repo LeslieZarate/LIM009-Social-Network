@@ -35,7 +35,6 @@ const changeTmp = (hash) => {
 
         case '#/profile':
         root.appendChild(Header());
-
         userData2((user) => {
           root.appendChild(Profile(user));  
         })
