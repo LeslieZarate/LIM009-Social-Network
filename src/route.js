@@ -5,6 +5,7 @@ import Home from "./view/home.js"
 import Profile from "./view/profile.js"
 import Error from "./view/404.js"
 
+import {userData2} from "./view-controller.js"
 const changeTmp = (hash) => {
     if (hash === '#/' || hash === '' || hash === '#') {
       return viewTmp('#/signIn');
@@ -34,7 +35,10 @@ const changeTmp = (hash) => {
 
         case '#/profile':
         root.appendChild(Header());
-        root.appendChild(Profile());
+
+        userData2((user) => {
+          root.appendChild(Profile(user));  
+        })
         break;
        
         default:
