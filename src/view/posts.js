@@ -60,8 +60,8 @@ export const templatePost = (data) =>{
 	// publicPosts.addEventListener('click', deleteNoteSubmit);
 
 	[...document.getElementsByClassName('fa-window-close')].forEach((e)=>{
-		 console.log(e);
-		 e.addEventListener('click',deleteNoteSubmit)});
+		 //console.log(e);
+		e.addEventListener('click',deleteNoteSubmit)});
 	//	console.log([...document.getElementsByClassName('fa-window-close')]);
 
 

@@ -33,13 +33,25 @@ export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
   })
 }
 
-export const getUser = (uid, tempUser) =>{
-  firebase.firestore().collection('users').doc(uid).get()  
-  .then(doc=> {
-    tempUser(doc.data())
-    console.log(doc.data())
-  })
+export const getUser = (id) =>{
+  return firebase.firestore().collection('users').doc(id).get()  
+  
 }
+
+export const getUser2 = (id,callback) =>{
+  firebase.firestore().collection("users").doc(id)
+    .onSnapshot(doc => {
+      const data = doc.data();
+      callback(data)
+    });   
+    
+}
+
+
+
+
+
+
 
 
 /********************** POST  **************** */
@@ -58,10 +70,10 @@ export const getUser = (uid, tempUser) =>{
     firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
         const posts =[];
         querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data().name}`);
+           // console.log(`${doc.id} => ${doc.data().name}`);
             posts.push({id: doc.id,...doc.data()});
         });
-        console.log(posts)
+       // console.log(posts)
         callback(posts);
     })
 }

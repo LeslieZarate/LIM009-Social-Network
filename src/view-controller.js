@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote, getUser,getUser2} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
@@ -25,13 +25,11 @@ export const signInOnSubmit = (event) => {
 // Funcion de Login con GOOGLE
 export const signInGoogleOnSubmit = () => {
   signInGoogle()
-    .then(() => {
-      const user = firebase.auth().currentUser;      
-      if (user != null) {
-        user.providerData.forEach( profile =>{
-          setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
-        })
-      }
+    .then((result) => {
+      const user = result.user
+      user.providerData.forEach( profile =>{
+        setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
+      })      
       changeHash('/home')
     })         
     .catch(error => {
@@ -44,16 +42,13 @@ export const signInGoogleOnSubmit = () => {
 // Funcion de Login FACEBOOK
 export const signInFacebookOnSubmit = () => {
   signInFacebook()
-  .then(() => {
-    const user = firebase.auth().currentUser;      
-    if (user != null) {
-      user.providerData.forEach( profile =>{
-        setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
-      }) 
-    }
+  .then((result) => {
+    const user = result.user
+    user.providerData.forEach( profile =>{
+      setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
+    })      
     changeHash('/home')
-    
-  })         
+  })           
   .catch(error => {
     const errorCode = error.code;
     const  errorMessage = error.message;
@@ -69,11 +64,10 @@ export const signUpSubmit = (event) =>{
   const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
 
   signUp(email,password)  
-    .then(()=>{
-      const user = firebase.auth().currentUser;
-      if(user != null){
-        setUser(user.uid,name,user.email,photo,user.uid)        
-      }      
+    .then((result)=>{
+      const user = result.user
+      setUser(user.uid,name,user.email,photo,user.uid);
+      signOut()     
       changeHash('/signIn');
     })
     .catch(error => {
@@ -93,22 +87,79 @@ export const signOutSubmit = () =>{
   })
 } 
 
+// OBTENER DATOS DEL USUARIO 
+
+export const userData = (callback) =>{
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      getUser(user.uid).then( doc => {
+        callback(doc.data())
+      })
+      .catch(error=>{
+        const errorCode = error.code;
+        const  errorMessage = error.message;
+        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+      })
+    }else{
+      console.log('usuario no activo Perfil')
+    }
+
+    
+  });
+}
+
+export const userData2 = (callback) =>{
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      getUser2(user.uid,callback)
+    } else{
+      console.log('usuario no activo Perfil')
+    }
+  })  
+}
+
 // OBSERVADOR 
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
-      console.log(user.displayName);
-      console.log('Usuario activo')
+      console.log('Usuario activo: '+ user.email )
     }else{
-      console.log('usuario no activo')
-    }
-  })  
+      console.log('usuario no activo Observador ')
+    }    
+  }) 
 }
+
+
+
 
 /********************** POST  **************** */
 
 export  const addNoteSubmit = (event) =>{
   event.preventDefault();
+  const privacy = document.querySelector('#options-privacy').value;  
+  const textPost = document.querySelector('#text-post');
+  userData((doc)=>{
+    if(textPost.value  === ''){
+      alert('Escribe algo ')
+    }
+    else{
+      addNote(doc.name,doc.photo,textPost.value,privacy)
+      .then(()=>{
+        alert('mensaje agregado')
+        textPost.value = '';
+        
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const  errorMessage = error.message;
+        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+      })
+    }
+
+  });
+
+/*
+
   const user = firebase.auth().currentUser;
   const userName = user.displayName;
   const userPhoto = user.photoURL;  
@@ -130,7 +181,7 @@ export  const addNoteSubmit = (event) =>{
       const  errorMessage = error.message;
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
-  } 
+  } */
 
 }
 
