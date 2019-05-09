@@ -47,14 +47,7 @@ export const getUser2 = (id,callback) =>{
     
 }
 
-
-
-
-
-
-
-
-/********************** POST  **************** */
+/************************************** POST  *************************************** */
   export const addNote = (userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
       name : userName,
@@ -78,5 +71,9 @@ export const getUser2 = (id,callback) =>{
     })
 }
 export const deleteNote = (idNote)=>{
-  return firebase.firestore().collection('posts').doc(idNote).delete()
+  return firebase.firestore().collection('posts').doc(idNote).delete();
+}
+
+export const updateNote = (idNote , note ) =>{
+  return firebase.firestore().collection('posts').doc(idNote).update(note);
 }

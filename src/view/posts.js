@@ -1,4 +1,4 @@
-import {addNoteSubmit , deleteNoteSubmit} from "../view-controller.js"
+import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit} from "../view-controller.js"
 import {getPost} from "../controller/controller-firebase.js"
 export default () => {
   const post = document.createElement('section');  
@@ -42,12 +42,12 @@ export const templatePost = (data) =>{
 					<i id="${doc.id}" class="fas fa-window-close icons"></i>
 		    </div>
 				<form class="p2">							
-					<textarea readonly >${doc.textPost}</textarea>
+					<textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
 					<p>${doc.date}</>
 					<div class="btn-actions m1">	
 						<i id="btn-like" class="fas fa-heart icons m1">${doc.likes}</i>
-						<i id="btn-edit" class="fas fa-edit icons m1"></i>	
-						<i id="btn-save" class="fas fa-save icons m1"></i>							
+						<i id="btn-edit-${doc.id}" class="fas fa-edit icons m1"></i>
+						<i id="btn-save-${doc.id}" class="fas fa-save icons m1"></i>							
 						</div>               
 				</form>					
 			</div> `;
@@ -56,13 +56,16 @@ export const templatePost = (data) =>{
 
 	const publicPosts = document.getElementById("public-posts");
 	publicPosts.innerHTML = listPost;
-
 	// publicPosts.addEventListener('click', deleteNoteSubmit);
 
-	[...document.getElementsByClassName('fa-window-close')].forEach((e)=>{
-		 //console.log(e);
-		e.addEventListener('click',deleteNoteSubmit)});
+	// BORRAR
+	[...document.getElementsByClassName('fa-window-close')].forEach(ele=>{
+		 //console.log(ele);
+		ele.addEventListener('click',deleteNoteSubmit)});
 	//	console.log([...document.getElementsByClassName('fa-window-close')]);
-
-
-}
+	
+	// EDITAR 
+	[... document.getElementsByClassName('fa-edit')].forEach(ele=>{
+			//console.log(ele)
+			ele.addEventListener('click',updateNoteSubmit)});
+	}
