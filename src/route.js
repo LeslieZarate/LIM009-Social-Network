@@ -1,14 +1,17 @@
-import Login from "./view/login.js"
-import Account from "./view/account.js"
 import Header from "./view/header.js"
 import Home from "./view/home.js"
+import Login from "./view/login.js"
+import Account from "./view/account.js"
 import Profile from "./view/profile.js"
 import Error from "./view/404.js"
+
+import {userData} from "./view-controller.js"
+import home from "./view/home.js";
 
 const changeTmp = (hash) => {
     if (hash === '#/' || hash === '' || hash === '#') {
       return viewTmp('#/signIn');
-    } else if (hash === '#/signIn' ||  hash ==='#/account' || hash === '#/home' || hash === '#/profile') {
+    } else if (hash === '#/dramaFever'|| hash === '#/signIn' ||  hash ==='#/account'|| hash === '#/profile') {
       return viewTmp(hash);
     } else {
       return viewTmp();
@@ -20,21 +23,24 @@ const changeTmp = (hash) => {
     const root = document.getElementById('root');
     root.innerHTML = '';
     switch (routers) {
+        case '#/dramaFever':
+        root.appendChild(Header())
+        root.appendChild(Home())        
+        break;
+
         case '#/signIn':
         root.appendChild(Login());
         break;
         case '#/account':
         root.appendChild(Account());
-        break;
-
-        case '#/home':
-        root.appendChild(Header());
-        root.appendChild(Home());
-        break;
-
+        break;  
+        
         case '#/profile':
-        root.appendChild(Header());
-        root.appendChild(Profile());
+        userData((user) => {
+          console.log(user);
+          root.appendChild(Header(user))
+          root.appendChild(Profile(user));  
+        })
         break;
        
         default:

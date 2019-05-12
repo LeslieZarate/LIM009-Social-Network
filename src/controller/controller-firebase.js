@@ -21,9 +21,35 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
-/********************** POST  **************** */
-  export const addNote = (userName,userPhoto,textPost,privacy) => {
+
+/******************************  DATOS DE USUARIO **********************************/
+
+export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
+  return firebase.firestore().collection('users').doc(uid).set({
+    idUser: idDoc,
+    name: userName,
+    email: email,
+    photo: userPhoto,
+  })
+}
+
+export const getUser = (id,callback) =>{
+  firebase.firestore().collection("users").doc(id)
+    .onSnapshot(doc => {
+      const data = doc.data();
+      callback(data)
+    });     
+}
+
+/* export const getUser2 = (id) =>{
+  return firebase.firestore().collection('users').doc(id).get()  
+  
+} */
+
+/************************************** POST  ******************************************/
+  export const addNote = (idUser,userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
+      idUser : idUser,
       name : userName,
       photo :  userPhoto,
       textPost : textPost,
@@ -32,3 +58,28 @@ export const signOut = () => firebase.auth().signOut();
       likes :0,
     });
   }
+
+export const getPost =(callback)=>{
+  firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+    const posts =[];
+    querySnapshot.forEach((doc) => {
+      // console.log(`${doc.id} => ${doc.data().name}`);
+        posts.push({id: doc.id,...doc.data()});                
+      });
+       // console.log(posts)
+      callback(posts);
+    })
+}
+export const deleteNote = (idNote)=>{
+  return firebase.firestore().collection('posts').doc(idNote).delete();
+}
+
+export const updateNote = (idNote , note ) =>{
+  return firebase.firestore().collection('posts').doc(idNote).update(note);
+}
+
+export const postLikes=(idNote,likes)=>{
+  return firebase.firestore().collection('publicaciones').doc(idNote).update({
+    like : likes,
+  });
+};

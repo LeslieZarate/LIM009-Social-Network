@@ -1,19 +1,19 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut ,addNote} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote,postLikes, getUser} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
 }
 
-/********************** AUTENTIFICACION  **************** */
+/*****************************  AUTENTIFICACION  *************************/
     
-// Funcion de Login EMAIL Y CONTRASEÑA
+// LOGIN - EMAIL Y CONTRASEÑA
 export const signInOnSubmit = (event) => {
   event.preventDefault()
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;  
   signIn(email, password)
-  	.then(() => {
-      changeHash('/home')
+    .then(() => {
+      changeHash('/dramaFever')
     })
     .catch(error => {
       const errorCode = error.code;
@@ -21,22 +21,13 @@ export const signInOnSubmit = (event) => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-  // Funcion de Login con GOOGLE
+// LOGIN - GOOGLE
 export const signInGoogleOnSubmit = () => {
   signInGoogle()
-    .then(() => {
-      const user = firebase.auth().currentUser;      
-      if (user != null) {
-        user.providerData.forEach( profile =>{
-          firebase.firestore().collection('users').doc(user.uid).set({
-            id: profile.uid,
-            name: profile.displayName,
-            email: profile.email,
-            photo: profile.photoURL,
-          })
-        })
-      }
-      changeHash('/home')
+    .then((result) => {
+      const user = result.user;      
+      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
+      changeHash('/dramaFever')
     })         
     .catch(error => {
       const errorCode = error.code;
@@ -44,59 +35,45 @@ export const signInGoogleOnSubmit = () => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })    
 }
-  // Funcion de Login FACEBOOK
+// LOGIN - FACEBOOK
 export const signInFacebookOnSubmit = () => {
-	signInFacebook()
-  .then(() => {
-    const user = firebase.auth().currentUser;      
-    if (user != null) {
-      user.providerData.forEach( profile =>{
-        firebase.firestore().collection('users').doc(user.uid).set({
-          id: profile.uid,
-          name: profile.displayName,
-          email: profile.email,
-          photo: profile.photoURL,
-        })
-      }) 
-    }
-    changeHash('/home')
-    
-  })         
+  signInFacebook()
+  .then((result) => {
+    const user = result.user;      
+      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
+      changeHash('/dramaFever')
+  })           
   .catch(error => {
     const errorCode = error.code;
     const  errorMessage = error.message;
     alert( `Error: ${errorMessage} Tipo:${errorCode}`)
   })
 }
-// Funcion de CREAR CUENTA 
+// CREAR CUENTA 
 export const signUpSubmit = (event) =>{
-	event.preventDefault();
-	const email = document.querySelector('#email').value;
-	const password = document.querySelector('#password').value;
+  event.preventDefault();
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
   const name = document.querySelector('#name').value;
-  signUp(email,password)	
-		.then(()=>{
-      const user = firebase.auth().currentUser;
-      console.log(user);
-      if(user != null){
-        firebase.firestore().collection('users').doc(user.uid).set({
-          id: user.uid,
-          name: name,
-          email: user.email,
-          photo: 'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png',
-        })
-      }      
+  const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
+
+  signUp(email,password)  
+    .then((result)=>{
+      const user = result.user
+      setUser(user.uid,name,user.email,photo,user.uid);
+      signOut()    
       changeHash('/signIn');
     })
-		.catch(error => {
+    .catch(error => {
         const errorCode = error.code;
         const  errorMessage = error.message;
         alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-// Salir de la Cuenta
+// CERRAR SESION
 export const signOutSubmit = () =>{
   signOut()
+  .then(()=>changeHash('/signIn'))
   .catch(error => {
     const errorCode = error.code;
     const  errorMessage = error.message;
@@ -104,34 +81,121 @@ export const signOutSubmit = () =>{
   })
 } 
 
+/************************ OBTENER DATOS DEL USUARIO *************************/
+export const userData = (callback) =>{
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      getUser(user.uid,callback)
+    } else {
+      callback(user)
+    }
+  }) 
+}
 // OBSERVADOR 
+/*
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
-      console.log(user.displayName);
-      console.log('Usuario activo')
+      console.log(`OBSERVADOR : USUARIO ACTIVO ${user.email}`)
     }else{
-      console.log('usuario no activo')
-    }
-  })  
+      console.log(' OBSERVADOR : USUARIO NO ACTIVO')
+    }    
+  }) 
 }
+*/
+/*
+export const userData2 = (callback) =>{
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      getUser(user.uid).then( doc => {
+        console.log('hola')
+        callback(doc.data())        
+      })
+      .catch(error=>{
+        const errorCode = error.code;
+        const  errorMessage = error.message;
+        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+      })
+    }else{
+      console.log('usuario no activo Perfil')
+    }    
+  });
+}
+*/
 
-/********************** POST  **************** */
+/************************************  POST *****************************************/
 
 export  const addNoteSubmit = (event) =>{
   event.preventDefault();
-  const user = firebase.auth().currentUser;
-  console.log(user);
-  const userName = user.displayName;
-  const userPhoto = user.photoURL;
-  const textPost = document.querySelector('#text-post').value;
   const privacy = document.querySelector('#options-privacy').value;  
-  addNote(userName,userPhoto,textPost,privacy)
-    .then(doc=>console.log(doc.data()))
+  const textPost = document.querySelector('#text-post');
+  if(textPost.value  === ''){
+    alert('Escribe algo ')
+  }
+  else{
+    userData((doc)=>{ 
+      addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
+      .then(()=>{
+        alert('mensaje agregado')
+        textPost.value = '';        
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const  errorMessage = error.message;
+        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+      })
+    });
+  }
+}
+
+export const deleteNoteSubmit = (event) =>{ 
+  event.preventDefault();
+  console.log(event.target.id) 
+    firebase.auth().onAuthStateChanged(user =>{
+      if(user){
+        getdoc(doc => {
+          if(user.uid === doc.id){  
+          }
+        })
+      }
+      else{
+        console.log('no hay usuario')
+      } 
+    })
+    
+
+  
+
+  
+  
+  deleteNote(event.target.id)
+    .then(()=>{
+      console.log('se elimino exitosamente')
+    })
     .catch(error => {
       const errorCode = error.code;
       const  errorMessage = error.message;
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
-
 }
+
+export const updateNoteSubmit = (event) => {
+  event.preventDefault()
+  const btnId = event.target.id;
+  const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
+  const textNote = document.querySelector(`#post-${idNote}`)
+  textNote.readOnly = false;  
+  const btnSave = document.querySelector(`#btn-save-${idNote}`)
+  btnSave.addEventListener('click',()=>{
+    const  note = {
+      textPost : textNote.value
+    }
+    updateNote(idNote,note)
+  })
+}
+
+export const likes = (objPost, likes) => {
+    
+  return postLikes(objPost, likes);
+ 
+ };
