@@ -9,7 +9,7 @@ export default () => {
     <!-- SECCION PERFIL -->
     <section class="profile-content m1 p2">
           <div class="perfil-user m1 p2">
-            <img alt ='photo-perfil' src="img/loogo.png" class="m1">
+            <img alt ='photo-perfil' src="img/users.png" class="m1">
           <h2>NAME</h2>
           </div>				
     </section>	
@@ -19,7 +19,7 @@ export default () => {
     <!-- FORMULARIO POST -->
       <div class="form-post  p2 m1">
         <form>
-          <textarea id="text-post"  placeholder="¿Qué estas pensando?" required></textarea> 
+          <textarea id="text-post"  placeholder="¿Qué estas pensando?"></textarea> 
           <div class="btn-actions">
             <select id="options-privacy">
               <option value="public">Publico</option>
@@ -61,7 +61,7 @@ export const templatePost = (data) =>{
 					<textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
 					<p>${doc.date}</>
 					<div class="btn-actions m1">	
-						<i id="btn-like" class="fas fa-heart icons m1">${doc.likes}</i>
+						<i id="btn-likes" class="fas fa-heart icons m1">${doc.likes}</i>
 						<i id="btn-edit-${doc.id}" class="fas fa-edit icons m1"></i>
 						<i id="btn-save-${doc.id}" class="fas fa-save icons m1"></i>							
 						</div>               
@@ -82,11 +82,4 @@ export const templatePost = (data) =>{
 		ele.addEventListener('click',updateNoteSubmit)});
 }
 
-   //LIKE
-[... document.getElementsByClassName('btn-like')].forEach((btnLike)=>{
-  btnLike.addEventListener('click',(e)=>{
-      const likes = parseInt(e.target.dataset.likes);
-      likes++;  
-      likes(e.target.id, likes);         
-  });
-});
+//LIKES

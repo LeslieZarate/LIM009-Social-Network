@@ -77,9 +77,3 @@ export const deleteNote = (idNote)=>{
 export const updateNote = (idNote , note ) =>{
   return firebase.firestore().collection('posts').doc(idNote).update(note);
 }
-
-export const postLikes=(idNote,likes)=>{
-  return firebase.firestore().collection('publicaciones').doc(idNote).update({
-    like : likes,
-  });
-};

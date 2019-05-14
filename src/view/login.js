@@ -5,6 +5,7 @@ export default () => {
     const formContent =`
 				<div class="container p1">
 				<section class="img-content center-content m1 p2 ">
+					<img src="img/intro.png">
 				</section>
 				<section class="forms-content  m1 p2 ">
 				<article class="register-login p4">
@@ -13,14 +14,14 @@ export default () => {
 					<form>
 						<div class="form-group">
 							<label  for="email">Email</label>
-							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" required/>
+							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
-							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña" required/>
+							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
 						</div>
 						<div class="form-group">
-							<button id="btn-login" type="submit" required>Login</button>
+							<button id="btn-login" type="submit">Login</button>
 						</div>                  
 					</form>
 					<p>O bien ingresa con:</p>

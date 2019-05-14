@@ -10,7 +10,6 @@ body{
   background-attachment: fixed;
   background-size: cover;
   font-family: 'Mukta', sans-serif;
-  color: #1c420a;
 }
 .p1{
   padding: 1%;
@@ -87,9 +86,9 @@ main{
   background-color:rgba(3, 109, 56, 0.1);
 }
 .img-logo {
-  width :80%;
-  height:15vh;
-  margin: 3%;  
+  width :35%;
+  height:10vh;
+  margin: 2%;  
 }
 
 .form-group{
@@ -138,7 +137,7 @@ main{
 header{
   width: 100%;
   height: 80px;
-  background: #76da83;
+  background: #4f41cc;
   color: #fff;
   position: fixed;
   top: 0;
@@ -165,7 +164,7 @@ header{
     position: absolute;
     width: 100%;
     height: auto;
-    background:#8dda76;
+    background:#4f41cc;
     left: 0;
     top:80px;
     transform:translateX(-100%);
@@ -184,7 +183,7 @@ header{
     text-align: center;
 }
 .main-nav li a:hover{
-    background: #90cc41
+    background: #4f41cc;
 }
 #toggle:checked ~ .navbar{
   transform:translateX(0%);
@@ -200,12 +199,12 @@ header{
   align-items: start;
 }
 .profile-content{
-  background:rgba(29, 41, 15, 0.1);
+  background:rgba(234, 247, 226, 0.1);
   width: 98%;
   height: auto;
 }
 .perfil-user {
-  border:3px solid #97cc41;
+  border:1px solid #4f41cc;
   border-radius: 10px;
   display:flex;
   align-items: center;
@@ -213,13 +212,13 @@ header{
 .perfil-user img{
   width:20%;
   height:15%;
-  border:1px solid #74cc41;
+  border:1px solid #4f41cc;
   border-radius: 50%;
   margin: 1% 5% 1% 1%;
 }
 
 .posts-content{
-  background:rgba(41, 15, 32, 0.1);
+  background:rgba(234, 247, 226, 0.1);
   width: 98%;
   height: auto;
   display: flex;
@@ -233,22 +232,20 @@ header{
 .form-post{
   width: 96%;
   height: auto;
-  border:3px solid #58cc41;
+  border:1px solid #4f41cc;
   border-radius: 10px; 
 }
 .form-post textarea{
   width: 100%;
   height: 100px;
   resize: none;
-  border:1px solid #97cc41;
+  border:1px solid #414fcc;
   padding: 7px 20px 7px 20px;
 }
 
-
-
 .user-post{
   border-radius: 7px 7px 0px 0px;
-  background: #6dcc41;
+  background: #4341cc;
   color: #fff;
   padding: 1rem;
   display: flex;
@@ -257,12 +254,13 @@ header{
 
 .icons{
   cursor: pointer;
-  font-size: 25px;
+  font-size: 15px;
+  color: rgb(154, 168, 189);
 }
 
 
 /*---------------------------------------------------------*/
-          /*DESKPOT */
+          /*DESKTOP */
 /*---------------------------------------------------------*/
 
 @media (min-width: 768px) {
@@ -337,16 +335,9 @@ header{
     }
 
     .posts-content{
-      background:rgba(199, 231, 179, 0.1);
+      background:rgba(234, 247, 226, 0.1);
       width: 70%;
       height: auto;
     }
 
 }
-
-
-
-
-
-
-

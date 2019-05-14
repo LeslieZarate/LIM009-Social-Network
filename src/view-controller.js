@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote,postLikes, getUser} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
@@ -162,11 +162,6 @@ export const deleteNoteSubmit = (event) =>{
         console.log('no hay usuario')
       } 
     })
-    
-
-  
-
-  
   
   deleteNote(event.target.id)
     .then(()=>{
@@ -194,8 +189,4 @@ export const updateNoteSubmit = (event) => {
   })
 }
 
-export const likes = (objPost, likes) => {
-    
-  return postLikes(objPost, likes);
- 
- };
+//LIKES
