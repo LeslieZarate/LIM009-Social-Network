@@ -3,8 +3,7 @@ import Home from "./view/home.js"
 import Login from "./view/login.js"
 import Account from "./view/account.js"
 import Profile from "./view/profile.js"
-import Error from "./view/404.js"
-
+import Error from "./view/404.js
 import {userData} from "./view-controller.js"
 import home from "./view/home.js";
 
@@ -48,7 +47,6 @@ const changeTmp = (hash) => {
         break;
     }
   }
-  
 
  export const initRouter = () => {
     window.addEventListener('load', changeTmp(window.location.hash))
