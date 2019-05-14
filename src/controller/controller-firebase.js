@@ -21,6 +21,7 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
+
 /******************************  DATOS DE USUARIO **********************************/
 
 export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
@@ -58,15 +59,15 @@ export const getUser = (id,callback) =>{
     });
   }
 
-  export const getPost =(callback)=>{
-    firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
-        const posts =[];
-        querySnapshot.forEach((doc) => {
-           // console.log(`${doc.id} => ${doc.data().name}`);
-            posts.push({id: doc.id,...doc.data()});
-        });
+export const getPost =(callback)=>{
+  firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+    const posts =[];
+    querySnapshot.forEach((doc) => {
+      // console.log(`${doc.id} => ${doc.data().name}`);
+        posts.push({id: doc.id,...doc.data()});                
+      });
        // console.log(posts)
-        callback(posts);
+      callback(posts);
     })
 }
 export const deleteNote = (idNote)=>{

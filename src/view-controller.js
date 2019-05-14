@@ -122,45 +122,6 @@ export const userData2 = (callback) =>{
   });
 }
 */
-/********** OBTENER DATOS DEL USUARIO ****/
-
-export const userData = (callback) =>{
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      getUser(user.uid).then( doc => {
-        callback(doc.data())
-      })
-      .catch(error=>{
-        const errorCode = error.code;
-        const  errorMessage = error.message;
-        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-      })
-    }else{
-      console.log('usuario no activo Perfil')
-    }
-
-    
-  });
-}
-export const userData2 = (callback) =>{
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      getUser2(user.uid,callback)
-    } else{
-      console.log('usuario no activo Perfil')
-    }
-  })  
-}
-// OBSERVADOR 
-export const  observer = () => {
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      console.log('Usuario activo: '+ user.email )
-    }else{
-      console.log('usuario no activo Observador ')
-    }    
-  }) 
-}
 
 /************************************  POST *****************************************/
 
@@ -168,34 +129,6 @@ export  const addNoteSubmit = (event) =>{
   event.preventDefault();
   const privacy = document.querySelector('#options-privacy').value;  
   const textPost = document.querySelector('#text-post');
-  userData((doc)=>{
-    if(textPost.value  === ''){
-      alert('Escribe algo ')
-    }
-    else{
-      addNote(doc.name,doc.photo,textPost.value,privacy)
-      .then(()=>{
-        alert('mensaje agregado')
-        textPost.value = '';
-        
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const  errorMessage = error.message;
-        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-      })
-    }
-
-  });
-
-/*
-
-  const user = firebase.auth().currentUser;
-  const userName = user.displayName;
-  const userPhoto = user.photoURL;  
-  const privacy = document.querySelector('#options-privacy').value;  
-  const textPost = document.querySelector('#text-post');
-
   if(textPost.value  === ''){
     alert('Escribe algo ')
   }
@@ -233,18 +166,12 @@ export const deleteNoteSubmit = (event) =>{
   deleteNote(event.target.id)
     .then(()=>{
       console.log('se elimino exitosamente')
-    addNote(userName,userPhoto,textPost.value,privacy)
-    .then(()=>{
-      alert('mensaje agregado')
-      textPost.value = '';
-      
     })
     .catch(error => {
       const errorCode = error.code;
       const  errorMessage = error.message;
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
-
 }
 
 export const updateNoteSubmit = (event) => {
@@ -261,34 +188,5 @@ export const updateNoteSubmit = (event) => {
     updateNote(idNote,note)
   })
 }
-  } */
 
-}
-
-export const deleteNoteSubmit = (event) =>{
-    event.preventDefault();
-    console.log(event.target.id);
-    deleteNote(event.target.id)
-    .then(()=>{
-      console.log('se elimino exitosamente')
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const  errorMessage = error.message;
-      alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-    })
-}
-
-export const updateNoteSubmit = (event) => {
-  const btnId = event.target.id;
-  const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
-  const textNote = document.querySelector(`#post-${idNote}`)
-  textNote.readOnly = false;  
-  const btnSave = document.querySelector(`#btn-save-${idNote}`)
-  btnSave.addEventListener('click',()=>{
-    const  note = {
-      textPost : textNote.value
-    }
-    updateNote(idNote,note)
-  })
-}
+//LIKES

@@ -5,7 +5,7 @@ export default () => {
     const formContent =`
 				<div class="container p1">
 				<section class="img-content center-content m1 p2 ">
-					<img src="img/intro.jpg">
+					<img src="img/intro.png">
 				</section>
 				<section class="forms-content  m1 p2 ">
 				<article class="register-login p4">
