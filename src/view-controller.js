@@ -1,11 +1,28 @@
 import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser} from "./controller/controller-firebase.js";
-
 const changeHash = (hash) =>  {
     location.hash = hash;
 }
 
 /*****************************  AUTENTIFICACION  *************************/
-    
+// CREAR CUENTA 
+export const signUpSubmit = (event) =>{
+  event.preventDefault();
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  const name = document.querySelector('#name').value;
+  const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
+   signUp(email,password)  
+    .then((result)=>{
+      const user = result.user
+      setUser(user.uid,name,user.email,photo);     
+      changeHash('/home');      
+    })
+    .catch(error => {
+        const errorCode = error.code;
+        const  errorMessage = error.message;
+        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+    })
+}
 // LOGIN - EMAIL Y CONTRASEÑA
 export const signInOnSubmit = (event) => {
   event.preventDefault()
@@ -13,7 +30,7 @@ export const signInOnSubmit = (event) => {
   const password = document.querySelector('#password').value;  
   signIn(email, password)
     .then(() => {
-      changeHash('/dramaFever')
+      changeHash('/home')
     })
     .catch(error => {
       const errorCode = error.code;
@@ -26,8 +43,8 @@ export const signInGoogleOnSubmit = () => {
   signInGoogle()
     .then((result) => {
       const user = result.user;      
-      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
-      changeHash('/dramaFever')
+      setUser(user.uid,user.displayName,user.email,user.photoURL)         
+      changeHash('/home')
     })         
     .catch(error => {
       const errorCode = error.code;
@@ -40,8 +57,8 @@ export const signInFacebookOnSubmit = () => {
   signInFacebook()
   .then((result) => {
     const user = result.user;      
-      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
-      changeHash('/dramaFever')
+      setUser(user.uid,user.displayName,user.email,user.photoURL)         
+      changeHash('/home')
   })           
   .catch(error => {
     const errorCode = error.code;
@@ -49,29 +66,10 @@ export const signInFacebookOnSubmit = () => {
     alert( `Error: ${errorMessage} Tipo:${errorCode}`)
   })
 }
-// CREAR CUENTA 
-export const signUpSubmit = (event) =>{
-  event.preventDefault();
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#password').value;
-  const name = document.querySelector('#name').value;
-  const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
 
-  signUp(email,password)  
-    .then((result)=>{
-      const user = result.user
-      setUser(user.uid,name,user.email,photo,user.uid);
-      signOut()    
-      changeHash('/signIn');
-    })
-    .catch(error => {
-        const errorCode = error.code;
-        const  errorMessage = error.message;
-        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-    })
-}
 // CERRAR SESION
-export const signOutSubmit = () =>{
+export const signOutSubmit = (event) =>{
+  event.preventDefault();
   signOut()
   .then(()=>changeHash('/signIn'))
   .catch(error => {
@@ -81,18 +79,20 @@ export const signOutSubmit = () =>{
   })
 } 
 
+
 /************************ OBTENER DATOS DEL USUARIO *************************/
 export const userData = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
+    if(user!= null){
       getUser(user.uid,callback)
     } else {
-      callback(user)
+      callback()
     }
   }) 
 }
 // OBSERVADOR 
-/*
+
+
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -102,9 +102,12 @@ export const  observer = () => {
     }    
   }) 
 }
-*/
 /*
-export const userData2 = (callback) =>{
+export const  userActivo = (callback) => {
+  firebase.auth().onAuthStateChanged(callback) 
+}
+
+export const userData = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
       getUser(user.uid).then( doc => {
@@ -127,42 +130,40 @@ export const userData2 = (callback) =>{
 
 export  const addNoteSubmit = (event) =>{
   event.preventDefault();
-  const privacy = document.querySelector('#options-privacy').value;  
-  const textPost = document.querySelector('#text-post');
-  if(textPost.value  === ''){
-    alert('Escribe algo ')
+  console.log(firebase.auth().currentUser)
+  const user = firebase.auth().currentUser
+
+  if(user != null){
+    const privacy = document.querySelector('#options-privacy').value;  
+    const textPost = document.querySelector('#text-post');
+    if(textPost.value  === ''){
+      alert('Ingresa texto')
+    }else{
+      userData((doc)=>{ 
+        if(doc){
+        addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
+          .then(()=>{         
+            textPost.value = '';        
+          })
+          .catch(error => {
+            const errorCode = error.code;
+            const  errorMessage = error.message;
+            alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+          });
+        }
+      });
+    }
+
+  }else{
+    alert('no estas logeado ')
   }
-  else{
-    userData((doc)=>{ 
-      addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
-      .then(()=>{
-        alert('mensaje agregado')
-        textPost.value = '';        
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const  errorMessage = error.message;
-        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-      })
-    });
-  }
+  
 }
 
 export const deleteNoteSubmit = (event) =>{ 
   event.preventDefault();
   console.log(event.target.id) 
-    firebase.auth().onAuthStateChanged(user =>{
-      if(user){
-        getdoc(doc => {
-          if(user.uid === doc.id){  
-          }
-        })
-      }
-      else{
-        console.log('no hay usuario')
-      } 
-    })
-  
+
   deleteNote(event.target.id)
     .then(()=>{
       console.log('se elimino exitosamente')
@@ -178,15 +179,29 @@ export const updateNoteSubmit = (event) => {
   event.preventDefault()
   const btnId = event.target.id;
   const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
-  const textNote = document.querySelector(`#post-${idNote}`)
-  textNote.readOnly = false;  
-  const btnSave = document.querySelector(`#btn-save-${idNote}`)
-  btnSave.addEventListener('click',()=>{
-    const  note = {
-      textPost : textNote.value
-    }
-    updateNote(idNote,note)
-  })
-}
 
-//LIKES
+  const textNote = document.querySelector(`#post-${idNote}`)
+  textNote.readOnly = false;
+  // editar el contenido de un post 
+  const btnSave = document.querySelector(`#btn-save-${idNote}`)
+  btnSave.addEventListener('click',()=>{    
+    const  note = {
+      textPost : textNote.value     
+    }
+    updateNote(idNote,note)    
+  })
+
+  // editar la privacidad del post
+  const privacy = document.querySelector(`#options-${idNote}`);
+  privacy.addEventListener('change',()=>{
+    const privacyValue = privacy.value;
+    const btnSave = document.querySelector(`#btn-save-${idNote}`)
+      btnSave.addEventListener('click',()=>{    
+        const  note = {
+          textPost : textNote.value,
+          privacy : privacyValue
+        }
+        updateNote(idNote,note)
+      });
+  });
+}

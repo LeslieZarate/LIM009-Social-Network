@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Mukta');
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;  
 }
 body{
-  opacity: 1;
-  background-image: url('../img/42503.jpg');
+  background: url('https://images.unsplash.com/photo-1520052205864-92d242b3a76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
   background-attachment: fixed;
   background-size: cover;
-  font-family: 'Mukta', sans-serif;
 }
 .p1{
   padding: 1%;
@@ -76,6 +73,7 @@ main{
 .forms-content{
   width: 98%;
   height: auto;
+ /* background: blue;*/
 }
 
 .register-login{  
@@ -83,12 +81,12 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:rgba(3, 109, 56, 0.1);
+  background-color:rgba(41, 15, 32, 0.1);
 }
 .img-logo {
-  width :35%;
-  height:10vh;
-  margin: 2%;  
+  width :80%;
+  height:15vh;
+  margin: 3%;  
 }
 
 .form-group{
@@ -103,13 +101,13 @@ main{
    height: 40px;  
    width: 100%;
    border-radius: 20px;
-   border: 1px solid #3de41b;
+   border: 1px solid #dd5570;
    margin: 0.5rem;
    padding: 7px 20px 7px 20px;
 }
 
 .form-group button{
-  background: rgb(51, 161, 47);
+  background: rgb(161, 47, 133);
   border:none;
   color: white;
 
@@ -118,7 +116,7 @@ main{
   height: 40px;
   width:50%;
   border-radius: 20px;
-  background: rgb(47, 161, 56);
+  background: rgb(161, 47, 133);
   border:none;
   color: white;
   margin:1rem;
@@ -137,7 +135,7 @@ main{
 header{
   width: 100%;
   height: 80px;
-  background: #4f41cc;
+  background: #da7697;
   color: #fff;
   position: fixed;
   top: 0;
@@ -164,7 +162,7 @@ header{
     position: absolute;
     width: 100%;
     height: auto;
-    background:#4f41cc;
+    background:#da7697;
     left: 0;
     top:80px;
     transform:translateX(-100%);
@@ -179,11 +177,11 @@ header{
     text-decoration: none;
     padding: 15px;
     font-weight: bold;    
-    border-top: 1px solid rgb(255,255,255,0.9);
+    border-top: 1px solid rgb(255,255,255,0.5);
     text-align: center;
 }
 .main-nav li a:hover{
-    background: #4f41cc;
+    background: #cc416f
 }
 #toggle:checked ~ .navbar{
   transform:translateX(0%);
@@ -199,12 +197,12 @@ header{
   align-items: start;
 }
 .profile-content{
-  background:rgba(234, 247, 226, 0.1);
+  background:rgba(41, 15, 32, 0.1);
   width: 98%;
   height: auto;
 }
 .perfil-user {
-  border:1px solid #4f41cc;
+  border:3px solid #cc416f;
   border-radius: 10px;
   display:flex;
   align-items: center;
@@ -212,13 +210,13 @@ header{
 .perfil-user img{
   width:20%;
   height:15%;
-  border:1px solid #4f41cc;
+  border:1px solid #cc416f;
   border-radius: 50%;
   margin: 1% 5% 1% 1%;
 }
 
 .posts-content{
-  background:rgba(234, 247, 226, 0.1);
+  background:rgba(41, 15, 32, 0.1);
   width: 98%;
   height: auto;
   display: flex;
@@ -232,20 +230,22 @@ header{
 .form-post{
   width: 96%;
   height: auto;
-  border:1px solid #4f41cc;
+  border:3px solid #cc416f;
   border-radius: 10px; 
 }
 .form-post textarea{
   width: 100%;
   height: 100px;
   resize: none;
-  border:1px solid #414fcc;
+  border:1px solid #cc416f;
   padding: 7px 20px 7px 20px;
 }
 
+
+
 .user-post{
   border-radius: 7px 7px 0px 0px;
-  background: #4341cc;
+  background: #cc416f;
   color: #fff;
   padding: 1rem;
   display: flex;
@@ -254,13 +254,15 @@ header{
 
 .icons{
   cursor: pointer;
-  font-size: 15px;
-  color: rgb(154, 168, 189);
+  font-size: 25px;
+}
+.icons:hover{
+  background: #fff
 }
 
 
 /*---------------------------------------------------------*/
-          /*DESKTOP */
+          /*DESKPOT */
 /*---------------------------------------------------------*/
 
 @media (min-width: 768px) {
@@ -291,8 +293,8 @@ header{
 }
 
 .img-logo {
-  width: 27vh;
-  height:10vh;
+  width: 60%;
+  height:18vh;
  }
  .form-group{
   width: 25vw;
@@ -335,9 +337,18 @@ header{
     }
 
     .posts-content{
-      background:rgba(234, 247, 226, 0.1);
+      background:rgba(41, 15, 32, 0.1);
       width: 70%;
       height: auto;
     }
 
+
+
 }
+
+
+
+
+
+
+
