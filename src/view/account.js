@@ -5,11 +5,11 @@ export default ()=>{
     const formContent = `
     <div class="container p1">
 			<section class="img-content center-content m1 p2 ">
-				<img src="img/intro.png">
+				<img src="img/intro.jpg">
 			</section>
 			<section class="forms-content  m1 p2 ">
 				<article class="register-login p4 ">
-					<img alt ='logo' src="img/loogo.png" class="img-logo">
+					<img alt ='logo' src="img/logo1.png" class="img-logo">
 					<h2> Registrate </h2>				
 					<form>
 						<div class="form-group">
@@ -25,8 +25,8 @@ export default ()=>{
 								<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
 							</div>
 							<div class="form-group">
-									<button id="btn-singUp" type="submit">Registrar</button>
-							</div>                
+							<button id="btn-singUp" type="submit">Registrar</button>
+						</div>                
 					</form>
 				</article> 
 			</section>

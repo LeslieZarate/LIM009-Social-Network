@@ -24,9 +24,9 @@ export const signOut = () => firebase.auth().signOut();
 
 /******************************  DATOS DE USUARIO **********************************/
 
-export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
+export const setUser = (uid,userName,email,userPhoto)=>{
   return firebase.firestore().collection('users').doc(uid).set({
-    idUser: idDoc,
+    idUser: uid,
     name: userName,
     email: email,
     photo: userPhoto,
@@ -40,8 +40,8 @@ export const getUser = (id,callback) =>{
       callback(data)
     });     
 }
-
-/* export const getUser2 = (id) =>{
+/*
+ export const getUser = (id) =>{
   return firebase.firestore().collection('users').doc(id).get()  
   
 } */
