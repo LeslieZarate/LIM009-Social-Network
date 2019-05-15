@@ -252,6 +252,12 @@ header{
   justify-content: space-between;
 }
 
+/*.btn-actions {
+  display: flex;
+ 
+  
+}*/
+
 .icons{
   cursor: pointer;
   font-size: 25px;

@@ -205,3 +205,17 @@ export const updateNoteSubmit = (event) => {
       });
   });
 }
+
+export const updateLikeSubmit = (event)=>{
+  event.preventDefault()  
+  const idBtn = event.target.id;
+  const idNote = idBtn.slice(10,30);
+  console.log(idNote)
+  const botonLike = document.querySelector(`#btn-likes-${idNote}`)
+  const likes = parseInt(botonLike.dataset.likes)
+  console.log(likes)
+  const note = {
+    likes : likes + 1
+  }
+  updateNote(idNote,note)
+}
