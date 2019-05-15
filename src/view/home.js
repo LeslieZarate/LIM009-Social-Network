@@ -1,4 +1,4 @@
-import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit} from "../view-controller.js"
+import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit ,updateLikeSubmit} from "../view-controller.js"
 import {getPost} from "../controller/controller-firebase.js"
 
 export default () => {
@@ -74,7 +74,10 @@ export const templatePost = (data) =>{
                   :  `<option value="Privado">${doc.privacy}</option>
                       <option value="Publico">Publico</option>`}                  
                 </select>
-                <i id="btn-like" class="fas fa-heart icons m1">${doc.likes}</i>
+
+                <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1"  data-likes="${doc.likes}"></i>
+                <label id="contenedor-like">${doc.likes}</label>
+
                 <i id="btn-edit-${doc.id}" class="fas fa-edit icons m1"></i>
                 <i id="btn-save-${doc.id}" class="fas fa-save icons m1"></i>							
               </div>`
@@ -112,6 +115,10 @@ export const templatePost = (data) =>{
 		
 	// EDITAR 
 	[... document.getElementsByClassName('fa-edit')].forEach(ele=>{
-		ele.addEventListener('click',updateNoteSubmit)});
+    ele.addEventListener('click',updateNoteSubmit)});
+
+  // LIKES  
+    [... document.getElementsByClassName('fa-heart')].forEach(ele=>{
+      ele.addEventListener('click',updateLikeSubmit)});
 }
 
