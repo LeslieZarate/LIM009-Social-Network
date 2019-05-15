@@ -1,19 +1,19 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser,getUser2} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser} from "./controller/controller-firebase.js";
 
 const changeHash = (hash) =>  {
     location.hash = hash;
 }
 
-/********************** AUTENTIFICACION  **************** */
+/*****************************  AUTENTIFICACION  *************************/
     
-// Funcion de Login EMAIL Y CONTRASEÑA
+// LOGIN - EMAIL Y CONTRASEÑA
 export const signInOnSubmit = (event) => {
   event.preventDefault()
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;  
   signIn(email, password)
     .then(() => {
-      changeHash('/home')
+      changeHash('/dramaFever')
     })
     .catch(error => {
       const errorCode = error.code;
@@ -21,15 +21,13 @@ export const signInOnSubmit = (event) => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-// Funcion de Login con GOOGLE
+// LOGIN - GOOGLE
 export const signInGoogleOnSubmit = () => {
   signInGoogle()
     .then((result) => {
-      const user = result.user
-      user.providerData.forEach( profile =>{
-        setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
-      })      
-      changeHash('/home')
+      const user = result.user;      
+      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
+      changeHash('/dramaFever')
     })         
     .catch(error => {
       const errorCode = error.code;
@@ -37,15 +35,13 @@ export const signInGoogleOnSubmit = () => {
       alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })    
 }
-// Funcion de Login FACEBOOK
+// LOGIN - FACEBOOK
 export const signInFacebookOnSubmit = () => {
   signInFacebook()
   .then((result) => {
-    const user = result.user
-    user.providerData.forEach( profile =>{
-      setUser(profile.uid,profile.displayName,profile.email,profile.photoURL,user.uid)
-    })      
-    changeHash('/home')
+    const user = result.user;      
+      setUser(user.uid,user.displayName,user.email,user.photoURL,user.uid)         
+      changeHash('/dramaFever')
   })           
   .catch(error => {
     const errorCode = error.code;
@@ -53,7 +49,7 @@ export const signInFacebookOnSubmit = () => {
     alert( `Error: ${errorMessage} Tipo:${errorCode}`)
   })
 }
-// Funcion de CREAR CUENTA 
+// CREAR CUENTA 
 export const signUpSubmit = (event) =>{
   event.preventDefault();
   const email = document.querySelector('#email').value;
@@ -65,7 +61,7 @@ export const signUpSubmit = (event) =>{
     .then((result)=>{
       const user = result.user
       setUser(user.uid,name,user.email,photo,user.uid);
-      signOut()     
+      signOut()    
       changeHash('/signIn');
     })
     .catch(error => {
@@ -74,9 +70,10 @@ export const signUpSubmit = (event) =>{
         alert( `Error: ${errorMessage} Tipo:${errorCode}`)
     })
 }
-// Salir de la Cuenta
+// CERRAR SESION
 export const signOutSubmit = () =>{
   signOut()
+  .then(()=>changeHash('/signIn'))
   .catch(error => {
     const errorCode = error.code;
     const  errorMessage = error.message;
@@ -84,13 +81,35 @@ export const signOutSubmit = () =>{
   })
 } 
 
-/********** OBTENER DATOS DEL USUARIO ****/
-
+/************************ OBTENER DATOS DEL USUARIO *************************/
 export const userData = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
+      getUser(user.uid,callback)
+    } else {
+      callback(user)
+    }
+  }) 
+}
+// OBSERVADOR 
+/*
+export const  observer = () => {
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      console.log(`OBSERVADOR : USUARIO ACTIVO ${user.email}`)
+    }else{
+      console.log(' OBSERVADOR : USUARIO NO ACTIVO')
+    }    
+  }) 
+}
+*/
+/*
+export const userData2 = (callback) =>{
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
       getUser(user.uid).then( doc => {
-        callback(doc.data())
+        console.log('hola')
+        callback(doc.data())        
       })
       .catch(error=>{
         const errorCode = error.code;
@@ -99,88 +118,52 @@ export const userData = (callback) =>{
       })
     }else{
       console.log('usuario no activo Perfil')
-    }
-
-    
+    }    
   });
 }
-export const userData2 = (callback) =>{
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      getUser2(user.uid,callback)
-    } else{
-      console.log('usuario no activo Perfil')
-    }
-  })  
-}
-// OBSERVADOR 
-export const  observer = () => {
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      console.log('Usuario activo: '+ user.email )
-    }else{
-      console.log('usuario no activo Observador ')
-    }    
-  }) 
-}
+*/
 
-/********************** POST  **************** */
+/************************************  POST *****************************************/
 
 export  const addNoteSubmit = (event) =>{
   event.preventDefault();
   const privacy = document.querySelector('#options-privacy').value;  
   const textPost = document.querySelector('#text-post');
-  userData((doc)=>{
-    if(textPost.value  === ''){
-      alert('Escribe algo ')
-    }
-    else{
-      addNote(doc.name,doc.photo,textPost.value,privacy)
+  if(textPost.value  === ''){
+    alert('Escribe algo ')
+  }
+  else{
+    userData((doc)=>{ 
+      addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
       .then(()=>{
         alert('mensaje agregado')
-        textPost.value = '';
-        
+        textPost.value = '';        
       })
       .catch(error => {
         const errorCode = error.code;
         const  errorMessage = error.message;
         alert( `Error: ${errorMessage} Tipo:${errorCode}`)
       })
-    }
-
-  });
-
-/*
-
-  const user = firebase.auth().currentUser;
-  const userName = user.displayName;
-  const userPhoto = user.photoURL;  
-  const privacy = document.querySelector('#options-privacy').value;  
-  const textPost = document.querySelector('#text-post');
-
-  if(textPost.value  === ''){
-    alert('Escribe algo ')
+    });
   }
-  else{
-    addNote(userName,userPhoto,textPost.value,privacy)
-    .then(()=>{
-      alert('mensaje agregado')
-      textPost.value = '';
-      
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const  errorMessage = error.message;
-      alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-    })
-  } */
-
 }
 
-export const deleteNoteSubmit = (event) =>{
-    event.preventDefault();
-    console.log(event.target.id);
-    deleteNote(event.target.id)
+export const deleteNoteSubmit = (event) =>{ 
+  event.preventDefault();
+  console.log(event.target.id) 
+    firebase.auth().onAuthStateChanged(user =>{
+      if(user){
+        getdoc(doc => {
+          if(user.uid === doc.id){  
+          }
+        })
+      }
+      else{
+        console.log('no hay usuario')
+      } 
+    })
+  
+  deleteNote(event.target.id)
     .then(()=>{
       console.log('se elimino exitosamente')
     })
@@ -192,6 +175,7 @@ export const deleteNoteSubmit = (event) =>{
 }
 
 export const updateNoteSubmit = (event) => {
+  event.preventDefault()
   const btnId = event.target.id;
   const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
   const textNote = document.querySelector(`#post-${idNote}`)
@@ -204,3 +188,5 @@ export const updateNoteSubmit = (event) => {
     updateNote(idNote,note)
   })
 }
+
+//LIKES

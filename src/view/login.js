@@ -5,37 +5,38 @@ export default () => {
     const formContent =`
 				<div class="container p1">
 				<section class="img-content center-content m1 p2 ">
-					<img src="img/intro.jpg">
+					<img src="img/intro.png">
 				</section>
 				<section class="forms-content  m1 p2 ">
-					<article class="register-login p4">
-						<img alt ='logo' src="img/logo1.png" class="img-logo">
-						<h2> Inicia Sesión </h2>				
-						<form>
-							<div class="form-group">
-								<label  for="email">Email</label>
-								<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
-							</div>
-							<div class="form-group">
-								<label for="password">Password</label>
-								<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
-							</div>
-							<div class="form-group">
-								<button id="btn-login" type="submit">Login</button>
-							</div>                  
-						</form>
-						<p>O bien ingresa con:</p>
-						<div class="login-social center-content m1">
-								<a id="btn-facebook" class="login-social-item">
-									<img src="https://i.ibb.co/NmxyWjL/ico-fb.png" alt="facebook">
-								</a>
-								<a  id="btn-google" class="login-social-item">
-									<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
-								</a>							
+				<article class="register-login p4">
+					<img alt ='logo' src="img/loogo.png" class="img-logo">
+					<h2> Inicia Sesión </h2>				
+					<form>
+						<div class="form-group">
+							<label  for="email">Email</label>
+							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
 						</div>
-						<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></p>				
-					</article>			
-				</section>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
+						</div>
+						<div class="form-group">
+							<button id="btn-login" type="submit">Login</button>
+						</div>                  
+					</form>
+					<p>O bien ingresa con:</p>
+					<div class="login-social center-content m1">
+							<a id="btn-facebook" class="login-social-item">
+								<img src="https://i.ibb.co/NmxyWjL/ico-fb.png" alt="facebook">
+							</a>
+							<a  id="btn-google" class="login-social-item">
+								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
+							</a>							
+					</div>
+					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></p>				
+				</article>			
+			</section>
+				
 			</div>
     `;
 	
@@ -54,6 +55,8 @@ export default () => {
 	// LOGEO CON FACEBOK
 	const btnFacebook = form.querySelector('#btn-facebook'); 
 	btnFacebook.addEventListener('click',signInFacebookOnSubmit );
+
+	
 
 return form;
 }

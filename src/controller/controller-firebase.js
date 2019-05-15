@@ -22,34 +22,34 @@ export const signUp = (email,password)=>{
 export const signOut = () => firebase.auth().signOut();
 
 
-/********************** DATOS DE USUARIO **************** */
+/******************************  DATOS DE USUARIO **********************************/
 
 export const setUser = (idDoc,userName,email,userPhoto,uid)=>{
   return firebase.firestore().collection('users').doc(uid).set({
-    id: idDoc,
+    idUser: idDoc,
     name: userName,
     email: email,
     photo: userPhoto,
   })
 }
 
-export const getUser = (id) =>{
-  return firebase.firestore().collection('users').doc(id).get()  
-  
-}
-
-export const getUser2 = (id,callback) =>{
+export const getUser = (id,callback) =>{
   firebase.firestore().collection("users").doc(id)
     .onSnapshot(doc => {
       const data = doc.data();
       callback(data)
-    });   
-    
+    });     
 }
 
-/************************************** POST  *************************************** */
-  export const addNote = (userName,userPhoto,textPost,privacy) => {
+/* export const getUser2 = (id) =>{
+  return firebase.firestore().collection('users').doc(id).get()  
+  
+} */
+
+/************************************** POST  ******************************************/
+  export const addNote = (idUser,userName,userPhoto,textPost,privacy) => {
     return firebase.firestore().collection('posts').add({
+      idUser : idUser,
       name : userName,
       photo :  userPhoto,
       textPost : textPost,
@@ -59,15 +59,15 @@ export const getUser2 = (id,callback) =>{
     });
   }
 
-  export const getPost =(callback)=>{
-    firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
-        const posts =[];
-        querySnapshot.forEach((doc) => {
-           // console.log(`${doc.id} => ${doc.data().name}`);
-            posts.push({id: doc.id,...doc.data()});
-        });
+export const getPost =(callback)=>{
+  firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+    const posts =[];
+    querySnapshot.forEach((doc) => {
+      // console.log(`${doc.id} => ${doc.data().name}`);
+        posts.push({id: doc.id,...doc.data()});                
+      });
        // console.log(posts)
-        callback(posts);
+      callback(posts);
     })
 }
 export const deleteNote = (idNote)=>{
