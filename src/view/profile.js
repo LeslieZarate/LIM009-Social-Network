@@ -3,11 +3,11 @@ export default (user) => {
  
   const profileContent = `
           <div>
-          ${user != null
+          ${user !== null
             ?`<h1>Perfil del Usuario</h1>
               <p>${user.name}</p>
               <img src= '${user.photo}'/>` 
-            : null}             
+            : ``}            
               
           </div> 
   `;
