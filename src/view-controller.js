@@ -92,7 +92,6 @@ export const userData = (callback) =>{
 }
 // OBSERVADOR 
 
-
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -128,22 +127,62 @@ export const userData = (callback) =>{
 
 /************************************  POST *****************************************/
 
+// funciones para validar la fecha 
+
+const validate = (number) => {
+  if(number<=9){
+    number ="0"+number;
+  }
+  return number 
+}
+
+const systemDate = (fullDate )=>{
+  const getDate = validate(fullDate.getDate());
+  const getMonth = validate(fullDate.getMonth()+1);
+  const getFullYear = fullDate.getFullYear()
+  
+  const minutes =  validate(fullDate.getMinutes());
+  const seconds =  validate(fullDate.getSeconds());
+  let  dn="AM";
+  let  hours = fullDate.getHours();
+    if(hours > 12){
+      hours = hours - 12;
+      dn = "PM"
+      if(hours<=9)
+        hours="0"+hours;
+    }
+    else if(hours===0){
+      hours=12
+    }
+    else if(hours<=9){
+        hours="0"+hours;
+    }
+  const myClock = `${hours}:${minutes}:${seconds} ${dn}`;
+  const day = `${getDate}/${getMonth}/${getFullYear}`;
+  const date = `${day},${myClock}`
+  return date;  
+}
+
 export  const addNoteSubmit = (event) =>{
   event.preventDefault();
-  console.log(firebase.auth().currentUser)
-  const user = firebase.auth().currentUser
-
+  const user = firebase.auth().currentUser;
+  
+  const fullDate= new Date();
+  const date = systemDate(fullDate);  
+ 
   if(user != null){
-    const privacy = document.querySelector('#options-privacy').value;  
+    const privacy = document.querySelector('#options-privacy');  
     const textPost = document.querySelector('#text-post');
     if(textPost.value  === ''){
       alert('Ingresa texto')
     }else{
       userData((doc)=>{ 
         if(doc){
-        addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
-          .then(()=>{         
-            textPost.value = '';        
+        addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy.value,date)
+          .then(()=>{    
+            alert('Se agrego exitosamente');   
+            textPost.value = '';
+            privacy.value  = 'Publico';
           })
           .catch(error => {
             const errorCode = error.code;
@@ -157,7 +196,6 @@ export  const addNoteSubmit = (event) =>{
   }else{
     alert('no estas logeado ')
   }
-  
 }
 
 export const deleteNoteSubmit = (event) =>{ 
@@ -180,23 +218,30 @@ export const updateNoteSubmit = (event) => {
   const btnId = event.target.id;
   const idNote = btnId.substr(9,btnId.length-9) // Identificar que post vamos a actualizar 
 
+  const messageEdit = document.querySelector(`#message-${idNote}`)
+  messageEdit.style.display = "block";
+
+
   const textNote = document.querySelector(`#post-${idNote}`)
   textNote.readOnly = false;
-  // editar el contenido de un post 
+
+  // editar el contenido de un post  BOTON SAVE 
   const btnSave = document.querySelector(`#btn-save-${idNote}`)
-  btnSave.addEventListener('click',()=>{    
+  btnSave.addEventListener('click',()=>{ 
+    messageEdit.style.display = "none";  
     const  note = {
       textPost : textNote.value     
     }
     updateNote(idNote,note)    
   })
 
-  // editar la privacidad del post
+  // editar la privacidad del post BOTON SAVE 
   const privacy = document.querySelector(`#options-${idNote}`);
   privacy.addEventListener('change',()=>{
     const privacyValue = privacy.value;
     const btnSave = document.querySelector(`#btn-save-${idNote}`)
       btnSave.addEventListener('click',()=>{    
+        messageEdit.style.display = "none";
         const  note = {
           textPost : textNote.value,
           privacy : privacyValue
@@ -211,8 +256,8 @@ export const updateLikeSubmit = (event)=>{
   const idBtn = event.target.id;
   const idNote = idBtn.slice(10,30);
   console.log(idNote)
-  const botonLike = document.querySelector(`#btn-likes-${idNote}`)
-  const likes = parseInt(botonLike.dataset.likes)
+  const buttonLike = document.querySelector(`#btn-likes-${idNote}`)
+  const likes = parseInt(buttonLike.dataset.likes)
   console.log(likes)
   const note = {
     likes : likes + 1

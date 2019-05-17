@@ -61,7 +61,8 @@ export const templatePost = (data) =>{
         </div>
         <form class="p2">							
           <textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
-          <p>${doc.date}</>
+          <h3>${doc.date}</h3>
+          <p id="message-${doc.id}" class="display-none">Ahora puedes editar </p>
           ${ user.uid === doc.idUser 
             ?
              `<div class="btn-actions m1">
@@ -74,6 +75,7 @@ export const templatePost = (data) =>{
                   :  `<option value="Privado">${doc.privacy}</option>
                       <option value="Publico">Publico</option>`}                  
                 </select>
+                
 
                 <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1"  data-likes="${doc.likes}"></i>
                 <label id="contenedor-like">${doc.likes}</label>

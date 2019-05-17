@@ -40,30 +40,26 @@ export const getUser = (id,callback) =>{
       callback(data)
     });     
 }
-/*
- export const getUser = (id) =>{
-  return firebase.firestore().collection('users').doc(id).get()  
-  
-} */
+
 
 /************************************** POST  ******************************************/
-  export const addNote = (idUser,userName,userPhoto,textPost,privacy) => {
-    return firebase.firestore().collection('posts').add({
-      idUser : idUser,
-      name : userName,
-      photo :  userPhoto,
-      textPost : textPost,
-      privacy : privacy,
-      date : Date(),
-      likes :0,
+export const addNote = (idUser,userName,userPhoto,textPost,privacy,date) => {
+  return firebase.firestore().collection('posts').add({
+    idUser : idUser,
+    name : userName,
+    photo :  userPhoto,
+    textPost : textPost,
+    privacy : privacy,
+    date : date,
+    likes :0,
     });
-  }
+}
 
-export const getPost =(callback)=>{
-  firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+export const getPost = (callback)=>{
+  firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
-      // console.log(`${doc.id} => ${doc.data().name}`);
+        // console.log(`${doc.id} => ${doc.data().date}`);
         posts.push({id: doc.id,...doc.data()});                
       });
        // console.log(posts)
