@@ -12,7 +12,7 @@ export default () => {
   <section class="profile-content m1 p2">
         <div class="perfil-user m1 p2">
           <img alt ='photo-perfil' src="img/users.png" class="m1">
-        <h2>NAME</h2>
+        <h4>NAME</h4>
         </div>				
   </section>	 
   
@@ -34,7 +34,7 @@ export default () => {
         </form>					
       </div>
       <!-- POSTS -->
-      <h1>Publicaciones </h1>
+      <h2>Publicaciones </h2>
       <!-- TOTAL POST -->
       <div class="public-posts" id="public-posts">			
       </div>
@@ -42,15 +42,15 @@ export default () => {
  `;
       
   main.innerHTML = mainContent;  
-  const btnSave = main.querySelector('#btn-save');
-  btnSave.addEventListener('click',addNoteSubmit) 
   postImage = main.querySelector('#input-file');
 	const uploadImageBtn = main.querySelector('#btn-img');
 	uploadImageBtn.addEventListener('click', () => {
 	postImage.classList.remove('none');
 }); 
+  const btnSave = main.querySelector('#btn-save');
+  btnSave.addEventListener('click',addNoteSubmit); 
   getPost(templatePost)
-  return main  
+  return main;  
 }
 
 
@@ -64,7 +64,7 @@ export const templatePost = (data) =>{
       <div class="form-post m1" id="${doc.id}">
       <div class="user-post">
       <img alt ='photo-perfil' src="${doc.photo}" class="icon-photo">
-          <p>${doc.name}</p>
+          <h3>${doc.name}</h3>
           ${ user.uid === doc.idUser ? `<i id="${doc.id}" class="fas fa-window-close icons"></i>`: `` }					
         </div>
         <form class="p2">							
@@ -130,6 +130,10 @@ export const templatePost = (data) =>{
   // LIKES  
   [... document.getElementsByClassName('fa-heart')].forEach(ele=>{
       ele.addEventListener('click',updateLikeSubmit)});
+
+  // IMAGEN  
+  [... document.getElementsByClassName('fa-image')].forEach(ele=>{
+    ele.addEventListener('click',uploadImageBtn)});
 
 }
 

@@ -207,6 +207,7 @@ export const updateNoteSubmit = (event) => {
   });
 }
 
+ // Like en los post
 export const updateLikeSubmit = (event)=>{
   event.preventDefault()  
   const idBtn = event.target.id;
