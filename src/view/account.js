@@ -14,15 +14,15 @@ export default ()=>{
 					<form>
 						<div class="form-group">
 								<label  for="name">Nombre</label>
-								<input class="form-control" id="name" type="text" placeholder="Ingresa tu nombre"/>
+								<input class="form-control" id="name" type="text" placeholder="Ingresa tu nombre" required/>
 							</div>
 							<div class="form-group">
 								<label  for="email">Email</label>
-								<input class="form-control" id="email" type="email" placeholder="Ingresa tu email"/>
+								<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" required/>
 							</div>
 							<div class="form-group">
 								<label for="password">Password</label>
-								<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
+								<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña" required/>
 							</div>
 							<div class="form-group">
 							<button id="btn-singUp" type="submit">Registrar</button>

@@ -72,22 +72,6 @@ export const getPost =(callback)=>{
 export const deleteNote = (idNote)=>{
   return firebase.firestore().collection('posts').doc(idNote).delete();
 }
-export const updateLike=(idNote,likes)=>{
-  return firebase.firestore().collection('posts').doc(idNote).update({
-    likes : likes,
-  });
-};
 export const updateNote = (idNote , note ) =>{
   return firebase.firestore().collection('posts').doc(idNote).update(note);
 }
-
-export const getPostsByPrivacity = (privacityValue, callback) =>{
-  firebase.firestore().collection('posts').where('privacity', '==', privacityValue)
-    .onSnapshot((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() })
-      });
-      callback(data);
-    });
- }

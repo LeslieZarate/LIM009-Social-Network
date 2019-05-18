@@ -75,7 +75,7 @@ export const templatePost = (data) =>{
                       <option value="Publico">Publico</option>`}                  
                 </select>
 
-                <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1"  data-likes="${doc.likes}"></i>
+                <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1" data-likes="${doc.likes}"></i>
                 <label id="contenedor-like">${doc.likes}</label>
 
                 <i id="btn-edit-${doc.id}" class="fas fa-edit icons m1"></i>
@@ -93,11 +93,13 @@ export const templatePost = (data) =>{
       const post = `
       <div class="form-post m1" id="${doc.id}">
           <div class="user-post">
-            <p>${doc.name}</p>                       
+            <p>${doc.name}</p>  	                     
           </div>
-          <form class="p2">							
+          <form class="p2">					
             <textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
-            <p>${doc.date}</>                      
+            <p>${doc.date}</>   
+            <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1" data-likes="${doc.likes}"></i>
+          <label id="contenedor-like">${doc.likes}</label>                   
           </form>					
         </div> `;
       listPost += post
@@ -118,7 +120,8 @@ export const templatePost = (data) =>{
     ele.addEventListener('click',updateNoteSubmit)});
 
   // LIKES  
-    [... document.getElementsByClassName('fa-heart')].forEach(ele=>{
+  [... document.getElementsByClassName('fa-heart')].forEach(ele=>{
       ele.addEventListener('click',updateLikeSubmit)});
+
 }
 

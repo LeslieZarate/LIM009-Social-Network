@@ -14,11 +14,11 @@ export default () => {
 					<form>
 						<div class="form-group">
 							<label  for="email">Email</label>
-							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
+							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" required/>
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
-							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
+							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña" required/>
 						</div>
 						<div class="form-group">
 							<button id="btn-login" type="submit">Login</button>
