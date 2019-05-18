@@ -47,7 +47,7 @@ export const getUser = (id,callback) =>{
 } */
 
 /************************************** POST  ******************************************/
-  export const addNote = (idUser,userName,userPhoto,textPost,privacy) => {
+  export const addNote = (idUser,userName,userPhoto,textPost,privacy, postImage = null) => {
     return firebase.firestore().collection('posts').add({
       idUser : idUser,
       name : userName,
@@ -56,10 +56,13 @@ export const getUser = (id,callback) =>{
       privacy : privacy,
       date : Date(),
       likes :0,
+      image: postImage 
     });
   }
 export const getPost =(callback)=>{
-  firebase.firestore().collection('posts').onSnapshot((querySnapshot)=>{
+  firebase.firestore().collection('posts')
+  .orderBy('date', 'desc')
+  .onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
       // console.log(`${doc.id} => ${doc.data().name}`);
@@ -74,4 +77,12 @@ export const deleteNote = (idNote)=>{
 }
 export const updateNote = (idNote , note ) =>{
   return firebase.firestore().collection('posts').doc(idNote).update(note);
+}
+
+export const uploadImage = (date, image) => {
+  const storageRef = firebase.storage().ref();
+  const postImageRef = storageRef.child(`images/${date}-${image.name}`);
+  const metadata = { contentType: image.type };
+  return postImageRef.put(image, metadata)
+  .then(snapshot => snapshot.ref.getDownloadURL());
 }

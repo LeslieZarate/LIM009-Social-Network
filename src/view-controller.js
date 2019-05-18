@@ -1,4 +1,4 @@
-import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser} from "./controller/controller-firebase.js";
+import { signIn ,signInGoogle ,signInFacebook,signUp ,signOut,setUser,addNote,deleteNote,updateNote, getUser, uploadImage} from "./controller/controller-firebase.js";
 const changeHash = (hash) =>  {
     location.hash = hash;
 }
@@ -142,6 +142,7 @@ export  const addNoteSubmit = (event) =>{
       userData((doc)=>{ 
         if(doc){
         addNote(doc.idUser,doc.name,doc.photo,textPost.value,privacy)
+        uploadImage(date, postImage.files[0])
           .then(()=>{         
             textPost.value = '';        
           })

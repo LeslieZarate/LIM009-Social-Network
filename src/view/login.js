@@ -52,7 +52,7 @@ export default () => {
 	const btnGoogle = form.querySelector('#btn-google'); 
 	btnGoogle.addEventListener('click',signInGoogleOnSubmit );
 
-	// LOGEO CON FACEBOK
+	// LOGEO CON FACEBOOK
 	const btnFacebook = form.querySelector('#btn-facebook'); 
 	btnFacebook.addEventListener('click',signInFacebookOnSubmit );
 

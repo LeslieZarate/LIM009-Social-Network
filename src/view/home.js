@@ -1,7 +1,9 @@
 import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit ,updateLikeSubmit} from "../view-controller.js"
 import {getPost} from "../controller/controller-firebase.js"
 
+
 export default () => {
+  let postImage;
   const main = document.createElement('main');
   const mainContent = `
   
@@ -25,9 +27,10 @@ export default () => {
               <option value="Publico">Publico</option>
               <option value="Privado">Privado</option>
             </select>
-            <i id="btn-img" class="fas fa-image icons m1"></i>
+            <i id="btn-img" class="fas fa-image icons m1" src="../assets/image.png" alt="subir-imagen" title="subir imagen" /></i>
             <i id="btn-save" class="fas fa-paper-plane icons m1"></i>
-          </div>               
+          </div> 
+          <input id="input-file" class="none" type="file" accept="image/*" />              
         </form>					
       </div>
       <!-- POSTS -->
@@ -40,7 +43,12 @@ export default () => {
       
   main.innerHTML = mainContent;  
   const btnSave = main.querySelector('#btn-save');
-	btnSave.addEventListener('click',addNoteSubmit) 
+  btnSave.addEventListener('click',addNoteSubmit) 
+  postImage = main.querySelector('#input-file');
+	const uploadImageBtn = main.querySelector('#btn-img');
+	uploadImageBtn.addEventListener('click', () => {
+	postImage.classList.remove('none');
+}); 
   getPost(templatePost)
   return main  
 }
