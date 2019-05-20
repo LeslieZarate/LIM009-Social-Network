@@ -123,7 +123,9 @@ main{
   color: white;
   margin:1rem;
 }
-
+.none {
+   display: none;
+}
 
 .login-social img{
   margin:1rem;
