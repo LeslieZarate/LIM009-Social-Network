@@ -21,7 +21,6 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
-
 /******************************  DATOS DE USUARIO **********************************/
 
 export const setUser = (uid,userName,email,userPhoto)=>{
@@ -30,6 +29,9 @@ export const setUser = (uid,userName,email,userPhoto)=>{
     name: userName,
     email: email,
     photo: userPhoto,
+    birthdate : null,
+    infoPersonal:null,
+    infoDoramas:null
   })
 }
 
@@ -41,6 +43,9 @@ export const getUser = (id,callback) =>{
     });     
 }
 
+export const updateUser = (idUser , dataUser ) =>{
+  return firebase.firestore().collection('users').doc(idUser).update(dataUser);
+}
 
 /************************************** POST  ******************************************/
 export const addNote = (idUser,userName,userPhoto,textPost,privacy,date) => {
@@ -55,17 +60,30 @@ export const addNote = (idUser,userName,userPhoto,textPost,privacy,date) => {
     });
 }
 
-export const getPost = (callback)=>{
+export const getAllPosts = (callback)=>{
   firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id} => ${doc.data().date}`);
+        //console.log(`${doc.id} => ${doc.data().privacy}`);
         posts.push({id: doc.id,...doc.data()});                
       });
        // console.log(posts)
       callback(posts);
     })
 }
+
+export const getPublicPosts = (callback)=>{
+  firebase.firestore().collection('posts').where("privacy","==","publico").orderBy("date","desc").onSnapshot(querySnapshot=>{
+    let posts =[];
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data().privacy}`);
+        posts.push({id: doc.id,...doc.data()});                
+      });   
+      callback(posts);
+      
+    })
+}
+
 export const deleteNote = (idNote)=>{
   return firebase.firestore().collection('posts').doc(idNote).delete();
 }

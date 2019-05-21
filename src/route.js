@@ -24,12 +24,13 @@ const changeTmp = (hash) => {
     root.innerHTML = '';
     switch (router) {      
       case '#/home':
+         
       userData((user)=>{  
-       // console.log(user)             
-        root.appendChild(Header(user));        
+        root.innerHTML = ''; 
+        root.appendChild(Header(user));  
+        root.appendChild(Home(user));       
       });
-      root.appendChild(Home());
-      
+          
       break;
 
       case '#/signIn':
@@ -41,7 +42,8 @@ const changeTmp = (hash) => {
       break;         
       
       case '#/profile':
-      userData((user) => {        
+      userData((user) => {     
+        root.innerHTML = '';   
         root.appendChild(Header(user));
         root.appendChild(Profile(user)); 
       })

@@ -6,7 +6,7 @@ const header = document.createElement('header');
 		<div class="container-header">
 			<div class="logo-design align-center float-left">
 				<label for="toggle"><i class="fas fa-bars"></i></label> 
-				<img src="img/logomin.png"  alt="logo" />  
+				<img src="img/logo.png"  alt="logo" />  
 			</div>	 
 			<input type="checkbox" class = "display-none" id="toggle">  	         
 			<nav class="navbar"> 
