@@ -21,7 +21,6 @@ export const signUp = (email,password)=>{
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
 
-
 /******************************  DATOS DE USUARIO **********************************/
 
 export const setUser = (uid,userName,email,userPhoto)=>{
@@ -30,59 +29,64 @@ export const setUser = (uid,userName,email,userPhoto)=>{
     name: userName,
     email: email,
     photo: userPhoto,
+    birthdate : null,
+    infoPersonal:null,
+    infoDoramas:null
   })
 }
 
 export const getUser = (id,callback) =>{
-  firebase.firestore().collection('users').doc(id)
+  firebase.firestore().collection("users").doc(id)
     .onSnapshot(doc => {
       const data = doc.data();
       callback(data)
     });     
 }
-/*
- export const getUser = (id) =>{
-  return firebase.firestore().collection('users').doc(id).get()  
-  
-} */
+
+export const updateUser = (idUser , dataUser ) =>{
+  return firebase.firestore().collection('users').doc(idUser).update(dataUser);
+}
 
 /************************************** POST  ******************************************/
-  export const addNote = (idUser,userName,userPhoto,textPost,privacy, postImage = null) => {
-    return firebase.firestore().collection('posts').add({
-      idUser : idUser,
-      name : userName,
-      photo :  userPhoto,
-      textPost : textPost,
-      privacy : privacy,
-      date : Date(),
-      likes :0,
-      image: postImage 
+export const addNote = (idUser,userName,userPhoto,textPost,privacy,date) => {
+  return firebase.firestore().collection('posts').add({
+    idUser : idUser,
+    name : userName,
+    photo :  userPhoto,
+    textPost : textPost,
+    privacy : privacy,
+    date : date,
+    likes :0,
     });
-  }
-export const getPost =(callback)=>{
-  firebase.firestore().collection('posts')
-  .orderBy('date', 'desc')
-  .onSnapshot((querySnapshot)=>{
+}
+
+export const getAllPosts = (callback)=>{
+  firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
-      // console.log(`${doc.id} => ${doc.data().name}`);
+        // console.log(`${doc.id} => ${doc.data().date}`);
         posts.push({id: doc.id,...doc.data()});                
       });
        // console.log(posts)
       callback(posts);
     })
 }
+
+
+export const getPublicPosts = (callback)=>{
+  firebase.firestore().collection('posts').where("privacy","==","Publico").orderBy("date","desc").onSnapshot(querySnapshot=>{
+    let posts =[];
+    querySnapshot.forEach((doc) => {
+       posts.push({id: doc.id,...doc.data()});                
+      });
+      callback(posts);
+    })
+}
+
 export const deleteNote = (idNote)=>{
   return firebase.firestore().collection('posts').doc(idNote).delete();
 }
+
 export const updateNote = (idNote , note ) =>{
   return firebase.firestore().collection('posts').doc(idNote).update(note);
-}
-
-export const uploadImage = (date, image) => {
-  const storageRef = firebase.storage().ref();
-  const postImageRef = storageRef.child(`images/${date}-${image.name}`);
-  const metadata = { contentType: image.type };
-  return postImageRef.put(image, metadata)
-  .then(snapshot => snapshot.ref.getDownloadURL());
 }

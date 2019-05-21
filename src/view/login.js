@@ -9,15 +9,12 @@ export default () => {
 				</section>
 				<section class="forms-content  m1 p2 ">
 				<article class="register-login p4">
-					<img alt ='logo' src="img/loogo.png" class="img-logo">
-					<h2> Inicia Sesión </h2>				
+					<img alt ='logo' src="img/loogo.png" class="img-logo">				
 					<form>
 						<div class="form-group">
-							<label  for="email">Email</label>
 							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" required/>
 						</div>
 						<div class="form-group">
-							<label for="password">Password</label>
 							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña" required/>
 						</div>
 						<div class="form-group">
@@ -33,7 +30,7 @@ export default () => {
 								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
 							</a>							
 					</div>
-					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></p>				
+					<h2>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></h2>				
 				</article>			
 			</section>
 				

@@ -1,32 +1,75 @@
+import { updateUserPerfil } from "../view-controller.js"
 export default (user) => {
-  const profile = document.createElement('main');
+  const profile = document.createElement('div');
  
   const profileContent = `
+    <div>
+          <div>
       <!-- SECCION PERFIL -->
-      ${user != null?`
-          <div class="profile">
+      ${user !==  undefined
+        ?`<div class="profile">
           <div class="img-perfil">
           <img src='${user.photo}' alt ='photo-perfil' class="img-profile"></div>
           <h4>${user.name}</h4>
           <p>${user.email}</p>
           <hr>
-          <h3>Activity Doramas : ${user.infoDoramas}</h3>
-          <p>BirthDate : ${user.birthdate}</p>
+          <h3>Informaciòn Personal : ${user.infoPersonal}</h3>
+          <h3>Actividades de Doramas : ${user.infoDoramas}</h3>
+          <h3>Tu Fecha de Nacimiento : ${user.birthdate}</h3>
           
             <div class="redes face"><a href="https://www.facebook.com/"></a></div>
             <div class="redes twitter"><a href="https://twitter.com/?lang=es"></a></div>
             <div class="redes instagram"><a href="https://www.instagram.com/?hl=es-la"></a></div>
             <div class="redes youtube"><a href="https://www.youtube.com/"></a></div>
           <div class="boton">
-              <a href="#/profile">Editar</a>
-              </div> 
+          <a id="editPerfil-${user.idUser}">Editar</a>
+          </div> 
         </div>
-    
-            `	
-            : null} 	          
-  `;
+        <div id="edit-perfil" class="display-none">
+        <div>
+        <img src= '${user.photo}' width="100px"/>
+        <br>
+        <button id="editPhoto-${user.idUser}">Subir Imagen</button>
+        </div>
+          <form>
+            <div class="form-group">
+              <label  for="name">Nombre</label>
+              <input class="form-control" id="name" type="text"  value="${user.name}"/>
+              <p>${user.email}</p>
+            </div>
 
-  profile.innerHTML=profileContent;
-  return profile;
-}
+            <div class="form-group">
+            <label for="birthdate">Fecha de Nacimiento </label>
+            <input id="birthdate" type="date" value=${user.birthdate}> 
+          </div>
+            
+            <div class="form-group">
+              <label for="info-personal">Informacion sobre ti </label>
+              <textarea id="info-personal"  placeholder="Escribe algunos datos sobre ti">${user.infoPersonal}</textarea> 
+            </div>
+            <div class="form-group">
+              <label for="info-doramas">Doramas Favoritos </label>
+              <textarea id="info-doramas"  placeholder="Agrega tus doramas favoritos">${user.infoDoramas}</textarea> 
+            </div>
+
+
+            <div class="form-groups">
+              <button id="btn-save-perfil" type="submit">Guardar</button>
+              <button id="btn-cancel-perfil" type="submit">Cancelar</button>
+            </div>                  
+          </form>
+    </div> ` 
+        : ``}            
+          
+      </div> 
+<div>	          
+            `;
+
+            profile.innerHTML=profileContent;
+            if(user!== undefined){
+              const btnEditPerfil = profile.querySelector(`#editPerfil-${user.idUser}`)
+              btnEditPerfil.addEventListener('click',updateUserPerfil)
+            }
+            return profile;
+          }
 

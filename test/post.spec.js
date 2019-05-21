@@ -1,69 +1,70 @@
 import MockFirebase from 'mock-cloud-firestore';
-
 const fixtureData = {
   __collection__: {
-    post: {
+    posts: {
       __doc__: {
         abc123: {
-          name : 'Diana',
-          photo :  'abc',
-          textPost : 'Prueba Publicaciòn',
-          privacy : 'private',
-          likes :1,
-        },
-        abc121: {
+          idUser : '1',
           name : 'Daiana',
-          photo :  'abs',
-          textPost : 'Prueba2',
-          privacy : 'public',
+          photo :  'abc.png',
+          textPost : 'probando agregar un post',
+          privacy : 'privado',
+          date : '18/05/19',
+          likes :2,
+        },
+        abc456: {
+          idUser : '2',
+          name : 'Leslie',
+          photo :  'abcd.png',
+          textPost : 'probando agregar un post 1',
+          privacy : 'privado',
+          date : '17/05/19',
           likes :3,
         },
-        abc134: {
-          name : 'Leslie',
-          photo :  'afv',
-          textPost : 'Prueba Publicaciòn3',
-          privacy : 'private',
-          likes :0,
-      },
-     }
+      }
     }
-   }
   }
-
-
-global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
-
-import {addNote, getPost, deleteNote, updateNote} from '../src/controller/controller-firebase.js'
-
-describe('Post', () => {
+ };
+ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });import {addNote, getAllPosts, deleteNote, updateNote} from '../src/controller/controller-firebase.js';
+ describe('Post', () => {
   it('Debería porder agregar un post', (done) => {
-    return addNote('probando agregar un post', 'public')
-      .then(() => getPost(
+    return addNote('2','Leslie','abcd.png','probando agregar un post','privado','17/05/19',3)
+      .then(() => getAllPosts(
         (data) => {
-          const result = data.find((posts) => posts.textPost === 'probando agregar un post');
+          const result = data.find((note) => note.textPost === 'probando agregar un post');
           expect(result.textPost).toBe('probando agregar un post');
           done()
         }
-      ))
+      ));
   });
+ });
+ 
+ describe('updateNote',()=>{
   it('Debería poder editar un post', (done) => {
-    return updateNote('abc134','Post modificado')
-      .then(() => getPost((data) => {
-          const result = data.find((posts) => posts.textPost === 'Post modificado');
-          expect(result.textPost).toBe('Post modificado');
-          done();
+    const data = {
+      textPost : 'post modificado'
+    }
+    return updateNote('abc456', data)
+      .then( ()=> getAllPosts(
+        (posts) =>{
+          const result = posts.find((post) => post.textPost === 'post modificado');
+          expect(result.textPost).toBe('post modificado');
+          done()
         }
-      ))
-  }); 
-
+      )
+      )
+    })
+  });
+  
+  describe('dleeteNote',()=>{
   it('Debería poder eliminar un post', (done) => {
     return deleteNote('abc123')
-      .then(() => getPost(
+      .then(() => getAllPosts(
         (data) => {
-          const result = data.find((posts) => posts.id === 'abc123');
+          const result = data.find((post) => post.id === 'abc123');
           expect(result).toBe(undefined);
           done()
         }
       ))
-  })
-})
+  });
+ });

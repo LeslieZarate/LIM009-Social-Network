@@ -10,7 +10,7 @@ import {userData} from "./view-controller.js"
 
 const changeTmp = (hash) => {
     if (hash === '#/' || hash === '' || hash === '#') {
-      return viewTmp('#/signIn');
+      return viewTmp('#/home');
     } else if (hash === '#/home'|| hash === '#/signIn' ||  hash ==='#/account'|| hash === '#/profile') {
       return viewTmp(hash);
     } else {
@@ -21,13 +21,15 @@ const changeTmp = (hash) => {
   const viewTmp = (router) => {
     const root = document.getElementById('root');
     root.innerHTML = '';
-    switch (router) {  
-      
+    switch (router) {      
       case '#/home':
-      userData((user)=>{              
-        root.appendChild(Header(user));
-        root.appendChild(Home());        
-      })
+
+      userData((user)=>{  
+        root.innerHTML = ''; 
+        root.appendChild(Header(user));  
+        root.appendChild(Home(user));       
+      });
+          
       break;
 
       case '#/signIn':
@@ -39,7 +41,8 @@ const changeTmp = (hash) => {
       break;         
       
       case '#/profile':
-      userData((user) => {        
+      userData((user) => {     
+        root.innerHTML = '';   
         root.appendChild(Header(user));
         root.appendChild(Profile(user)); 
       })
