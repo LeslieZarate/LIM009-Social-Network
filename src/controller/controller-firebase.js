@@ -48,10 +48,11 @@ export const updateUser = (idUser , dataUser ) =>{
 }
 
 /************************************** POST  ******************************************/
-export const addNote = (idUser,userName,userPhoto,textPost,privacy,date) => {
+export const addNote = (idUser,userName,email,userPhoto,textPost,privacy,date) => {
   return firebase.firestore().collection('posts').add({
     idUser : idUser,
     name : userName,
+    email : email,
     photo :  userPhoto,
     textPost : textPost,
     privacy : privacy,
@@ -64,10 +65,8 @@ export const getAllPosts = (callback)=>{
   firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
-        //console.log(`${doc.id} => ${doc.data().privacy}`);
         posts.push({id: doc.id,...doc.data()});                
       });
-       // console.log(posts)
       callback(posts);
     })
 }
@@ -76,7 +75,6 @@ export const getPublicPosts = (callback)=>{
   firebase.firestore().collection('posts').where("privacy","==","publico").orderBy("date","desc").onSnapshot(querySnapshot=>{
     let posts =[];
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().privacy}`);
         posts.push({id: doc.id,...doc.data()});                
       });   
       callback(posts);
