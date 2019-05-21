@@ -6,6 +6,7 @@ const fixtureData = {
         abc123: {
           idUser : '1',
           name : 'Daiana',
+          email: 'diana@gmail.com',
           photo :  'abc.png',
           textPost : 'probando agregar un post',
           privacy : 'privado',
@@ -16,6 +17,7 @@ const fixtureData = {
             idUser : '2',
             name : 'Leslie',
             photo :  'abcd.png',
+            email: 'les@gmail.com',
             textPost : 'probando agregar un post 1',
             privacy : 'publico',
             date : '18/05/19',
@@ -25,6 +27,7 @@ const fixtureData = {
           idUser : '3',
           name : 'Leslie',
           photo :  'abcd.png',
+          email: 'les2@gmail.com',
           textPost : 'este es un post Publico',
           privacy : 'publico',
           date : '17/05/19',
@@ -71,7 +74,7 @@ describe('getPublicPosts', () => {
 
 describe('addNote', () => {
   it('Debería porder agregar un post', (done) => {
-    return addNote('2','Leslie','abcd.png','probando agregar un post','public','17/05/19',3)
+    return addNote('2','Leslie','les2@gmail.com','abcd.png','probando agregar un post','public','17/05/19',3)
       .then(() => getAllPosts(
         (data) => {
           const result = data.find((note) => note.textPost === 'probando agregar un post');

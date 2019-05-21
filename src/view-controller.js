@@ -220,17 +220,18 @@ export  const addNoteSubmit = (event) =>{
   if(textPost.value  === ''){
     alert('Ingresa texto')
   }else{    
-    addNote(user.uid,user.displayName,user.photoURL,textPost.value,privacy.value,date)
+    addNote(user.uid,user.displayName,user.email,user.photoURL,textPost.value,privacy.value,date)
       .then((doc)=>{  
-        userData(user => {
-          if(user!= null){
+        console.log(doc)
+       /* userData(user => {
+          if(user != null){
             const   data={
                name : user.name,
               photo : user.photo
           }
           updateNote(doc.id,data)
         }
-        })              
+        })   */           
         document.getElementById("form-post").reset();
         alert('Se agrego exitosamente');  
       })

@@ -2,7 +2,6 @@ import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit ,updateLikeSubmit} fr
 import {getAllPosts,getPublicPosts} from "../controller/controller-firebase.js"
 
 export default (user) => {
-  console.log(user)
   const main = document.createElement('main');
   const mainContent = `
   
@@ -51,7 +50,7 @@ export default (user) => {
  `;
       
   main.innerHTML = mainContent;  
-  if(user){
+  if(user!==undefined){
      const btnSave = main.querySelector('#btn-save');
      btnSave.addEventListener('click',addNoteSubmit)  
      getAllPosts(templatePost)  
@@ -71,7 +70,7 @@ export const templatePost = (data) =>{
       const post = `
       <div class="form-post m1" id="${doc.id}">
         <div class="user-post">
-          <p class ="color-text">${doc.name}</p>
+          <p class ="color-text">${doc.email}</p>
           ${ user.uid === doc.idUser ? `<i id="${doc.id}" class="fas fa-window-close icons"></i>`: `` }					
         </div>
         <form class="p2">							
@@ -105,8 +104,12 @@ export const templatePost = (data) =>{
       </div> `;
       listPost += post
   });
+
   const publicPosts = document.getElementById("public-posts");
-  publicPosts.innerHTML = listPost;
+  if(publicPosts != null){
+    publicPosts.innerHTML = listPost;
+  }
+  
   
 
 	// BORRAR
@@ -130,7 +133,7 @@ export const templatePostPublic = (data) =>{
       const post = `
       <div class="form-post m1" id="${doc.id}">
           <div class="user-post">
-            <p>${doc.name}</p>                       
+            <p>${doc.email}</p>                       
           </div>
           <form class="p2">							
             <textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
@@ -140,7 +143,10 @@ export const templatePostPublic = (data) =>{
       listPost += post
     });
     const publicPosts = document.getElementById("public-posts");
-    publicPosts.innerHTML = listPost;
+    if(publicPosts != null){
+      publicPosts.innerHTML = listPost;
+    }
+    
   
 }
 
