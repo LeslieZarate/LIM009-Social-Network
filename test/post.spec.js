@@ -25,7 +25,7 @@ const fixtureData = {
     }
   }
  };
- global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });import {addNote, getAllPosts, deleteNote, updateNote} from '../src/controller/controller-firebase.js';
+ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });import {addNote, getAllPosts, getPublicPosts, deleteNote, updateNote} from '../src/controller/controller-firebase.js';
  describe('Post', () => {
   it('Debería porder agregar un post', (done) => {
     return addNote('2','Leslie','abcd.png','probando agregar un post','privado','17/05/19',3)
@@ -56,7 +56,7 @@ const fixtureData = {
     })
   });
   
-  describe('dleeteNote',()=>{
+  describe('deleteNote',()=>{
   it('Debería poder eliminar un post', (done) => {
     return deleteNote('abc123')
       .then(() => getAllPosts(

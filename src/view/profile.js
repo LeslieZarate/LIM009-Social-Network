@@ -25,11 +25,12 @@ export default (user) => {
           <a id="editPerfil-${user.idUser}">Editar</a>
           </div> 
         </div>
-        <div id="edit-perfil" class="display-none">
+        <div id="edit-perfil" class="profile .none">
         <div>
-        <img src= '${user.photo}' width="100px"/>
-        <br>
-        <button id="editPhoto-${user.idUser}">Subir Imagen</button>
+        <img src= '${user.photo}' class="img-profile"/>
+        <br><br><br>
+        <div class="boton">
+        <a id="editPhoto-${user.idUser}">Subir Imagen</a>
         </div>
           <form>
             <div class="form-group">
@@ -45,17 +46,17 @@ export default (user) => {
             
             <div class="form-group">
               <label for="info-personal">Informacion sobre ti </label>
-              <textarea id="info-personal"  placeholder="Escribe algunos datos sobre ti">${user.infoPersonal}</textarea> 
+              <textarea id="info-personal" placeholder="Escribe algunos datos sobre ti">${user.infoPersonal}</textarea> 
             </div>
             <div class="form-group">
               <label for="info-doramas">Doramas Favoritos </label>
-              <textarea id="info-doramas"  placeholder="Agrega tus doramas favoritos">${user.infoDoramas}</textarea> 
+              <textarea id="info-doramas" placeholder="Agrega tus doramas favoritos">${user.infoDoramas}</textarea> 
             </div>
 
 
-            <div class="form-groups">
-              <button id="btn-save-perfil" type="submit">Guardar</button>
-              <button id="btn-cancel-perfil" type="submit">Cancelar</button>
+            <div class="boton">
+              <a id="btn-save-perfil" type="submit">Guardar</a>
+              <a id="btn-cancel-perfil" type="submit">Cancelar</a>
             </div>                  
           </form>
     </div> ` 
