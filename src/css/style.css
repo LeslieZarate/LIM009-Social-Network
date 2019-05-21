@@ -124,7 +124,7 @@ main{
   margin:1rem;
   align-items: center;
 }
-profile .none {
+.profile .none {
    display: none;
 }
 
