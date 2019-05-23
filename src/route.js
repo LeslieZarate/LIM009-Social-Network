@@ -1,16 +1,13 @@
-import Header from "./view/header.js"
-import Home from "./view/home.js"
+import {ContentHome} from "./view/home.js"
 import Login from "./view/login.js"
 import Account from "./view/account.js"
 import Profile from "./view/profile.js"
 import Error from "./view/404.js"
-
-import {userData} from "./view-controller.js"
-
+import {userData} from "./view-controller/user-model.js"
 
 const changeTmp = (hash) => {
     if (hash === '#/' || hash === '' || hash === '#') {
-      return viewTmp('#/home');
+      return viewTmp('#/signIn');
     } else if (hash === '#/home'|| hash === '#/signIn' ||  hash ==='#/account'|| hash === '#/profile') {
       return viewTmp(hash);
     } else {
@@ -23,16 +20,13 @@ const changeTmp = (hash) => {
     const root = document.getElementById('root');
     root.innerHTML = '';
     switch (router) {      
-      case '#/home':
-         
-      userData((user)=>{  
+      case '#/home':  
+      userData((user) => {     
         root.innerHTML = ''; 
-        root.appendChild(Header(user));  
-        root.appendChild(Home(user));       
-      });
-          
+      root.appendChild(ContentHome(user));
+      })
+      
       break;
-
       case '#/signIn':
       root.appendChild(Login());
       break;
@@ -44,7 +38,6 @@ const changeTmp = (hash) => {
       case '#/profile':
       userData((user) => {     
         root.innerHTML = '';   
-        root.appendChild(Header(user));
         root.appendChild(Profile(user)); 
       })
       break;
