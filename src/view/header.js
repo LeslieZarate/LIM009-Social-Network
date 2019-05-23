@@ -1,4 +1,4 @@
-import {signOutSubmit } from '../view-controller.js';
+import {signOutSubmit } from '../view-controller/auth-model.js';
 export default (user) => {
 	//console.log(user)
 const header = document.createElement('header');
@@ -11,7 +11,7 @@ const header = document.createElement('header');
 			<input type="checkbox" class = "display-none" id="toggle">  	         
 			<nav class="navbar"> 
 				<ul class="main-nav">
-				${user !== undefined
+				${user !== null
 					?`<li><a href="#/home"> Inicio </a></li>
 						<li><a href="#/profile"> Mi Perfil</a></li>					
 						<li><a href="#/home" id="btn-signOut"> Cerrar Sesión </a></li>`
@@ -23,7 +23,7 @@ const header = document.createElement('header');
 		
 		`;
 	header.innerHTML = headerContent;
-	if(user !== undefined){
+	if(user !== null){
 		const btnSignOut = header.querySelector('#btn-signOut')
 		btnSignOut.addEventListener('click',signOutSubmit);
 	}

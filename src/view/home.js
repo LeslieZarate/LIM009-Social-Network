@@ -1,18 +1,19 @@
-import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit ,updateLikeSubmit} from "../view-controller.js"
-import {getAllPosts,getPublicPosts} from "../controller/controller-firebase.js"
+import {addNoteSubmit , deleteNoteSubmit, updateNoteSubmit , updateLikeSubmit} from "../view-controller/posts-model.js"
+import {getAllPosts,getPublicPosts} from "../controller/post.js"
 
 export default (user) => {
+  console.log(user)
   const main = document.createElement('main');
   const mainContent = `
   
   
   <div class="container-home p1 ">
     <!-- SECCION PERFIL -->
-    ${user!== undefined
+    ${user!= null
       ?`<section class="profile-content m1 p2">
           <div class="perfil-user m1 p2">
-            <img alt ='photo-perfil' src="${user.photo}" class="m1">
-          <h2 class ="color-title">${user.name}</h2>
+            <img alt ='photo-perfil' src="${user.photoURL}" class="m1">
+          <h2 class ="color-title">${user.displayName}</h2>
           </div>				
       </section>`
       :`<section class="profile-content  m1 p2">  
@@ -26,7 +27,7 @@ export default (user) => {
     <!-- SECCION POST -->
     <section class="posts-content m1 p2">
     <!-- FORMULARIO POST -->
-    ${user !== undefined ?`<div class="form-post  p2 m1">
+    ${user !== null ?`<div class="form-post  p2 m1">
     <form id="form-post">
       <textarea id="text-post"  placeholder="¿Qué estas pensando?"></textarea> 
       <div class="btn-actions">
@@ -50,11 +51,14 @@ export default (user) => {
  `;
       
   main.innerHTML = mainContent;  
-  if(user!==undefined){
+  if(user!== null){
+      console.log('usuario getAll')
+      console.log(user)
      const btnSave = main.querySelector('#btn-save');
      btnSave.addEventListener('click',addNoteSubmit)  
      getAllPosts(templatePost)  
  }else{
+  console.log(user)
     getPublicPosts(templatePostPublic)
   }
 
@@ -76,7 +80,6 @@ export const templatePost = (data) =>{
         <form class="p2">							
           <textarea id="post-${doc.id}"readonly>${doc.textPost}</textarea>
           <h3 class ="color-text" >Fecha de Publicación :${doc.date}</h3>
-          <p id="message-${doc.id}" class="display-none color-diferent">Ahora puedes editar </p>
           ${ user.uid === doc.idUser 
             ?
              `<div class="btn-actions m1">
@@ -89,9 +92,11 @@ export const templatePost = (data) =>{
                   :  `<option value="privado">${doc.privacy}</option>
                       <option value="publico">publico</option>`}                  
                 </select> `
-                : ``}	               
-
-                <i id="btn-likes-${doc.id}" class="fas fa-heart icons m1"  data-likes="${doc.likes}"></i>
+                : ``}	
+               
+               
+                <i id="btn-like-${doc.id}" class="fas fa-heart icons m1"  data-likes="${doc.likes}"></i>                               
+                
                 <label id="contenedor-like" class = "color-diferent">${doc.likes}</label>
             ${ user.uid === doc.idUser 
                 ?
@@ -121,8 +126,12 @@ export const templatePost = (data) =>{
     ele.addEventListener('click',updateNoteSubmit)});
 
   // LIKES  
-    [... document.getElementsByClassName('fa-heart')].forEach(ele=>{
-      ele.addEventListener('click',updateLikeSubmit)});
+  [... document.getElementsByClassName('fas fa-heart')].forEach(ele=>{
+    ele.addEventListener('click',updateLikeSubmit)});
+    
+  
+
+
   
 }
 

@@ -1,4 +1,4 @@
-import { updateUserPerfil } from "../view-controller.js"
+import { updateUserPerfil } from "../view-controller/user-model.js"
 export default (user) => {
   const profile = document.createElement('main');
  

@@ -5,7 +5,7 @@ import Account from "./view/account.js"
 import Profile from "./view/profile.js"
 import Error from "./view/404.js"
 
-import {userData} from "./view-controller.js"
+import {userData} from "./view-controller/user-model.js"
 
 
 const changeTmp = (hash) => {
