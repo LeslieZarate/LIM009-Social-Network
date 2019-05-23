@@ -4,7 +4,7 @@
     padding: 0;  
 }
 body{
-  background: url('../img/fondo2.jpeg');
+ /* background: url('../img/fondo2.jpeg');*/
   background-attachment: fixed;
   background-size: cover;
  

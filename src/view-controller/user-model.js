@@ -1,26 +1,17 @@
 /************************ OBTENER DATOS DEL USUARIO *************************/
 import{getUser,updateUser} from "../controller/user.js"
 
-/*export const userData = (callback) =>{
+export const userData = (callback) =>{
   firebase.auth().onAuthStateChanged((user)=>{
-    if(user!== null){
+    if(user!= null){
       getUser(user.uid,callback)
     } else {
       callback()
     }
   }) 
-}*/
-
-// OBSERVADOR 
-
-export const userData = (callback) => firebase.auth().onAuthStateChanged(callback)
- 
+}
 
 
-
-
-
-/*
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -29,30 +20,7 @@ export const  observer = () => {
       console.log(' OBSERVADOR : USUARIO NO ACTIVO')
     }    
   }) 
-}*/
-/*
-export const  userActivo = (callback) => {
-  firebase.auth().onAuthStateChanged(callback) 
 }
-
-export const userData = (callback) =>{
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-      getUser(user.uid).then( doc => {
-        console.log('hola')
-        callback(doc.data())        
-      })
-      .catch(error=>{
-        const errorCode = error.code;
-        const  errorMessage = error.message;
-        alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-      })
-    }else{
-      console.log('usuario no activo Perfil')
-    }    
-  });
-}
-*/
 
 
 //  EDITAR PERFIL DEL USUARIO 

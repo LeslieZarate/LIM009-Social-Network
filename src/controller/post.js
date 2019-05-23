@@ -1,4 +1,4 @@
-export const addNote = (idUser,userName,email,userPhoto,textPost,privacy,date) => {
+export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date) => {
     return firebase.firestore().collection('posts').add({
       idUser : idUser,
       name : userName,
@@ -11,23 +11,29 @@ export const addNote = (idUser,userName,email,userPhoto,textPost,privacy,date) =
       });
   }
   
-  export const deleteNote = (idNote)=>{
-    return firebase.firestore().collection('posts').doc(idNote).delete();
-  }
+export const deletePost = (idPost)=>{
+  return firebase.firestore().collection('posts').doc(idPost).delete();
+}
   
-  export const updateNote = (idNote , note ) =>{
-    return firebase.firestore().collection('posts').doc(idNote).update(note);
-  }
+export const updateTextPost = (idPost ,inputPost ) =>{
+  return firebase.firestore().collection('posts').doc(idPost).update({
+    textPost : inputPost
+  });
+}
+export const updatePrivacyPost = (idPost ,newPrivacy) =>{
+  return firebase.firestore().collection('posts').doc(idPost).update({
+    privacy : newPrivacy
+  });
+}
   
-  export const addLikePost = (idPost,idUser)=>{
+export const addLikePost = (idPost,idUser)=>{
     return firebase.firestore().collection('posts').doc(idPost).collection('likes').add({
       idUser : idUser,
       idPost : idPost
     });
-  }
-  
-  
-  export const getAllPosts = (callback)=>{
+}
+    
+export const getAllPosts = (callback)=>{
     firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
       const posts =[];
       querySnapshot.forEach((doc) => {
@@ -35,9 +41,9 @@ export const addNote = (idUser,userName,email,userPhoto,textPost,privacy,date) =
         });
         callback(posts);
       })
-  }
+}
   
-  export const getPublicPosts = (callback)=>{
+export const getPublicPosts = (callback)=>{
     firebase.firestore().collection('posts').where("privacy","==","publico").orderBy("date","desc").onSnapshot(querySnapshot=>{
       let posts =[];
       querySnapshot.forEach((doc) => {
@@ -46,4 +52,4 @@ export const addNote = (idUser,userName,email,userPhoto,textPost,privacy,date) =
         callback(posts);
         
       })
-  }
+}

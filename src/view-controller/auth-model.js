@@ -92,7 +92,7 @@ export const signInFacebookOnSubmit = () => {
 export const signOutSubmit = (event) =>{
   event.preventDefault();
   signOut()
-  .then(()=>changeHash('/home'))
+  .then(()=>changeHash('/signIn'))
   .catch(error => {
     const errorCode = error.code;
     const  errorMessage = error.message;
