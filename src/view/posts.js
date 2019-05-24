@@ -1,4 +1,6 @@
 import { deletePostSubmit,updateTextPostSubmit,updatePrivacyPostSubmit} from "../view-controller/posts-model.js"
+import{addLikePostSubmit} from "../view-controller/posts-actions-model.js"
+
 import {currentUser} from "../controller/user.js"
 
 export const itemPost = (objPost) =>{
@@ -40,12 +42,10 @@ export const itemPost = (objPost) =>{
     </form> 
   `;     
   
-  // ELIMINAR POSTS 
+  if(currentUser().uid === objPost.idUser && (currentUser()) !==null){
 
-  if(currentUser().uid === objPost.idUser){
-
-    divElement.querySelector(`#btn-delete-${objPost.id}`)
-    .addEventListener('click',()=>deletePostSubmit(objPost))
+    // ELIMINAR POSTS 
+    divElement.querySelector(`#btn-delete-${objPost.id}`).addEventListener('click',()=>deletePostSubmit(objPost))
   
     // EDITAR PRIVACIDAD 
     const state = divElement.querySelector(`#options-privacy-${objPost.id}`)
@@ -54,7 +54,7 @@ export const itemPost = (objPost) =>{
       updatePrivacyPostSubmit(objPost,newPrivacy)
     });
   
-    // editar post 
+    // EDITAR POST 
     divElement.querySelector(`#btn-edit-${objPost.id}`)
     .addEventListener('click',()=>{
         const textareaPost = divElement.querySelector(`#text-${objPost.id}`)      
@@ -75,7 +75,13 @@ export const itemPost = (objPost) =>{
         const post = divElement.querySelector(`#post-${objPost.id}`)
         post.classList.remove('display-none')   
     })
+  }
 
+   // LIKES
+  if((currentUser()) !==null){ 
+    divElement.querySelector(`#btn-like-${objPost.id}`).addEventListener('click',()=>{   
+      addLikePostSubmit(objPost,currentUser())
+    })
   }
 
   return divElement; 

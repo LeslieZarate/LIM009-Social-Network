@@ -25,13 +25,7 @@ export const updatePrivacyPost = (idPost ,newPrivacy) =>{
     privacy : newPrivacy
   });
 }
-  
-export const addLikePost = (idPost,idUser)=>{
-    return firebase.firestore().collection('posts').doc(idPost).collection('likes').add({
-      idUser : idUser,
-      idPost : idPost
-    });
-}
+
     
 export const getAllPosts = (callback)=>{
     firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{

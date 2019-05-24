@@ -12,9 +12,9 @@ export const signUpSubmit = (event) =>{
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
   const name = document.querySelector('#name').value;
-
   const photo =  'https://images.vexels.com/media/users/3/147101/isolated/lists/b4a49d4b864c74bb73de63f080ad7930-boton-de-perfil-de-instagram.png';
-   signUp(email,password)  
+  
+  signUp(email,password)  
     .then((result)=>{
       const user = result.user
       setUser(user.uid,name,user.email,photo);     
