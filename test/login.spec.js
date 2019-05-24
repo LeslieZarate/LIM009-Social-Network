@@ -1,27 +1,25 @@
-const firebasemock = require('firebase-mock');
-const mockauth = new firebasemock.MockAuthentication();
-const mockdatabase = new firebasemock.MockFirebase();
+/*
+// importamto el mock 
+ import MockFirebase from '../_mocks_/firebase-mocks.js'
+ global.firebase = MockFirebase()  // de manera global ,que toda las declaracion e de firebase van ser remplasados por el mock
+*/
 
-export const mocksdk = new firebasemock.MockFirebaseSdk(
-  // use null if your code does not use RTDB
-	(path) => {
-		return path ? mockdatabase.child(path) : mockdatabase;
-	},
-	// use null if your code does not use AUTHENTICATION
-	() => {
-		return mockauth;
-	},
-	// use null if your code does not use FIRESTORE
-	() => {
-		return mockfirestore;
-	}
+// configurando firebase mock
+const firebasemock = require('firebase-mock');
+const mockauth = new firebasemock.MockFirebase();
+const mockfirestore = new firebasemock.MockFirestore();
+
+mockfirestore.autoFlush();
+mockauth.autoFlush();
+
+global.firebase = firebasemock.MockFirebaseSdk(
+	// use null if your code does not use RTDB
+	path => (path ? mockdatabase.child(path) : null),
+	() => mockauth,
+	() => mockfirestore
 );
 
-mockauth.autoFlush();
-global.firebase = mocksdk;
-
-
-import { signUp, signIn, signInGoogle, signInFacebook ,signOut } from "../src/controller/auth.js";
+import { signUp, signIn, signInGoogle, signInFacebook ,signOut } from "../src/controller/controller-firebase.js";
 
 describe('SignUp', () => { 
     it('Deberia ser una funcion:', ()=>{
@@ -57,7 +55,7 @@ describe('SignInGoogle', () => {
 	it('Debería poder iniciar sesion con una Cuenta de Google', () => {
 		return signInGoogle('admin@gmail.com', '123456')
 			.then((user) => {
-				expect(user.providerData[0].providerId).toBe('google.com');
+				expect(user.email).toBe();
 			})
 	})
 });
@@ -70,7 +68,7 @@ describe('SignInFacebook', () => {
 	it('Debería poder iniciar sesion con una Cuenta de Facebook', () => {
 		return signInFacebook('admin@hotmail.com', '123456')
 			.then((user) => {
-				expect(user.providerData[0].providerId).toBe('facebook.com');
+				expect(user.email).toBe();
 			})
 	})
 });
