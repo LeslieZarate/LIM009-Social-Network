@@ -1,23 +1,21 @@
-import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../view-controller.js"
+import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../view-controller/auth-model.js"
 
 export default () => {
     const form = document.createElement('div');
     const formContent =`
 				<div class="container p1">
 				<section class="img-content center-content m1 p2 ">
-					<img src="img/intro.jpg">
+					<img src="img/intro.png">
 				</section>
 				<section class="forms-content  m1 p2 ">
 				<article class="register-login p4">
-					<img alt ='logo' src="img/logo1.png" class="img-logo">
+					<img alt ='logo' src="img/logo.png" class="img-logo">
 					<h2> Inicia Sesión </h2>				
 					<form>
 						<div class="form-group">
-							<label  for="email">Email</label>
 							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
 						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
+						<div class="form-group">							
 							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
 						</div>
 						<div class="form-group">
@@ -33,7 +31,7 @@ export default () => {
 								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
 							</a>							
 					</div>
-					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></p>				
+					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></p>				
 				</article>			
 			</section>
 				
