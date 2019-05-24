@@ -14,7 +14,7 @@ export const userSection = (user) => {
         <h2 class ="color-title">${user.name}</h2>
       </div>` 
     
-    :`hola` }
+    :`<img src="./img/logotipo2.png">` }
     				
   `;    
   return divUser
