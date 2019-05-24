@@ -80,9 +80,13 @@ if(user != null){
   btnSave.addEventListener('click',()=>{     
     const privacy = home.querySelector('#options-privacy').value;  
     const textPost = home.querySelector('#text-post').value;
-    addPostSubmit(textPost,privacy)
-});
-
+    if(textPost === ''){
+      alert('Ingresar texto')
+    }else{
+      addPostSubmit(textPost,privacy)
+      home.querySelector('#form-post').reset()
+    }
+  });
 }
 
 

@@ -1,5 +1,8 @@
 import { addPost,deletePost,updateTextPost,updatePrivacyPost} from "../controller/post.js";
 import {currentUser} from "../controller/user.js"
+import {userData} from "./user-model.js"
+
+
 
 const validate = (number) => {
   if(number<=9){
@@ -23,10 +26,14 @@ const systemDate = (fullDate )=>{
 }
 
 export  const addPostSubmit = (textPost,privacy) =>{
-  const user = firebase.auth().currentUser;
   const fullDate= new Date();
   const date = systemDate(fullDate); 
-  addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)  
+  const user = firebase.auth().currentUser;
+  //addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)
+    userData(doc =>{
+      addPost(doc.idUser,doc.name,doc.email,doc.photo,textPost,privacy,date)
+    });
+
 }
 
 export const deletePostSubmit = (objPost) =>{ 
