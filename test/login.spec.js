@@ -21,14 +21,14 @@ mockauth.autoFlush();
 global.firebase = mocksdk;
 
 
-import { signUp, signIn, signInGoogle, signInFacebook ,signOut } from "../src/controller/auth.js";
+import { signUp, signIn, signInGoogle, signInFacebook ,signOut ,currentUser} from "../src/controller/auth.js";
 
 describe('SignUp', () => { 
-    it('Deberia ser una funcion:', ()=>{
+    it('Deberia ser una funcio:', ()=>{
 		expect(typeof signUp).toBe('function')
 		});
 		
-		it('Debería poder iniciar sesion', () => {
+		it('Debería poder crear cuenta con ', () => {
 			return signUp('admin@dramafever.com.pe', '123456')
 				.then((user) => {
 					expect(user.email).toBe('admin@dramafever.com.pe')
@@ -87,3 +87,14 @@ describe('SignOut', () => {
 			})
 	})
 });
+
+describe('currentUser', () => {
+  it('deberia tener usuario activo', (done) => {
+    signIn('admin@dramafever.com.pe', '123456')
+      .then(() => {
+        const user = currentUser();
+        expect(user.email).toEqual('admin@dramafever.com.pe');
+        done()
+      })
+  })
+})

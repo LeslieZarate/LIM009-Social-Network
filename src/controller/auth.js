@@ -20,3 +20,5 @@ export const signUp = (email,password)=>{
 }
 // Cerrar Sesión
 export const signOut = () => firebase.auth().signOut();
+
+export const currentUser = () => firebase.auth().currentUser;

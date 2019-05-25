@@ -15,6 +15,7 @@ export const getUser = (id,callback) =>{
     .onSnapshot(doc => {
       const data = doc.data();
       callback(data)
+      //callback(doc)
   });     
 }
   
@@ -22,6 +23,5 @@ export const updateUser = (idUser , dataUser ) =>{
   return firebase.firestore().collection('users').doc(idUser).update(dataUser);
 }
 
-export const currentUser = () => firebase.auth().currentUser;
 
-export const userActive = (callback) => firebase.auth().onAuthStateChanged(callback)
+//export const userActive = (callback) => firebase.auth().onAuthStateChanged(callback)

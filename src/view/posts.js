@@ -3,7 +3,7 @@ import { deletePostSubmit,updateTextPostSubmit,updatePrivacyPostSubmit} from "..
 import{addLikePostSubmit,deleteLikePostSubmit} from "../view-controller/posts-actions-model.js"
 import {getAllPostLikes} from "../controller/posts-actions.js"
 
-import {currentUser} from "../controller/user.js"
+import {currentUser} from "../controller/auth.js"
 
 export const itemPost = (objPost) =>{
   const divElement = document.createElement('div');
@@ -45,7 +45,7 @@ export const itemPost = (objPost) =>{
     </form> 
   `;     
   
-  if(currentUser().uid === objPost.idUser && (currentUser()) !==null){
+  if(currentUser().uid === objPost.idUser && currentUser()!==null){
     // ELIMINAR POSTS 
     divElement.querySelector(`#btn-delete-${objPost.id}`).addEventListener('click',()=>deletePostSubmit(objPost))
   
@@ -91,8 +91,7 @@ export const itemPost = (objPost) =>{
 
     // verificar si el usuarioActivo dio like
       const userLike = likes.find( like=>like.idUser === currentUser().uid)
-      console.log(userLike)
-
+      
       if(userLike === undefined){
         // no dieron like           
         btnDislike.addEventListener('click',()=>{   

@@ -28,7 +28,7 @@ const fixtureData = {
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
-import { setUser ,getUser} from '../src/controller/user.js';
+import { setUser ,getUser,updateUser} from '../src/controller/user.js';
 
 describe('setUser', () => {
   it('Debería porder guardar los datos del usuario', (done) => {
@@ -36,12 +36,48 @@ describe('setUser', () => {
       .then(() => {
         getUser(
           'abc789', data =>{
-            console.log(data)
+            expect(data.idUser).toBe('abc789');
             done()
-          }
-             
-        )
+          })
       });            
   });
 });
- 
+
+/* describe('UpdateUser', () => {
+  it('Debería porder guardar los datos del usuario', (done) => {
+    return setUser('abc789','fiorelly','fiorelly@gmail.com','abcde.png')
+      .then(() => {
+        getUser(
+          'abc789', data =>{
+            expect(data.idUser).toBe('abc789');
+            done()
+          })
+      });            
+  });
+}); 
+*/
+
+describe('getUser',()=>{
+  it('deberia ser una funcion ',()=>{
+    expect(typeof getUser).toBe('function')
+  });
+
+  it.only('Deberia poder mostrar los datos del documento con el id abc456 ' ,(done)=>{
+    const callback = (user)=>{
+      console.log(user)
+      //expect(data.idUser).toEqual('abc456')
+      done()
+    }
+       
+        
+    getUser('abc456', callback)
+    
+  });
+}); 
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import { addPost,deletePost,updateTextPost,updatePrivacyPost} from "../controller/post.js";
-import {currentUser} from "../controller/user.js"
+import {currentUser} from "../controller/auth.js"
 import {userData} from "./user-model.js"
 
 
