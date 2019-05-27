@@ -18,10 +18,10 @@ export const getUser = (id,callback) =>{
       //callback(doc)
   });     
 }
-
+/*
 export const getUser2 = (id)=>{
   return firebase.firestore().collection('users').doc(id).get()
-}
+}*/
 
   
 export const updateUser = (idUser ,name, birthdate,infoPersonal,infoDoramas ) =>{

@@ -7,14 +7,16 @@ import { getAllPosts, getPublicPosts } from "../controller/post.js";
 
 export const userSection = (user) => {    
   const divUser = document.createElement('div');
+  
   divUser.innerHTML= `   
   ${user != null 
-    ?`<div class="perfil-user m1 p2">
-        <img alt ='photo-perfil' src="${user.photo}" class="m1">
-        <h2 class ="color-title">${user.name}</h2>
+    ?`<img class="img-section" src="img/img-section.jpg">
+      <div class="perfil-user">
+        <img alt ='photo-perfil' src="${user.photo}">
+        <h2>${user.name}</h2>
       </div>` 
     
-    :`hola` }
+    :`hola`}
     				
   `;    
   return divUser
@@ -29,7 +31,7 @@ export const ContentHome = (user)=>{
 
   <main>
   <div class="container-home p1 ">
-    <section class="profile-content m1 p2" id="profile-content">
+    <section class="profile-content m1" id="profile-content">
     <!-- AQUI VA USER SECTION -->
     </section>
 

@@ -16,8 +16,7 @@ export const itemPostPublic = (objPost) =>{
       <div>          
           <div id="comments-${objPost.id}" class="m1">        
           </div>
-      </div>      
-      
+      </div>     
     `; 
     
     const allComents = divElement.querySelector(`#comments-${objPost.id}`);
