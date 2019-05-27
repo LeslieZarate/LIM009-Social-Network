@@ -1,17 +1,34 @@
-/************************ OBTENER DATOS DEL USUARIO *************************/
 import{getUser,updateUser} from "../controller/user.js"
+import{ userActive } from "../controller/auth.js"
 
 export const userData = (callback) =>{
-  firebase.auth().onAuthStateChanged((user)=>{
+  userActive((user)=>{
     if(user!= null){
       getUser(user.uid,callback)
     } else {
-      callback()
+      callback(null)
     }
   }) 
 }
 
+export const userData2 = (callback) =>{
+  userActive(user=>{
+    if(user != null){
+      getUser(user.uid).then(doc=>{
+        const data = doc.data();
+        callback(data)
+      });
+    }else{
+      callback()
+    }
+  });  
+}
 
+export const updateUserPerfil = (user,name,birthdate,infoPersonal,infoDoramas) =>{      
+    updateUser(user.idUser,name ,birthdate,infoPersonal,infoDoramas);    
+  }
+
+  // se borrara despues 
 export const  observer = () => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -22,38 +39,3 @@ export const  observer = () => {
   }) 
 }
 
-
-//  EDITAR PERFIL DEL USUARIO 
-
-export const updateUserPerfil = (event) =>{
-  const btnEdit = event.target.id;
-  const idUser = btnEdit.slice(11,39);  // ID del documento de usuario a editar 
-  
-  const containerPerfil = document.getElementById('describe-perfil');
-  containerPerfil.style.display = "none";
-
-  const containerEditPerfil = document.getElementById('edit-perfil');
-  containerEditPerfil.style.display = "block"
-
- 
-  const btnSavePerfil = document.querySelector('#btn-save-perfil')
-  btnSavePerfil.addEventListener('click',(event)=>{
-    event.preventDefault();
-    const  infoPersonal = document.querySelector('#info-personal');
-    const infoDoramas = document.querySelector('#info-doramas');
-    const birthdate =document.querySelector('#birthdate');
-    const name = document.querySelector('#name');
-    const dataUser ={
-      name: name.value,    
-      birthdate : birthdate.value,
-      infoPersonal:infoPersonal.value,
-      infoDoramas:infoDoramas.value,
-    }
-    
-    updateUser(idUser , dataUser);
-    alert('se actualizo perfil');
-    containerEditPerfil.style.display = "none";
-    containerPerfil.style.display = "block";
-  })
-
-}

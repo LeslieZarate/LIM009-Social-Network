@@ -1,5 +1,5 @@
 import { addPost,deletePost,updateTextPost,updatePrivacyPost} from "../controller/post.js";
-import {currentUser} from "../controller/user.js"
+import {currentUser} from "../controller/auth.js"
 import {userData} from "./user-model.js"
 
 
@@ -29,10 +29,16 @@ export  const addPostSubmit = (textPost,privacy) =>{
   const fullDate= new Date();
   const date = systemDate(fullDate); 
   const user = firebase.auth().currentUser;
-  //addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)
-    userData(doc =>{
+  addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)
+  
+ /* const cb = doc =>{
+      if(doc != null)
       addPost(doc.idUser,doc.name,doc.email,doc.photo,textPost,privacy,date)
-    });
+  }
+     userData(cb)
+ */
+  
+    
 
 }
 

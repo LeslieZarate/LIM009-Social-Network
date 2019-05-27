@@ -21,13 +21,13 @@ export default (user) => {
               <p class="item-perfil"><strong> Doramas Favoritos:</strong>${user.infoDoramas}</p> 
 
               <div class="form-groups">
-                <button id="editPerfil-${user.idUser}">Editar</button>
+                <button id="edit-perfil">Editar</button>
 						  </div>       
              
             </div> 
 
 
-          <div id="edit-perfil" class="edit-perfil p2 display-none">
+          <div id="form-edit-perfil" class="edit-perfil p2 display-none">
             <h1 class="color-perfil text-center">Editar Perfil</h1>
             <p class="color-text text-center">${user.email}</p>
             <div>
@@ -73,12 +73,30 @@ export default (user) => {
   const headerHome = profile.querySelector("#header-content")
   headerHome.appendChild(header(user));
 
-  if(user != null){
- 
-  const btnEditPerfil = profile.querySelector(`#editPerfil-${user.idUser}`);
-  btnEditPerfil.addEventListener('click',updateUserPerfil);
+  if(user != null){ 
+
+    const btnEditPerfil = profile.querySelector('#edit-perfil');
+    const btnSavePerfil = profile.querySelector('#btn-save-perfil')
+
+    const containerPerfil = profile.querySelector('#describe-perfil');
+    const containerEditPerfil = profile.querySelector('#form-edit-perfil');
+    
+
+    btnEditPerfil.addEventListener('click', ()=>{     
+    containerPerfil.classList.add('display-none');   containerEditPerfil.classList.remove('display-none');
+    });
+    
+    btnSavePerfil.addEventListener('click',()=>{
+      const  infoPersonal = document.querySelector('#info-personal').value;
+      const infoDoramas = document.querySelector('#info-doramas').value;
+      const birthdate =document.querySelector('#birthdate').value;
+      const name = document.querySelector('#name').value;
+
+      updateUserPerfil(user,name,birthdate,infoPersonal,infoDoramas);
+      containerPerfil.classList.remove('display-none');   containerEditPerfil.classList.add('display-none');
+
+    });
   }
-  
   return profile;
 }
 
