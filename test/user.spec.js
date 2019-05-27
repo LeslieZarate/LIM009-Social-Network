@@ -26,7 +26,18 @@ const fixtureData = {
   }
  };
  global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });import {addsetUser, setUser,updateUser} from '../src/controller/controller-firebase.js';
-
+ describe('addsetUser', () => {
+  it('Debería poder agregar un usuario', (done) => {
+    return addsetUser('2','Leslie','leslie@gmail.com','abc.jpg')
+      .then(() => getUser(
+        (data) => {
+          const result = data.find((user) => user.data === 'probando agregar un usuario');
+          expect(result.data).toBe('probando agregar un usuario');
+          done()
+        }
+      ));
+  });
+ });
  describe('setUser', () => { 
     it('Deberia ser una funcion:', ()=>{
 		expect(typeof setUser).toBe('function')

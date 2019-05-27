@@ -10,7 +10,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "npx serve src/",
     "htmlhint": "htmlhint dist/*.html ",
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage"
@@ -27,8 +26,5 @@
     "jest": "^23.6.0",
     "mock-cloud-firestore": "^0.9.3",
     "regenerator-runtime": "^0.13.1"
-  },
-  "dependencies": {
-    "mocha": "^6.1.4"
   }
 }

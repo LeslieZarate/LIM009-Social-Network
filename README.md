@@ -2,7 +2,7 @@
 
 En este proyecto nuestra tematica es enfocarnos en el publico juvenil, al cual tiene como hobbie ver doramas en sus tiempos libres, por eso pensamos en este espacio en el cual pueden compartir referencias sobre este tema.
 
-![image](https://github.com/Daianatk/Social-Drama-Fever/blob/master/src/img/loogo.png)
+![image](https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/logo.jpg)
 
 
 Las **caraterísticas técnicas** de tu aplicación serán las siguientes:

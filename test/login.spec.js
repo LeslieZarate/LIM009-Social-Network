@@ -1,32 +1,34 @@
-/*
-// importamto el mock 
- import MockFirebase from '../_mocks_/firebase-mocks.js'
- global.firebase = MockFirebase()  // de manera global ,que toda las declaracion e de firebase van ser remplasados por el mock
-*/
-
-// configurando firebase mock
 const firebasemock = require('firebase-mock');
-const mockauth = new firebasemock.MockFirebase();
-const mockfirestore = new firebasemock.MockFirestore();
+const mockauth = new firebasemock.MockAuthentication();
+const mockdatabase = new firebasemock.MockFirebase();
 
-mockfirestore.autoFlush();
-mockauth.autoFlush();
-
-global.firebase = firebasemock.MockFirebaseSdk(
-	// use null if your code does not use RTDB
-	path => (path ? mockdatabase.child(path) : null),
-	() => mockauth,
-	() => mockfirestore
+export const mocksdk = new firebasemock.MockFirebaseSdk(
+  // use null if your code does not use RTDB
+	(path) => {
+		return path ? mockdatabase.child(path) : mockdatabase;
+	},
+	// use null if your code does not use AUTHENTICATION
+	() => {
+		return mockauth;
+	},
+	// use null if your code does not use FIRESTORE
+	() => {
+		return mockfirestore;
+	}
 );
 
-import { signUp, signIn, signInGoogle, signInFacebook ,signOut } from "../src/controller/controller-firebase.js";
+mockauth.autoFlush();
+global.firebase = mocksdk;
+
+
+import { signUp, signIn, signInGoogle, signInFacebook ,signOut ,currentUser,userActive} from "../src/controller/auth.js";
 
 describe('SignUp', () => { 
-    it('Deberia ser una funcion:', ()=>{
+    it('Deberia ser una funcio:', ()=>{
 		expect(typeof signUp).toBe('function')
 		});
 		
-		it('Debería poder iniciar sesion', () => {
+		it('Debería poder crear cuenta con ', () => {
 			return signUp('admin@dramafever.com.pe', '123456')
 				.then((user) => {
 					expect(user.email).toBe('admin@dramafever.com.pe')
@@ -55,7 +57,7 @@ describe('SignInGoogle', () => {
 	it('Debería poder iniciar sesion con una Cuenta de Google', () => {
 		return signInGoogle('admin@gmail.com', '123456')
 			.then((user) => {
-				expect(user.email).toBe();
+				expect(user.providerData[0].providerId).toBe('google.com');
 			})
 	})
 });
@@ -68,7 +70,7 @@ describe('SignInFacebook', () => {
 	it('Debería poder iniciar sesion con una Cuenta de Facebook', () => {
 		return signInFacebook('admin@hotmail.com', '123456')
 			.then((user) => {
-				expect(user.email).toBe();
+				expect(user.providerData[0].providerId).toBe('facebook.com');
 			})
 	})
 });
@@ -85,3 +87,29 @@ describe('SignOut', () => {
 			})
 	})
 });
+
+describe('currentUser', () => {
+  it('deberia tener usuario activo', (done) => {
+    signIn('admin@dramafever.com.pe', '123456')
+      .then(() => {
+        const user = currentUser();
+        expect(user.email).toEqual('admin@dramafever.com.pe');
+        done()
+      })
+  })
+})
+
+describe('activeUser', () => {
+  it('deberia tener usuario activo', (done) => {
+        const callback = user =>{
+						console.log(user)
+						expect(user.email).toEqual('admin@dramafever.com.pe');
+						done()
+			}
+			userActive(callback);
+			signIn('admin@dramafever.com.pe', '123456');	
+	});	
+});
+
+
+
