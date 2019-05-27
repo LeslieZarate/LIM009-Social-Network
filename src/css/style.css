@@ -4,11 +4,12 @@
     padding: 0;  
 }
 body{
- /* background: url('../img/fondo2.jpeg');*/
+  background: url('../img/FONDO.jpeg');
   background-attachment: fixed;
   background-size: cover;
  
 }
+
 .p1{
   padding: 1%;
 }
