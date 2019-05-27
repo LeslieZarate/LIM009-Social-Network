@@ -27,22 +27,44 @@ body{
 .m2{
   margin: 2%;
 }
-.color-diferent{
-  color:blue;
+.mp{
+  margin: 1% 0%;
+}
+.mp2{
+  margin: 2% 0%;
+}
+
+.mt{
+  margin-top: 1%;
+}
+.mb{
+  margin: 0% 1%;
+}
+.color-text-like{  
   font-weight: bold;
   font-size: 20px;
 }
 .color-text {
   color :#522e4a;
+}
+.font-bold{
   font-weight: bold;
 }
 .text-center{
-  text-align: center
+  text-align: center;
 }
 
+.text-justify{
+  text-align: justify;
+}
+
+ .text-right{
+   text-align: right
+ }
 .color-title{
   color :#1a0e1a;
   font-weight: bold;
+  font-family: 'Satisfy';
 }
 .center-content{
   display: flex;
@@ -75,7 +97,6 @@ main{
   width: 90%;
   margin: auto;
   height: auto;
- /* background: yellow;*/
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -83,17 +104,14 @@ main{
 .img-content{
   width: 98%;
   height: auto;
- /* background: red;*/
 }
 .img-content  img{
   width :100%;
   height:100%;
-/*  border:1px solid yellow; */
 }
 .forms-content{
   width: 98%;
   height: auto;
- /* background: blue;*/
 }
 
 .register-login{  
@@ -139,7 +157,7 @@ main{
   font-weight: bold;
 }
 
-button:hover{
+.form-group button:hover{
   background: rgb(90,195 ,155,0.6);
   color:#c0e2e4;
   
@@ -194,14 +212,14 @@ header{
   cursor: pointer;
 }
 .navbar{
-    position: absolute;
-    width: 100%;
-    height: auto;
-    background:#3d1e2b;
-    left: 0;
-    top:80px;
-    transform:translateX(-100%);
-}    
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background:#3d1e2b;
+  left: 0;
+  top:80px;
+  transform:translateX(-100%);
+}   
 .main-nav li{
     list-style: none;       
 }
@@ -279,6 +297,7 @@ header{
   border:3px solid #5AC39B;
   border-radius: 10px; 
 }
+
 .form-post textarea{
   width: 100%;
   height: 100px;
@@ -311,11 +330,95 @@ header{
   font-size: 25px;
   color:#6b1330
 }
+
 i:hover{
   color: #8f727d;
 }
 
-/*    perfil  del usuario */
+.separating-line{
+  color: #0056b2;
+  margin: 0.5rem 0rem 0rem 0rem;
+}
+
+.icons-action{
+  cursor: pointer;
+  font-size: 20px;
+  
+}
+
+.btn-circle {  
+
+  width: 40px;
+  height: 40px;
+  padding: 6px 0px;
+  border-radius: 50%;
+  background:#5AC39B;
+  border :1px solid  #5AC39B;
+  color:#522e4a ;
+  
+}
+
+.btn-circle:hover{
+  background:#7c817e;
+  border :1px solid  #7c817e;
+  color:#522e4a ;
+}
+
+
+/* ESTILOS DE FORMUALRIO DE COMENTARIOS */
+.icons-comment{
+  cursor: pointer;
+  font-size: 15px;
+  
+}
+
+.btn-circle-comment {  
+  width: 30px;
+  height: 30px;
+  padding: 3px 0px;
+  border-radius: 50%;
+  border :1px solid #522e4a;
+  background: #522e4a;
+  color:#5AC39B ;
+  
+}
+
+.btn-circle-comment:hover{
+  background:#7c817e;
+  border :1px solid  #7c817e;
+  color:#522e4a ;
+}
+
+.form-comment{
+  display: flex;
+  width: 100%;
+ 
+}
+.form-comment input{
+  width: 91%;
+  height: 35px;
+  border-radius: 5px;
+  border:1px solid #5AC39B;
+  padding: 7px 20px 7px 20px;
+}
+
+.comment-post{  
+  background:rgba(41, 15, 32, 0.1);
+}
+.user-post-comment{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-post input{  
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border:1px solid #5AC39B;
+  padding: 7px 20px 7px 20px;
+}
+
+/*PERFIL DEL USUARIO*/
 
 .container-perfil{
   display: flex;
@@ -323,7 +426,7 @@ i:hover{
 }
 
 .describe-perfil{
-  background:#eee4e8;
+  background:rgba(226, 226, 247, 0.6);
   padding: 2rem;
 }
 .color-perfil{
@@ -368,7 +471,7 @@ i:hover{
 }
 
 .edit-perfil{
-  background:rgba(249, 249, 252, 0.6);
+  background:rgba(226, 226, 247, 0.6);
   align-items: center;
   color: #522e4a;
   font-weight: bold;
@@ -384,7 +487,7 @@ i:hover{
   padding: 7px 20px 7px 20px;
 }
 
-h1{
+.h1{
   color: rgb(39, 5, 28);
   font-size: 18px;
 }
@@ -405,7 +508,6 @@ h2{
   height: 60%;
   margin: 20px 2px 20px 20px;
 }
-
 
 /*---------------------------------------------------------*/
           /*DESKTOP */
@@ -482,8 +584,8 @@ h2{
       height: 15vh;
     }
 
-    .posts-content{
-      background:rgba(41, 15, 32, 0.1);
+    .posts-content{      
+      border: 1px solid  #7c817e;
       width: 70%;
       height: auto;
     }

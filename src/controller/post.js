@@ -5,10 +5,10 @@ export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date,ph
       email : email,
       photo :  userPhoto,
       textPost : textPost,
+      image: photoUrl,
       privacy : privacy,
       date : date,
       likes :0,
-      image: photoUrl,
       });
   }
   
@@ -49,10 +49,10 @@ export const getPublicPosts = (callback)=>{
       })
 }
 
-export const getImagePost = (file,cb) => {
+export const getImagePost = (file, cb) => {
   //create ref
   const storageRef = firebase.storage().ref()
-  const imageRef = storageRef.child('images/'+file.name)
+  const imageRef = storageRef.child(`images/${file.name}`)
 
   //update file to fb storage
   const task = imageRef.put(file)

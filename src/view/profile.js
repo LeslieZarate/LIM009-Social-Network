@@ -19,11 +19,14 @@ export default (user) => {
               <p class="item-perfil"><strong> Fecha de Nacimiento :</strong>${user.birthdate}</p> 
               <p class="item-perfil"><strong> Información Personal:</strong>${user.infoPersonal}</p>
               <p class="item-perfil"><strong> Doramas Favoritos:</strong>${user.infoDoramas}</p> 
+
               <div class="form-groups">
                 <button id="edit-perfil">Editar</button>
 						  </div>       
              
             </div> 
+
+
           <div id="form-edit-perfil" class="edit-perfil p2 display-none">
             <h1 class="color-perfil text-center">Editar Perfil</h1>
             <p class="color-text text-center">${user.email}</p>
@@ -37,6 +40,7 @@ export default (user) => {
                   <input class="form-control" id="name" type="text"  value="${user.name}"/>
                   
                 </div>
+
                 <div class="form-group">
                 <label for="birthdate">Fecha de Nacimiento </label>
                 <input id="birthdate" type="date" value=${user.birthdate}> 
@@ -50,6 +54,8 @@ export default (user) => {
                   <label for="info-doramas">Doramas Favoritos </label>
                   <textarea id="info-doramas"  placeholder="Agrega tus doramas favoritos">${user.infoDoramas}</textarea> 
                 </div>
+
+
                 <div class="form-groups">
                   <button id="btn-save-perfil" type="submit">Guardar</button>
                   <button id="btn-cancel-perfil" type="submit">Cancelar</button>
@@ -93,3 +99,7 @@ export default (user) => {
   }
   return profile;
 }
+
+
+
+

@@ -1,9 +1,9 @@
 import {header} from "./header.js"
 import {itemPost} from "./posts.js"
-import {itemPostPublic } from "./postsPublic.js";
+import { itemPostPublic } from "./postsPublic.js";
 
-import{addPostSubmit, getImage} from "../view-controller/posts-model.js"
-import {getAllPosts, getPublicPosts } from "../controller/post.js";
+import{addPostSubmit,getImage,} from "../view-controller/posts-model.js"
+import { getAllPosts, getPublicPosts } from "../controller/post.js";
 
 export const userSection = (user) => {    
   const divUser = document.createElement('div');
@@ -45,10 +45,12 @@ export const ContentHome = (user)=>{
             <option value="privado">privado</option>
           </select>
           <label>
+          <label>
           <input type="file" name="fichero"  id="image-file" class="display-none">
           <i id="image-file" class="fas fa-image icons m1" alt="descargar"></i>
           </label>
-          <i id="btn-save" class="fas fa-paper-plane icons m1"></i>
+          <button id="btn-save" class="btn-circle m1"><i class="fas fa-paper-plane icons-action"></i></button> 
+
         </div>               
       </form>					
     </div>
@@ -57,8 +59,7 @@ export const ContentHome = (user)=>{
      
       
       <!-- POSTS -->
-      <h1 class ="color-text">Publicaciones </h1>
-    
+        
       <div class="public-posts" id="public-posts">
       <!-- TOTAL POST -->
       </div>
@@ -76,21 +77,21 @@ export const ContentHome = (user)=>{
   const sectionUser = home.querySelector("#profile-content") 
   sectionUser.appendChild(userSection(user)); 
 
-  //Agregando Imagen
-  const imageFile = home.querySelector('#image-file')
-  imageFile.addEventListener('change', (event) => {
-  const file = event.target.files;
-  getImage(file)
-  })
+    //Agregando Imagen
+    const imageFile = home.querySelector('#image-file')
+    imageFile.addEventListener('change', (event) => {
+    const file = event.target.files;
+    getImage(file)
+    })
 
 // Agregando Notas
 if(user != null){
-  
   const btnSave = home.querySelector('#btn-save');
-  btnSave.addEventListener('click',()=>{     
+  btnSave.addEventListener('click',(e)=>{ 
+    e.preventDefault()    
     const privacy = home.querySelector('#options-privacy').value;  
     const textPost = home.querySelector('#text-post').value;
-    const imageFile = home.querySelector('#image-file')
+    const imageFile = home.querySelector('#image-file');
     if(textPost === ''){
       alert('Ingresar texto')
     }else{
@@ -101,12 +102,11 @@ if(user != null){
   });
 }
 
-
 // Mostrando todos los Post
 const listPosts = home.querySelector('#public-posts');
 
 if(user != null){
-    getAllPosts(notes=>{
+  getAllPosts(notes=>{
       listPosts.innerHTML ="";
       notes.forEach(note => {
         listPosts.appendChild(itemPost(note))
@@ -114,6 +114,7 @@ if(user != null){
   })  
 }else{
   getPublicPosts(notes=>{
+    listPosts.innerHTML ="";
     notes.forEach(note => {
        listPosts.appendChild(itemPostPublic(note))
     });

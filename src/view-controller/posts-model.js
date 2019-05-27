@@ -1,12 +1,13 @@
-import { addPost,deletePost,updateTextPost,updatePrivacyPost,getImagePost} from "../controller/post.js";
+import { addPost,deletePost,updateTextPost,updatePrivacyPost, getImagePost} from "../controller/post.js";
 import {currentUser} from "../controller/auth.js"
 import {userData} from "./user-model.js"
 
-let newimg = ''
+let newimage = ''
 export const getImage = (file) => {
   getImagePost(file[0], downloadURL => {
+    console.log('available at', downloadURL);
     if (file.length !== 0) {
-      newimg = downloadURL
+      newimage = downloadURL
     }
   })
 }
@@ -38,9 +39,9 @@ export  const addPostSubmit = (textPost,privacy, file) =>{
   const user = firebase.auth().currentUser;
   let photoImg = ''
   if (file !== 0) {
-    photoImg = newimg
+    photoImg = newimage
   };
-  addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)
+  addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date,photoImg)
   
  /* const cb = doc =>{
       if(doc != null)
@@ -48,6 +49,9 @@ export  const addPostSubmit = (textPost,privacy, file) =>{
   }
      userData(cb)
  */
+  
+    
+
 }
 
 export const deletePostSubmit = (objPost) =>{ 

@@ -10,12 +10,10 @@ const init = () =>{
       messagingSenderId: "82992397174"
     };
     firebase.initializeApp(config);  
-
-       
+    
     initRouter();
   observer();
 }
-
  window.onload = init();
 
 

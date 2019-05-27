@@ -6,16 +6,23 @@ export const itemComment = (objComment)=>{
     const divElement = document.createElement('div');
     //divElement.classList.add('form-post','m1')
     divElement.innerHTML = `
-    <div>
-        <p>${objComment.emailUser}</p>
-        <p id="comment-${objComment.id}">${objComment.comment}</p>
-        <input id="edit-${objComment.id}" value="${objComment.comment}" class="display-none"/>
+    <div class ="comment-post mt p2">
+        <div class="user-post-comment">
+        <p class="color-text font-bold">${objComment.emailUser}</p>
         ${currentUser().uid === objComment.idUser 
-            ? `<i id="btn-delete-${objComment.id}" class="fas fa-window-close icons"></i>
-                <i id="btn-edit-${objComment.id}" class="fas fa-edit icons m1"></i>
-                <i id="btn-save-${objComment.id}" class="fas fa-save icons m1"></i>` : ``}
+            ? ` <button id="btn-delete-${objComment.id}" class="btn-circle-comment"><i class="fas fa-times icons-comment"></i></button>`: ``}
          
+        </div>
         
+        <p id="comment-${objComment.id}">${objComment.comment}</p>
+        <input id="edit-${objComment.id}" value="${objComment.comment}" class=" mp2 display-none"/>
+        ${currentUser().uid === objComment.idUser 
+            ? `
+            <button id="btn-edit-${objComment.id}" class="btn-circle-comment mp2"><i class="fas fa-edit icons-comment"></i></button>
+            <button id="btn-save-${objComment.id}" class="btn-circle-comment mp2 display-none"><i class="fas fa-save icons-comment"></i></button>
+
+           ` : ``}
+         
     </div>    
     `;
 
@@ -27,15 +34,24 @@ export const itemComment = (objComment)=>{
         const textComment = divElement.querySelector(`#comment-${objComment.id}`);
         const inputComment = divElement.querySelector(`#edit-${objComment.id}`);
 
-        divElement.querySelector(`#btn-edit-${objComment.id}`).addEventListener('click',()=>{
+        const btnEdit = divElement.querySelector(`#btn-edit-${objComment.id}`);
+        const btnSave = divElement.querySelector(`#btn-save-${objComment.id}`);
+
+        btnEdit.addEventListener('click',(e)=>{
+            e.preventDefault()
             textComment.classList.add('display-none'); inputComment.classList.remove('display-none');
+            btnEdit.classList.add('display-none'); btnSave.classList.remove('display-none');
         });
 
-        divElement.querySelector(`#btn-save-${objComment.id}`).addEventListener('click',()=>{
+        btnSave.addEventListener('click',(e)=>{
+            e.preventDefault()
             const newComent = inputComment.value;
-            updateCommentSubmit(objComment,newComent)
-
-            textComment.classList.remove('display-none'); inputComment.classList.add('display-none');
+            if(newComent !== ""){
+                updateCommentSubmit(objComment,newComent);
+                textComment.classList.remove('display-none'); inputComment.classList.add('display-none');
+                btnEdit.classList.remove('display-none'); btnSave.classList.add('display-none');
+            }
+           
         });
         
     }
