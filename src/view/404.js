@@ -2,12 +2,11 @@ export default () => {
 
   const divElemt = document.createElement('div');
   const viewDifferent = `
-            <div class="lineas">
-            <blockquote class="tr_bq">
-              <h1>- Opps! 404 Error -</h1>
-              <h2> Sorry! Regresa...</h2>
-              <h1>Back to <a href="#">home</a></h1></blockquote>
-            </div>
+          <div>          
+            <h2>404</h2>
+            <h1>Página no encontrada</h1>
+            <p>El archivo especificado no se encontró en este sitio web. Por favor, compruebe la URL para errores y vuelva a intentarlo.</p>
+          </div>
           `;
            
     divElemt.setAttribute('id', 'message');

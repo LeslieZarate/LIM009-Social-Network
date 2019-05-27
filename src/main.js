@@ -1,5 +1,5 @@
 import {initRouter} from "./route.js"
-import{observer} from "./view-controller.js"
+import{observer} from "./view-controller/user-model.js"
 const init = () =>{
   const config = {
       apiKey: "AIzaSyCiKAaY7lb-RFBBp10RSyTZmRHd1BBo90w",
@@ -10,10 +10,12 @@ const init = () =>{
       messagingSenderId: "82992397174"
     };
     firebase.initializeApp(config);  
-    
+
+       
     initRouter();
-   observer();
+  observer();
 }
+
  window.onload = init();
 
 

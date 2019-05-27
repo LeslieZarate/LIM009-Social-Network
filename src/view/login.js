@@ -1,4 +1,4 @@
-import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../view-controller.js"
+import {signInOnSubmit , signInGoogleOnSubmit ,signInFacebookOnSubmit } from "../view-controller/auth-model.js"
 
 export default () => {
     const form = document.createElement('div');
@@ -9,19 +9,20 @@ export default () => {
 				</section>
 				<section class="forms-content  m1 p2 ">
 				<article class="register-login p4">
-					<img alt ='logo' src="img/loogo.png" class="img-logo">				
+					<img alt ='logo' src="img/logo.png" class="img-logo">
+					<h2> Inicia Sesión </h2>				
 					<form>
 						<div class="form-group">
-							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" required/>
+							<input class="form-control" id="email" type="email" placeholder="Ingresa tu email" />
 						</div>
-						<div class="form-group">
-							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña" required/>
+						<div class="form-group">							
+							<input class="form-control" id="password" type="password" placeholder="Ingresa tu contraseña"/>
 						</div>
 						<div class="form-group">
 							<button id="btn-login" type="submit">Login</button>
 						</div>                  
 					</form>
-					<p>O bien ingresa con:</p>
+					<h2>O bien ingresa con:</h2>
 					<div class="login-social center-content m1">
 							<a id="btn-facebook" class="login-social-item">
 								<img src="https://i.ibb.co/NmxyWjL/ico-fb.png" alt="facebook">
@@ -30,7 +31,7 @@ export default () => {
 								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
 							</a>							
 					</div>
-					<h2>Aun no tines cuenta <span><a href="#/account" id="sing-up">Registrate</a></span></h2>				
+					<h2>Aun no tines cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></h2>				
 				</article>			
 			</section>
 				
@@ -49,7 +50,7 @@ export default () => {
 	const btnGoogle = form.querySelector('#btn-google'); 
 	btnGoogle.addEventListener('click',signInGoogleOnSubmit );
 
-	// LOGEO CON FACEBOOK
+	// LOGEO CON FACEBOK
 	const btnFacebook = form.querySelector('#btn-facebook'); 
 	btnFacebook.addEventListener('click',signInFacebookOnSubmit );
 

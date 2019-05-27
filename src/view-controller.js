@@ -43,39 +43,41 @@ export const signInOnSubmit = (event) => {
 export const signInGoogleOnSubmit = (event) => {
   event.preventDefault()
   signInGoogle()
-    .then((result) => {
-      const user = result.user;   
-      const docRef = firebase.firestore().collection('users').doc(user.uid);
-      docRef.get().then(function(doc) {
-          if (doc.exists) {
-              console.log("Document data:", doc.data());
-          } else {
-            setUser(user.uid,user.displayName,user.email,user.photoURL);
-              console.log("No such document!");
-          }
-          });
-
-
-
-
-
-              
-      changeHash('/home')
-    })         
-    .catch(error => {
-      const errorCode = error.code;
-      const  errorMessage = error.message;
-      alert( `Error: ${errorMessage} Tipo:${errorCode}`)
-    })    
+  .then((result) => {
+    const user = result.user;   
+    const docRef = firebase.firestore().collection('users').doc(user.uid);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+          setUser(user.uid,user.displayName,user.email,user.photoURL);
+            console.log("No such document!");
+        }
+    });
+    changeHash('/home')
+  })         
+  .catch(error => {
+    const errorCode = error.code;
+    const  errorMessage = error.message;
+    alert( `Error: ${errorMessage} Tipo:${errorCode}`)
+  })    
 }
 // LOGIN - FACEBOOK
 export const signInFacebookOnSubmit = () => {
   event.preventDefault()
   signInFacebook()
   .then((result) => {
-    const user = result.user;      
-      setUser(user.uid,user.displayName,user.email,user.photoURL)         
-      changeHash('/home')
+    const user = result.user;   
+    const docRef = firebase.firestore().collection('users').doc(user.uid);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+          setUser(user.uid,user.displayName,user.email,user.photoURL);
+            console.log("No such document!");
+        }
+    });
+    changeHash('/home')
   })           
   .catch(error => {
     const errorCode = error.code;
@@ -119,11 +121,6 @@ export const  observer = () => {
   }) 
 }
 /*
-
-
-
-
-
 export const  userActivo = (callback) => {
   firebase.auth().onAuthStateChanged(callback) 
 }
@@ -152,19 +149,19 @@ export const userData = (callback) =>{
 //  EDITAR PERFIL DEL USUARIO 
 
 export const updateUserPerfil = (event) =>{
-  event.preventDefault()
   const btnEdit = event.target.id;
   const idUser = btnEdit.slice(11,39);  // ID del documento de usuario a editar 
   
+  const containerPerfil = document.getElementById('describe-perfil');
+  containerPerfil.style.display = "none";
+
   const containerEditPerfil = document.getElementById('edit-perfil');
   containerEditPerfil.style.display = "block"
 
-  
-  
+ 
   const btnSavePerfil = document.querySelector('#btn-save-perfil')
   btnSavePerfil.addEventListener('click',(event)=>{
     event.preventDefault();
-     // Datos del formulario de editar a guardar 
     const  infoPersonal = document.querySelector('#info-personal');
     const infoDoramas = document.querySelector('#info-doramas');
     const birthdate =document.querySelector('#birthdate');
@@ -179,12 +176,15 @@ export const updateUserPerfil = (event) =>{
     updateUser(idUser , dataUser);
     alert('se actualizo perfil');
     containerEditPerfil.style.display = "none";
+    containerPerfil.style.display = "block";
   })
 
 }
 
 
+
 /************************************  POST *****************************************/
+
 // funciones para validar la fecha 
 
 const validate = (number) => {
@@ -220,17 +220,18 @@ export  const addNoteSubmit = (event) =>{
   if(textPost.value  === ''){
     alert('Ingresa texto')
   }else{    
-    addNote(user.uid,user.displayName,user.photoURL,textPost.value,privacy.value,date)
+    addNote(user.uid,user.displayName,user.email,user.photoURL,textPost.value,privacy.value,date)
       .then((doc)=>{  
-        userData(user => {
-          if(user!= null){
+        console.log(doc)
+       /* userData(user => {
+          if(user != null){
             const   data={
                name : user.name,
               photo : user.photo
           }
           updateNote(doc.id,data)
         }
-        })              
+        })   */           
         document.getElementById("form-post").reset();
         alert('Se agrego exitosamente');  
       })
@@ -239,11 +240,8 @@ export  const addNoteSubmit = (event) =>{
             const  errorMessage = error.message;
             alert( `Error: ${errorMessage} Tipo:${errorCode}`)
       });
-  }
-    
+  }    
 }
-
-
 
 export const deleteNoteSubmit = (event) =>{ 
   event.preventDefault();
@@ -274,7 +272,8 @@ export const updateNoteSubmit = (event) => {
 
   // editar el contenido de un post  BOTON SAVE 
   const btnSave = document.querySelector(`#btn-save-${idNote}`)
-  btnSave.addEventListener('click',()=>{ 
+  btnSave.addEventListener('click',(event)=>{ 
+    event.preventDefault()
     messageEdit.style.display = "none";  
     const  note = {
       textPost : textNote.value     
@@ -284,10 +283,12 @@ export const updateNoteSubmit = (event) => {
 
   // editar la privacidad del post BOTON SAVE 
   const privacy = document.querySelector(`#options-${idNote}`);
-  privacy.addEventListener('change',()=>{
+  privacy.addEventListener('change',(event)=>{    
+    event.preventDefault()
     const privacyValue = privacy.value;
     const btnSave = document.querySelector(`#btn-save-${idNote}`)
-      btnSave.addEventListener('click',()=>{    
+      btnSave.addEventListener('click',(event)=>{  
+        event.preventDefault()  
         messageEdit.style.display = "none";
         const  note = {
           textPost : textNote.value,
