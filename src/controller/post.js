@@ -50,16 +50,16 @@ export const getPublicPosts = (callback)=>{
 }
 
 export const getImagePost = (file, callback) => {
-  //create ref
+  //Creando referencia a Storage Firebase
   const storageRef = firebase.storage().ref()
   const imageRef = storageRef.child(`images/${file.name}`)
 
-  //update file to fb storage
+  //Actualizando Archivo en Storage
   const task = imageRef.put(file)
   return task.on('state_changed', (snapshot) => {
   }, (error) => {
   }, () => {
-    //get updated img url 
+    //Obteniendo actualizacion de URL para Firestore
     const downloadImg = task.snapshot.ref.getDownloadURL()
     downloadImg.then(callback)
   })
