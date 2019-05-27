@@ -9,27 +9,16 @@ const fixtureData = {
           photo :  'abc.png',
           email : 'diana@gmail.com',
           birthdate : '18/05/1998',
-          infoDoramas :"Me gusta  los doramas",
-          infoPersonal :"Soy soltera",          
-        },
-        abc456: {
-            idUser : 'abc456',
-            name : 'Leslie',
-            photo :  'abcd.png',
-            email : 'leslie@gmail.com',
-            birthdate : '18/05/1997',
-            infoDoramas :"Me gusta  los doramas",
-            infoPersonal :"Teengo 21 años",
-        },        
+          infoDoramas :'Me gusta  los doramas',
+          infoPersonal :'Soy soltera',          
+        },       
       }
     }
   }
  };
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
-
 import { setUser ,getUser,updateUser} from '../src/controller/user.js';
-
 describe('setUser', () => {
   it('Debería porder guardar los datos del usuario', (done) => {
     return setUser('abc789','fiorelly','fiorelly@gmail.com','abcde.png')
@@ -43,20 +32,24 @@ describe('setUser', () => {
   });
 });
 
-/* describe('UpdateUser', () => {
+describe('UpdateUser', () => {
   it('Debería porder guardar los datos del usuario', (done) => {
-    return setUser('abc789','fiorelly','fiorelly@gmail.com','abcde.png')
+    setUser('abc456','leslie','fiorelly@gmail.com','abcde.png')
+  return  updateUser('abc456','fiorelly','18/05/1997','tengo 21 años','Me gusta los doramas',)
       .then(() => {
         getUser(
-          'abc789', data =>{
-            expect(data.idUser).toBe('abc789');
+          'abc456', data =>{
+            expect(data.name).toEqual('fiorelly');     
+            expect(data.birthdate).toEqual('18/05/1997');
+            expect(data.infoDoramas).toEqual('Me gusta los doramas');
+            expect(data.infoPersonal).toEqual('tengo 21 años');
             done()
           })
       });            
   });
 }); 
-*/
 
+/*
 describe('getUser',()=>{
   it('deberia ser una funcion ',()=>{
     expect(typeof getUser).toBe('function')
@@ -67,14 +60,11 @@ describe('getUser',()=>{
       console.log(user)
       //expect(data.idUser).toEqual('abc456')
       done()
-    }
-       
-        
-    getUser('abc456', callback)
-    
+    }       
+    getUser('abc456', callback);    
   });
 }); 
-
+*/
 
 
 

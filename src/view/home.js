@@ -14,7 +14,7 @@ export const userSection = (user) => {
         <h2 class ="color-title">${user.name}</h2>
       </div>` 
     
-    :`<img src="./img/logotipo2.png">` }
+    :`hola` }
     				
   `;    
   return divUser
@@ -44,8 +44,10 @@ export const ContentHome = (user)=>{
             <option value="publico">publico</option>
             <option value="privado">privado</option>
           </select>
-          <i id="btn-img" class="fas fa-image icons m1"></i>
-          <i id="btn-save" class="fas fa-paper-plane icons m1"></i>
+
+          <button id="btn-save-img" class="btn-circle m1"><i class="fas fa-image icons-action"></i></button>
+          <button id="btn-save" class="btn-circle m1"><i class="fas fa-paper-plane icons-action"></i></button> 
+
         </div>               
       </form>					
     </div>
@@ -54,8 +56,7 @@ export const ContentHome = (user)=>{
      
       
       <!-- POSTS -->
-      <h1 class ="color-text">Publicaciones </h1>
-    
+        
       <div class="public-posts" id="public-posts">
       <!-- TOTAL POST -->
       </div>
@@ -77,7 +78,8 @@ export const ContentHome = (user)=>{
 // Agregando Notas
 if(user != null){
   const btnSave = home.querySelector('#btn-save');
-  btnSave.addEventListener('click',()=>{     
+  btnSave.addEventListener('click',(e)=>{ 
+    e.preventDefault()    
     const privacy = home.querySelector('#options-privacy').value;  
     const textPost = home.querySelector('#text-post').value;
     if(textPost === ''){
@@ -94,7 +96,7 @@ if(user != null){
 const listPosts = home.querySelector('#public-posts');
 
 if(user != null){
-    getAllPosts(notes=>{
+  getAllPosts(notes=>{
       listPosts.innerHTML ="";
       notes.forEach(note => {
         listPosts.appendChild(itemPost(note))
@@ -102,6 +104,7 @@ if(user != null){
   })  
 }else{
   getPublicPosts(notes=>{
+    listPosts.innerHTML ="";
     notes.forEach(note => {
        listPosts.appendChild(itemPostPublic(note))
     });

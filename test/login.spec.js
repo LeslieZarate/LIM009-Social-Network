@@ -21,7 +21,7 @@ mockauth.autoFlush();
 global.firebase = mocksdk;
 
 
-import { signUp, signIn, signInGoogle, signInFacebook ,signOut ,currentUser} from "../src/controller/auth.js";
+import { signUp, signIn, signInGoogle, signInFacebook ,signOut ,currentUser,userActive} from "../src/controller/auth.js";
 
 describe('SignUp', () => { 
     it('Deberia ser una funcio:', ()=>{
@@ -98,3 +98,18 @@ describe('currentUser', () => {
       })
   })
 })
+
+describe('activeUser', () => {
+  it('deberia tener usuario activo', (done) => {
+        const callback = user =>{
+						console.log(user)
+						expect(user.email).toEqual('admin@dramafever.com.pe');
+						done()
+			}
+			userActive(callback);
+			signIn('admin@dramafever.com.pe', '123456');	
+	});	
+});
+
+
+

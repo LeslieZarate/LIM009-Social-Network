@@ -20,3 +20,32 @@ export const getAllPostLikes = (idPost,callback)=>{
   })
 }
 
+export const addComment = (idPost,id,email,photo,comment)=>{
+  return firebase.firestore().collection('posts').doc(idPost).collection('comments').add({
+    idUser : id,
+    emailUser : email,
+    photoUser :photo,
+    comment : comment
+  })
+}
+
+export const deleteComment = (idPost,idComment)=>{
+  return firebase.firestore().collection('posts').doc(idPost).collection('comments').doc(idComment).delete();
+}
+
+export const updateComment = (idPost,idComment,newComment)=>{
+  return firebase.firestore().collection('posts').doc(idPost).collection('comments').doc(idComment).update({
+    comment : newComment
+  });
+}
+
+export const getAllPostComments = (idPost,callback)=>{
+  firebase.firestore().collection('posts').doc(idPost).collection('comments').onSnapshot(querySnapshot=>{
+    const comments = [];
+    querySnapshot.forEach(doc=>{
+      comments.push({idPost: idPost,id:doc.id,...doc.data()});
+    });
+    callback(comments)
+  });
+}
+
