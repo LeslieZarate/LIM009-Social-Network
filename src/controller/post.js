@@ -49,7 +49,7 @@ export const getPublicPosts = (callback)=>{
       })
 }
 
-export const getImagePost = (file, cb) => {
+export const getImagePost = (file, callback) => {
   //create ref
   const storageRef = firebase.storage().ref()
   const imageRef = storageRef.child(`images/${file.name}`)
@@ -61,6 +61,6 @@ export const getImagePost = (file, cb) => {
   }, () => {
     //get updated img url 
     const downloadImg = task.snapshot.ref.getDownloadURL()
-    downloadImg.then(cb)
+    downloadImg.then(callback)
   })
 }
