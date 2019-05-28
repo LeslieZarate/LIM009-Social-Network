@@ -1,4 +1,4 @@
-export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date,imgPost) => {
+export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date) => {
     return firebase.firestore().collection('posts').add({
       idUser : idUser,
       name : userName,
@@ -6,7 +6,7 @@ export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date,im
       photo :  userPhoto,
       textPost : textPost,
       privacy : privacy,
-      imgPost :imgPost,
+      
       date : date,      
       });
   }
@@ -48,18 +48,3 @@ export const getPublicPosts = (callback)=>{
       })
 }
 
-export const getImagePost = (file, callback) => {
-  //Creando referencia a Storage Firebase
-  const storageRef = firebase.storage().ref()
-  const imageRef = storageRef.child(`images/${file.name}`)
- 
-  //Actualizando Archivo en Storage
-  const task = imageRef.put(file)
-  return task.on('state_changed', (snapshot) => {    
-  }, (error) => {
-  }, () => {
-    //Obteniendo actualizacion de URL para Firestore
-    const downloadImg = task.snapshot.ref.getDownloadURL()
-    downloadImg.then(callback)
-  })
- }
