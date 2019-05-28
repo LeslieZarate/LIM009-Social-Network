@@ -2,7 +2,7 @@
 import{getAllPostComments} from "../controller/posts-actions.js"
 export const itemPostPublic = (objPost) =>{
     const divElement = document.createElement('div');
-    divElement.classList.add('form-post','m1')
+    divElement.classList.add('form-post','mp2')
     
     divElement.innerHTML = `
       <div class="user-post">
@@ -10,14 +10,20 @@ export const itemPostPublic = (objPost) =>{
       </div>
       <div class="p2">
         <p id="post-${objPost.id}" class="text-justify">${objPost.textPost}</p>
+        ${objPost.imgPost === 0 ? ``: `
+      
+        <div class = "post-image">
+          <img src='${objPost.imgPost}'> 
+        </div>
+      `}
+
         <p class ="color-text text-right" >Fecha de Publicación :${objPost.date}</p>
       </div> 
       <hr class ="separating-line"/>
       <div>          
           <div id="comments-${objPost.id}" class="m1">        
           </div>
-      </div>      
-      
+      </div>     
     `; 
     
     const allComents = divElement.querySelector(`#comments-${objPost.id}`);

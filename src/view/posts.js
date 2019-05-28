@@ -9,7 +9,7 @@ import { itemComment } from "./comments.js";
 
 export const itemPost = (objPost) =>{
   const divElement = document.createElement('div');
-  divElement.classList.add('form-post','m1')
+  divElement.classList.add('form-post','mp2')
   divElement.innerHTML = `  
     <div class="user-post">
       <p class ="color-text  mp">${objPost.email}</p>
@@ -19,34 +19,53 @@ export const itemPost = (objPost) =>{
     <div class="p2">
       <p id="post-${objPost.id}" class="text-justify">${objPost.textPost}</p>
       <textarea id="text-${objPost.id}" class="display-none" >${objPost.textPost}</textarea>
+
+      ${objPost.imgPost === 0 ? ``: `
+      
+        <div class = "post-image">
+          <img src='${objPost.imgPost}'> 
+        </div>
+      `}
+
       <p class ="color-text text-right" >Fecha de Publicación :${objPost.date}</p>
+
       <hr class ="separating-line"/>
+
       <div class="btn-actions mp">
-        ${currentUser().uid === objPost.idUser 
-          ? `
-          <select id="options-privacy-${objPost.id}" class ="options-privacy ">
-            ${objPost.privacy === 'publico' 
-            ?
-              `<option value="publico">${objPost.privacy}</option>
-                <option value="privado">privado</option>`
-              : `<option value="privado">${objPost.privacy}</option>
-                 <option value="publico">publico</option>`}                  
-         </select>`:``}         
+        <div class="action-sub1">
+          <button id="btn-like-${objPost.id}" class="btn-circle display-none"><i class="fas fa-heart icons-action "></i></button> 
+          <button id="btn-dislike-${objPost.id}" class="btn-circle"><i class="far fa-heart icons-action"></i></button> 
+          <label id="count-likes" class = "color-text-like"></label>
+        </div>
+              
+        <div class="action-sub2">
+          ${currentUser().uid === objPost.idUser 
+            ? `
+            <select id="options-privacy-${objPost.id}" class ="options-privacy ">
 
-        <button id="btn-like-${objPost.id}" class="btn-circle display-none"><i class="fas fa-heart icons-action "></i></button> 
-        <button id="btn-dislike-${objPost.id}" class="btn-circle"><i class="far fa-heart icons-action"></i></button> 
-        <label id="count-likes" class = "color-text-like"></label>
+              ${objPost.privacy === 'publico' 
+              ?
+                `<option value="publico">${objPost.privacy}</option>
+                  <option value="privado">privado</option>`
+                : `<option value="privado">${objPost.privacy}</option>
+                  <option value="publico">publico</option>`}  
+                  
+            </select>
+            <button id="btn-edit-${objPost.id}" class="btn-circle mb4"><i class="fas fa-edit icons-action"></i></button>                       
+            <button id="btn-save-${objPost.id}" class="btn-circle display-none mb4"><i class="fas fa-save icons-action"></i></button>`:``}         
+        </div> 
+      </div>
 
-        ${currentUser().uid === objPost.idUser 
-          ? ` <button id="btn-edit-${objPost.id}" class="btn-circle mb"><i class="fas fa-edit icons-action"></i></button>                         
-              <button id="btn-save-${objPost.id}" class="btn-circle display-none mb"><i class="fas fa-save icons-action"></i></button>
-               ` : ``}
-      </div> 
+
       <hr class ="separating-line"/>
       <div>
-        <form id="form-comment" class="form-comment m1">
-          <input id="comment-${objPost.id}" class="mp"placeholder ="Escribe un comentario" type=text/>
-          <button id="btn-comment-${objPost.id}" class="btn-circle  m1"><i class="fas fa-paper-plane icons-action"></i></button>
+        <form id="form-comment" class="form-comment">
+          <div class="comment-sub1 mp">
+            <input id="comment-${objPost.id}" class="mp"placeholder ="Escribe un comentario" type=text/>
+          </div>
+          <div class="comment-sub2 mp2">          
+            <button id="btn-comment-${objPost.id}" class="btn-circle "><i class="fas fa-paper-plane icons-action"></i></button>
+          </div>
         </form>
         <div id="all-comments-${objPost.id}">        
         </div>
