@@ -1,8 +1,6 @@
-import { addPost,deletePost,updateTextPost,updatePrivacyPost} from "../controller/post.js";
-import {currentUser} from "../controller/auth.js"
-import {userData} from "./user-model.js"
-
-
+import { addPost,deletePost,updateTextPost,updatePrivacyPost,getImagePost} from "../controller/post.js";
+import {currentUser} from "../controller/auth.js";
+//import {userData} from "./user-model.js"
 
 const validate = (number) => {
   if(number<=9){
@@ -25,20 +23,36 @@ const systemDate = (fullDate )=>{
   return date;  
 }
 
-export  const addPostSubmit = (textPost,privacy) =>{
+let imgURL;
+export const getImageLink = (file,uploader) =>{  
+  getImagePost (file,uploader,imgLink=>{
+    imgURL=imgLink
+  });
+}
+
+export  const addPostSubmit = (textPost,privacy,imgPost) =>{
+
+  const uploader = document.querySelector(`#uploader`); 
+  uploader.classList.remove('display-none')
+  console.log(imgPost)
   const fullDate= new Date();
   const date = systemDate(fullDate); 
-  const user = firebase.auth().currentUser;
-  addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,date)
-  
+  const user = firebase.auth().currentUser;  
+  if(imgPost === 0){
+    addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,imgPost,date)
+    .then(res=>console.log(res.get().data()))
+  }else{
+    addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,imgURL,date)
+    uploader.value = 0;
+  }
+   
  /* const cb = doc =>{
       if(doc != null)
       addPost(doc.idUser,doc.name,doc.email,doc.photo,textPost,privacy,date)
   }
      userData(cb)
  */
-  
-    
+     
 
 }
 
