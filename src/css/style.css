@@ -1,16 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=ABeeZee|Comfortaa|PT+Sans+Narrow|Satisfy&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;  
 }
 body{
-  background: url('../img/fondo11.jpeg');
+ /* background: url('../img/fondo2.jpeg');*/
   background-attachment: fixed;
   background-size: cover;
-  font-family: 'ABeeZee', sans-serif;
- 
+  font-family: 'Roboto', sans-serif;
 }
 .p1{
   padding: 1%;
@@ -62,9 +60,8 @@ body{
    text-align: right
  }
 .color-title{
-  color :#1a0e1a;
+  color :#c0e2e4;
   font-weight: bold;
-  font-family: 'Satisfy';
 }
 .center-content{
   display: flex;
@@ -97,6 +94,7 @@ main{
   width: 90%;
   margin: auto;
   height: auto;
+ /* background: yellow;*/
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -104,14 +102,17 @@ main{
 .img-content{
   width: 98%;
   height: auto;
+ /* background: red;*/
 }
 .img-content  img{
   width :100%;
   height:100%;
+/*  border:1px solid yellow; */
 }
 .forms-content{
   width: 98%;
   height: auto;
+ /* background: blue;*/
 }
 
 .register-login{  
@@ -119,8 +120,8 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:  rgba(231, 240, 226, 0.6);
-  color:	#c0e2e4;
+  /*background :#522e4a;*/
+  color:	#522e4a;
 }
 .img-logo {
   width :80%;
@@ -158,8 +159,8 @@ main{
 }
 
 .form-group button:hover{
-  background: rgb(90,195 ,155,0.6);
-  color:#c0e2e4;
+  background: #522e4a;
+  color:#5AC39B;
   
 }
 
@@ -171,7 +172,7 @@ main{
 }
 
 span a{
-  color: #606664;
+  color: #5AC39B;
   font-weight: bold;
 }
 /*** MENU DE NAVEGACION **/
@@ -179,7 +180,7 @@ span a{
 header{
   width: 100%;
   height: 80px;
-  background:#3d1e2b;
+  background:#5d3e4b;
   color: #fff;
   position: fixed;
   top: 0;
@@ -198,35 +199,37 @@ header{
 } 
 
 .logo-design img{
-  width: 200px;
-  height: 65px;
-  margin: 0.1rem
+  width: 180px;
+  height: 40px;
+  margin: 1rem
 } 
 
 .logo-design label{
-  font-size: 25px;
-  margin: 0.3rem;
-  border:1px solid #fff;
+  font-size: 20px;
+  margin: 0.5rem;
+  border:1px solid #5AC39B;
   border-radius: 5px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   cursor: pointer;
+  color:  #5AC39B;
+  ;
 }
 .navbar{
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background:#3d1e2b;
-  left: 0;
-  top:80px;
-  transform:translateX(-100%);
-}   
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background:#5d3e4b;
+    left: 0;
+    top:80px;
+    transform:translateX(-100%);
+}    
 .main-nav li{
     list-style: none;       
 }
 .main-nav li a{ 
     line-height: 25px;   
     display: block; 
-    color: #c0e2e4;
+    color: #5AC39B;
     text-decoration: none;
     padding: 15px;
     font-weight: bold;    
@@ -248,20 +251,22 @@ header{
   display: flex;
   flex-direction: column;
   align-items: start;
-  font-family: 'PT Sans Narrow', sans-serif;
 }
 .profile-content{
-  background:rgba(190, 171, 178, 0.3);
-  width: 98%;
+  border: 1px solid  #7c817e;
+  width: 100%;
   height: auto;
-  font-family: 'PT Sans Narrow', sans-serif;
+  color:#5d3e4b;;
 }
+
+.img-section{
+  width: 100%;
+  height: 100px;
+}
+
 .perfil-user {
-  border:3px solid #5AC39B;
-  border-radius: 10px;
   display:flex;
   align-items: center;
-  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 .perfil-no-user {
@@ -275,16 +280,15 @@ header{
   height:15%;
   border:1px solid #5AC39B;
   border-radius: 50%;
-  margin: 1% 5% 1% 1%;
+  margin: 5%;
 }
 
 .posts-content{
-  background:rgba(94, 31, 63, 0.3);
-  width: 98%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;  
-  font-family: 'PT Sans Narrow', sans-serif;
+  border: 1px solid  #7c817e;
 }
 
 .public-posts{
@@ -292,26 +296,24 @@ header{
 }
 
 .form-post{
-  width: 96%;
+  width: 98%;
   height: auto;
-  border:3px solid #5AC39B;
-  border-radius: 10px; 
+  border:2px solid #7c817e;
+  border-radius: 5px; 
 }
-
 .form-post textarea{
   width: 100%;
   height: 100px;
   resize: none;
   border:1px solid #5AC39B;
   padding: 7px 20px 7px 20px;
-  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 
 .user-post{
-  border-radius: 7px 7px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
   background: #5AC39B;
-  color: 	#eee4e8;
+  color: 	#5d3e4b;
   font-weight: bold;
   padding: 1rem;
   display: flex;
@@ -319,26 +321,25 @@ header{
 }
 
 .options-privacy{
-  background: #5AC39B;
-  height: 35px;
+  background: #522e4a;
+  height: 40px;
   border-radius: 5px;
-  color:rgb(1, 12, 12);;
+  color:#5AC39B;
 }
 
 .icons{
   cursor: pointer;
   font-size: 25px;
-  color:#6b1330
+  color:#5d3e4b
 }
-
 i:hover{
-  color: #8f727d;
+  color: #765c66;
 }
 
-.separating-line{
+ .separating-line{
   color: #0056b2;
   margin: 0.5rem 0rem 0rem 0rem;
-}
+ }
 
 .icons-action{
   cursor: pointer;
@@ -418,7 +419,9 @@ i:hover{
   padding: 7px 20px 7px 20px;
 }
 
-/*PERFIL DEL USUARIO*/
+
+
+/*    perfil  del usuario */
 
 .container-perfil{
   display: flex;
@@ -487,27 +490,19 @@ i:hover{
   padding: 7px 20px 7px 20px;
 }
 
-.h1{
-  color: rgb(39, 5, 28);
-  font-size: 18px;
-}
 
-h2{
-  color: rgb(5, 59, 30);
-  font-size: 18px;
-}
 
-.icon-photo{
-  width: 30px;
-  height: 30px;
-  border-radius: 50px; 
-}
 
-.postImagen{
-  width: 40%;
-  height: 60%;
-  margin: 20px 2px 20px 20px;
-}
+
+
+
+
+
+
+
+
+
+
 
 /*---------------------------------------------------------*/
           /*DESKTOP */

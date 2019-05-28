@@ -12,17 +12,14 @@ export const itemPost = (objPost) =>{
   divElement.classList.add('form-post','m1')
   divElement.innerHTML = `  
     <div class="user-post">
-    <img alt ='Myphoto' src="${objPost.photo}" class="icon-photo">
-      <p class ="color-text">${objPost.name}</p>
+      <p class ="color-text  mp">${objPost.email}</p>
       ${currentUser().uid === objPost.idUser ? `
       <button id="btn-delete-${objPost.id}" class="btn-circle-comment"><i class="fas fa-times icons-action"></i></button>`:``}     			
     </div>
     <div class="p2">
-    <div>
       <p id="post-${objPost.id}" class="text-justify">${objPost.textPost}</p>
       <textarea id="text-${objPost.id}" class="display-none" >${objPost.textPost}</textarea>
-      <div id="photoUploaded"></div>     
-    </div>
+      <div id="photoUploaded"></div>  
       <p class ="color-text text-right" >Fecha de Publicación :${objPost.date}</p>
       <hr class ="separating-line"/>
       <div class="btn-actions mp">
@@ -69,15 +66,6 @@ export const itemPost = (objPost) =>{
       const newPrivacy = state.value;    
       updatePrivacyPostSubmit(objPost,newPrivacy)
     });
-
-    //Subir Imagen
-    const postImg = divElement.querySelector('#photoUploaded');
-    if (objPost.image !== '') {
-      const image = document.createElement('img')
-      image.setAttribute('src', objPost.image)
-      image.classList.add('styleAddImage');
-      postImg.appendChild(image)
-    }
   
     // EDITAR POST
     const textareaPost = divElement.querySelector(`#text-${objPost.id}`)  
@@ -134,6 +122,15 @@ export const itemPost = (objPost) =>{
         })
       }
     })
+
+        //Subir Imagen
+        const postImg = divElement.querySelector('#photoUploaded');
+        if (objPost.image !== '') {
+          const image = document.createElement('img')
+          image.setAttribute('src', objPost.image)
+          image.classList.add('styleAddImage');
+          postImg.appendChild(image)
+        }
 
     //AGREGAR COMENTARIOS
     const btnComment = divElement.querySelector(`#btn-comment-${objPost.id}`);

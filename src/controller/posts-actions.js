@@ -20,9 +20,9 @@ export const getAllPostLikes = (idPost,callback)=>{
   })
 }
 
-export const addComment = (idPost,id,email,photo,comment)=>{
+export const addComment = (idPost,idUser,email,photo,comment)=>{
   return firebase.firestore().collection('posts').doc(idPost).collection('comments').add({
-    idUser : id,
+    idUser : idUser,
     emailUser : email,
     photoUser :photo,
     comment : comment

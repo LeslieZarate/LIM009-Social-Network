@@ -10,7 +10,7 @@ export const userData = (callback) =>{
     }
   }) 
 }
-
+/*
 export const userData2 = (callback) =>{
   userActive(user=>{
     if(user != null){
@@ -23,7 +23,7 @@ export const userData2 = (callback) =>{
     }
   });  
 }
-
+*/
 export const updateUserPerfil = (user,name,birthdate,infoPersonal,infoDoramas) =>{      
     updateUser(user.idUser,name ,birthdate,infoPersonal,infoDoramas);    
   }

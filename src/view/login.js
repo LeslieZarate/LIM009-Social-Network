@@ -22,7 +22,7 @@ export default () => {
 							<button id="btn-login" type="submit">Login</button>
 						</div>                  
 					</form>
-					<h2>O bien ingresa con:</h2>
+					<p>O bien ingresa con:</p>
 					<div class="login-social center-content m1">
 							<a id="btn-facebook" class="login-social-item">
 								<img src="https://i.ibb.co/NmxyWjL/ico-fb.png" alt="facebook">
@@ -31,7 +31,7 @@ export default () => {
 								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
 							</a>							
 					</div>
-					<h2>Aun no tines cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></h2>				
+					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></p>				
 				</article>			
 			</section>
 				

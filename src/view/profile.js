@@ -12,7 +12,7 @@ export default (user) => {
             
             ?`
             <div id="describe-perfil" class="describe-perfil ">
-              <h1 class="color-perfil text-center">Perfil del Usuario</h1>
+              <h1 class="color-perfil text-center">Mi Perfil</h1>
               <img class="img-perfil-user" src= '${user.photo}'/>                          
               <p class="item-perfil"><strong> Nombre:</strong>${user.name}</p>
               <p class="item-perfil"><strong> Email:</strong>${user.email}</p> 

@@ -33,7 +33,7 @@ const systemDate = (fullDate )=>{
   return date;  
 }
 
-export  const addPostSubmit = (textPost,privacy, file) =>{
+export  const addPostSubmit = (textPost,privacy,file) =>{
   const fullDate= new Date();
   const date = systemDate(fullDate); 
   const user = firebase.auth().currentUser;

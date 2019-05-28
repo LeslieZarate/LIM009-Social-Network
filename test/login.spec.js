@@ -102,7 +102,6 @@ describe('currentUser', () => {
 describe('activeUser', () => {
   it('deberia tener usuario activo', (done) => {
         const callback = user =>{
-						console.log(user)
 						expect(user.email).toEqual('admin@dramafever.com.pe');
 						done()
 			}

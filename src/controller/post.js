@@ -5,10 +5,9 @@ export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date,ph
       email : email,
       photo :  userPhoto,
       textPost : textPost,
-      image: photoUrl,
       privacy : privacy,
-      date : date,
-      likes :0,
+      date : date,  
+      image: photoUrl    
       });
   }
   
@@ -21,21 +20,21 @@ export const updateTextPost = (idPost ,inputPost ) =>{
     textPost : inputPost
   });
 }
+
 export const updatePrivacyPost = (idPost ,newPrivacy) =>{
   return firebase.firestore().collection('posts').doc(idPost).update({
     privacy : newPrivacy
   });
 }
 
-    
 export const getAllPosts = (callback)=>{
-    firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
-      const posts =[];
-      querySnapshot.forEach((doc) => {
-          posts.push({id:doc.id,...doc.data()});                
-        });
-        callback(posts);
-      })
+  firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
+    const posts =[];
+    querySnapshot.forEach((doc) => {
+      posts.push({id:doc.id,...doc.data()});                
+    });
+      callback(posts);
+  })
 }
   
 export const getPublicPosts = (callback)=>{

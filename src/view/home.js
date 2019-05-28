@@ -2,19 +2,21 @@ import {header} from "./header.js"
 import {itemPost} from "./posts.js"
 import { itemPostPublic } from "./postsPublic.js";
 
-import{addPostSubmit,getImage,} from "../view-controller/posts-model.js"
+import{addPostSubmit,getImage} from "../view-controller/posts-model.js"
 import { getAllPosts, getPublicPosts } from "../controller/post.js";
 
 export const userSection = (user) => {    
   const divUser = document.createElement('div');
+  
   divUser.innerHTML= `   
   ${user != null 
-    ?`<div class="perfil-user m1 p2">
-        <img alt ='photo-perfil' src="${user.photo}" class="m1">
-        <h1 class ="color-title">${user.name}</h1>
+    ?`<img class="img-section" src="img/img-section.jpg">
+      <div class="perfil-user">
+        <img alt ='photo-perfil' src="${user.photo}">
+        <h2>${user.name}</h2>
       </div>` 
     
-    :`hola` }
+    :`hola`}
     				
   `;    
   return divUser
@@ -29,7 +31,7 @@ export const ContentHome = (user)=>{
 
   <main>
   <div class="container-home p1 ">
-    <section class="profile-content m1 p2" id="profile-content">
+    <section class="profile-content m1" id="profile-content">
     <!-- AQUI VA USER SECTION -->
     </section>
 
@@ -44,7 +46,7 @@ export const ContentHome = (user)=>{
             <option value="publico">publico</option>
             <option value="privado">privado</option>
           </select>
-          <label>
+
           <label>
           <input type="file" name="fichero"  id="image-file" class="display-none">
           <i id="image-file" class="fas fa-image icons m1" alt="descargar"></i>
@@ -97,10 +99,11 @@ if(user != null){
     }else{
       const file = imageFile.files.length
       addPostSubmit(textPost,privacy,file)
-      home.querySelector('#form-post').reset()
+      home.querySelector('#form-post')
     }
   });
 }
+
 
 // Mostrando todos los Post
 const listPosts = home.querySelector('#public-posts');

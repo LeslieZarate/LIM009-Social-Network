@@ -12,7 +12,7 @@ const fixtureData = {
           textPost : 'probando agregar un post',
           privacy : 'privado',
           date : '18/05/19',
-          likes :2,
+          
         },
         abc456: {
             idUser : '2',
@@ -22,7 +22,7 @@ const fixtureData = {
             textPost : 'probando agregar un post 1',
             privacy : 'publico',
             date : '18/05/19',
-            likes :3,
+           
           },
         abc789: {
           idUser : '3',
@@ -32,7 +32,7 @@ const fixtureData = {
           textPost : 'este es un post Publico',
           privacy : 'publico',
           date : '17/05/19',
-          likes :3,
+          
         },
       }
     }
@@ -76,7 +76,7 @@ describe('getPublicPosts', () => {
 
 describe('addPost', () => {
   it('Debería porder agregar un post', (done) => {
-    return addPost('2','Leslie','les2@gmail.com','abcd.png','probando agregar un post','privado','17/05/19',3)
+    return addPost('2','Leslie','les2@gmail.com','abcd.png','probando agregar un post','privado','17/05/19')
       .then(() => getAllPosts(
         (data) => {
           const result = data.find((note) => note.textPost === 'probando agregar un post');
