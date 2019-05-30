@@ -34,26 +34,22 @@ export  const addPostSubmit = (textPost,privacy,imgPost) =>{
 
   const uploader = document.querySelector(`#uploader`); 
   uploader.classList.remove('display-none')
-  console.log(imgPost)
+ 
   const fullDate= new Date();
   const date = systemDate(fullDate); 
   const user = firebase.auth().currentUser;  
   if(imgPost === 0){
     addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,imgPost,date)
-    .then(res=>console.log(res.get().data()))
   }else{
     addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,imgURL,date)
     uploader.value = 0;
   }
-   
- /* const cb = doc =>{
+   /* const cb = doc =>{
       if(doc != null)
       addPost(doc.idUser,doc.name,doc.email,doc.photo,textPost,privacy,date)
   }
-     userData(cb)
- */
-     
-
+  userData(cb)
+ */ 
 }
 
 export const deletePostSubmit = (objPost) =>{ 

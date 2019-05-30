@@ -23,7 +23,7 @@ const changeTmp = (hash) => {
       case '#/home':  
       userData((user) => {     
         root.innerHTML = ''; 
-      root.appendChild(ContentHome(user));
+        root.appendChild(ContentHome(user));
       })
       
       break;

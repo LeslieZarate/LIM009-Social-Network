@@ -1,10 +1,10 @@
 // LOGIN CON EMAIL -PASSWORD
-export const signIn = (email, password) =>
-  firebase.auth().signInWithEmailAndPassword(email, password);
+export const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
 
 // LOGIN CON GOOGLE
 export const signInGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    //Crear una instancia del objeto del proveedor de Google:
+    const provider = new firebase.auth.GoogleAuthProvider();    
     return firebase.auth().signInWithPopup(provider);
 }
 
@@ -22,7 +22,6 @@ export const signUp = (email,password)=>{
 export const signOut = () => firebase.auth().signOut();
 
 // usuarios 
-
 export const currentUser = () => firebase.auth().currentUser;
 
 export const userActive = (callback) => firebase.auth().onAuthStateChanged(callback)

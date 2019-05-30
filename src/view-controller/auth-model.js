@@ -50,10 +50,9 @@ export const signInGoogleOnSubmit = (event) => {
     const docRef = firebase.firestore().collection('users').doc(user.uid);
     docRef.get().then(function(doc) {
         if (doc.exists) {
-            //console.log("Document data:", doc.data());
+            console.log("Document data:", doc.data());
         } else {
-          setUser(user.uid,user.displayName,user.email,user.photoURL);
-            console.log("No such document!");
+          setUser(user.uid,user.displayName,user.email,user.photoURL);            
         }
     });
     changeHash('/home')
@@ -75,8 +74,7 @@ export const signInFacebookOnSubmit = () => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
         } else {
-          setUser(user.uid,user.displayName,user.email,user.photoURL);
-            console.log("No such document!");
+          setUser(user.uid,user.displayName,user.email,user.photoURL);            
         }
     });
     changeHash('/home')

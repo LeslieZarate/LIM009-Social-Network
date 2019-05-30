@@ -12,7 +12,7 @@ const init = () =>{
     firebase.initializeApp(config);  
     
     initRouter();
-  observer();
+    observer();
 }
  window.onload = init();
 

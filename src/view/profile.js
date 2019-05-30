@@ -2,7 +2,6 @@ import { updateUserPerfil } from "../view-controller/user-model.js"
 import {header} from "../view/header.js"
 export default (user) => {
   const profile = document.createElement('div');
-  console.log(user)
   const profileContent = `
   <header id="header-content">
   </header>
