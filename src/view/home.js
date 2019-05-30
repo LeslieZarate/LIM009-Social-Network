@@ -115,8 +115,8 @@ if(user != null){
 
   //  CARGANDO IMAGEN
   fileButton.addEventListener('change', (e)=> {    
-    const  file = e.target.files[0];  
-    console.log(file)
+    const  file = e.target.files[0];  // obtener el elemento cuando se habra la carpeta 
+    console.log(e.target.files)
     getImageLink(file,uploader);     
     
   });
