@@ -4,50 +4,63 @@ const fixtureData = {
     posts: {
       __doc__: {
         abc123: {
-            idUser: '1',
-            name: 'Daiana',
-            email: 'daiana@dramafever.com',
-            photo: 'abc.jpg',
-            birthdate : '12/03/1991',
-            infoPersonal:'Correr',
-            infoDoramas:'2 Vistos'
-        },
-        abc456: {
-            idUser: '2',
-            name: 'Diana',
-            email: 'diana@dramafever.com',
-            photo: 'abcd.jpg',
-            birthdate : '25/10/1995',
-            infoPersonal:'Leer',
-            infoDoramas:'1 Vistos'
-        },
+          idUser : 'abc123',
+          name : 'Daiana',
+          photo :  'abc.png',
+          email : 'diana@gmail.com',
+          birthdate : '18/05/1998',
+          infoDoramas :'Me gusta  los doramas',
+          infoPersonal :'Soy soltera',          
+        },       
       }
     }
   }
  };
- global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });import {addsetUser, setUser,updateUser} from '../src/controller/controller-firebase.js';
- describe('addsetUser', () => {
-  it('Debería poder agregar un usuario', (done) => {
-    return addsetUser('2','Leslie','leslie@gmail.com','abc.jpg')
-      .then(() => getUser(
-        (data) => {
-          const result = data.find((user) => user.data === 'probando agregar un usuario');
-          expect(result.data).toBe('probando agregar un usuario');
-          done()
-        }
-      ));
+
+global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
+import { setUser ,getUser,updateUser} from '../src/controller/user.js';
+describe('setUser', () => {
+  it('Debería porder guardar los datos del usuario', (done) => {
+    return setUser('abc789','fiorelly','fiorelly@gmail.com','abcde.png')
+      .then(() => {
+        getUser(
+          'abc789', data =>{
+            expect(data.idUser).toBe('abc789');
+            done()
+          })
+      });            
   });
- });
- describe('setUser', () => { 
-    it('Deberia ser una funcion:', ()=>{
-		expect(typeof setUser).toBe('function')
-		});
-
 });
-describe('updateUser', () => { 
-    it('Deberia ser una funcion:', ()=>{
-		expect(typeof updateUser).toBe('function')
-		});
-		
 
-});
+describe('UpdateUser', () => {
+  it('Debería porder guardar los datos del usuario', (done) => {
+    setUser('abc456','leslie','fiorelly@gmail.com','abcde.png')
+  return  updateUser('abc456','fiorelly','18/05/1997','tengo 21 años','Me gusta los doramas',)
+      .then(() => {
+        getUser(
+          'abc456', data =>{
+            expect(data.name).toEqual('fiorelly');     
+            expect(data.birthdate).toEqual('18/05/1997');
+            expect(data.infoDoramas).toEqual('Me gusta los doramas');
+            expect(data.infoPersonal).toEqual('tengo 21 años');
+            done()
+          })
+      });            
+  });
+}); 
+
+/*
+describe('getUser',()=>{
+  it('deberia ser una funcion ',()=>{
+    expect(typeof getUser).toBe('function')
+  });
+  it.only('Deberia poder mostrar los datos del documento con el id abc456 ' ,(done)=>{
+    const callback = (user)=>{
+      console.log(user)
+      //expect(data.idUser).toEqual('abc456')
+      done()
+    }       
+    getUser('abc456', callback);    
+  });
+}); 
+*/

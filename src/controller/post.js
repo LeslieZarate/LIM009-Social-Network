@@ -1,13 +1,13 @@
-export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,date,photoUrl) => {
-    return firebase.firestore().collection('posts').add({
+export const addPost = (idUser,userName,email,userPhoto,textPost,privacy,imgPost,date) => {
+  return firebase.firestore().collection('posts').add({
       idUser : idUser,
       name : userName,
       email : email,
       photo :  userPhoto,
       textPost : textPost,
       privacy : privacy,
-      date : date,  
-      image: photoUrl    
+      imgPost:imgPost,
+      date : date,      
       });
   }
   
@@ -33,7 +33,7 @@ export const getAllPosts = (callback)=>{
     querySnapshot.forEach((doc) => {
       posts.push({id:doc.id,...doc.data()});                
     });
-      callback(posts);
+    callback(posts);
   })
 }
   
@@ -48,18 +48,23 @@ export const getPublicPosts = (callback)=>{
       })
 }
 
-export const getImagePost = (file, cb) => {
-  //create ref
-  const storageRef = firebase.storage().ref()
-  const imageRef = storageRef.child(`images/${file.name}`)
+/*export const getImagePost = (file,uploader,callback) =>{
+  // Crear un storage ref
+  const storageRef = firebase.storage().ref();    //
+  const imageRef = storageRef.child(`img/${file.name}`)
+  
+  // Subir archivo
+  const task = imageRef.put(file);
+  return  task.on('state_changed',
+    (snapshot)=>{
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      uploader.value = percentage;      
+    },
+    (error)=>(error),
+    ()=>{
+      const downloadImg = task.snapshot.ref.getDownloadURL()
+      downloadImg.then(callback)
+    }
+  );
+}*/
 
-  //update file to fb storage
-  const task = imageRef.put(file)
-  return task.on('state_changed', (snapshot) => {
-  }, (error) => {
-  }, () => {
-    //get updated img url 
-    const downloadImg = task.snapshot.ref.getDownloadURL()
-    downloadImg.then(cb)
-  })
-}

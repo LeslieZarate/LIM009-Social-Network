@@ -2,7 +2,7 @@ import {header} from "./header.js"
 import {itemPost} from "./posts.js"
 import { itemPostPublic } from "./postsPublic.js";
 
-import{addPostSubmit,getImage} from "../view-controller/posts-model.js"
+import{addPostSubmit,getImageLink} from "../view-controller/posts-model.js"
 import { getAllPosts, getPublicPosts } from "../controller/post.js";
 
 export const userSection = (user) => {    
@@ -10,13 +10,13 @@ export const userSection = (user) => {
   
   divUser.innerHTML= `   
   ${user != null 
-    ?`<img class="img-section" src="img/img-section.jpg">
+    ?`<img class="img-section" src='img/img-section.jpg'/>
       <div class="perfil-user">
         <img alt ='photo-perfil' src="${user.photo}">
         <h2>${user.name}</h2>
       </div>` 
     
-    :`hola`}
+    :`<img class="img-section" src='img/logotipo.png'/>`}
     				
   `;    
   return divUser
@@ -30,29 +30,42 @@ export const ContentHome = (user)=>{
   </header>
 
   <main>
-  <div class="container-home p1 ">
+  <div class="container-home p1">
     <section class="profile-content m1" id="profile-content">
     <!-- AQUI VA USER SECTION -->
     </section>
 
-    <section class="posts-content m1 p2">
+    <section class="posts-content m1 ">
     ${user != null 
       ?`
-      <div class="form-post  p2 m1">
+      <div class="form-post p2">
       <form id="form-post">
         <textarea id="text-post"  placeholder="¿Qué estas pensando?"></textarea> 
-        <div class="btn-actions">
-          <select id="options-privacy" class = "options-privacy" >
-            <option value="publico">publico</option>
-            <option value="privado">privado</option>
-          </select>
 
-          <label>
-          <input type="file" name="fichero"  id="image-file" class="display-none">
-          <i id="image-file" class="fas fa-image icons m1" alt="descargar"></i>
+       
+
+        <div class="btn-actions"> 
+          <div class="action-sub1 mp">
+          
+          <label class="btn-label">
+            <input type="file" name="fichero"  id="image-file" class="display-none">            
+            <i id="image-file" class="fas fa-image icons-action btn-circle"></i>
           </label>
-          <button id="btn-save" class="btn-circle m1"><i class="fas fa-paper-plane icons-action"></i></button> 
 
+           <!-- <input type="file" accept="image/*" id="image-file" /> -->
+            <progress value="0" max="100" class="progress-bar mb4" id="uploader">0%</progress>
+          </div>
+
+
+          <div class="action-sub2 mp">
+            <select id="options-privacy" class = "options-privacy" >
+              <option value="publico">publico</option>
+              <option value="privado">privado</option>
+            </select>
+            
+            <button  id="btn-save" class="btn-circle mb4"><i class="fas fa-paper-plane icons-action"></i></button> 
+          </div>      
+          
         </div>               
       </form>					
     </div>
@@ -79,30 +92,39 @@ export const ContentHome = (user)=>{
   const sectionUser = home.querySelector("#profile-content") 
   sectionUser.appendChild(userSection(user)); 
 
-    //Agregando Imagen
-    const imageFile = home.querySelector('#image-file')
-    imageFile.addEventListener('change', (event) => {
-    const file = event.target.files;
-    getImage(file)
-    })
 
 // Agregando Notas
 if(user != null){
+  
+  const fileButton = home.querySelector(`#image-file`);  
+  const uploader = home.querySelector(`#uploader`);  
+  console.log(uploader)
+
   const btnSave = home.querySelector('#btn-save');
   btnSave.addEventListener('click',(e)=>{ 
-    e.preventDefault()    
+    e.preventDefault() 
+    const imgPost = fileButton.files.length;
+          
     const privacy = home.querySelector('#options-privacy').value;  
     const textPost = home.querySelector('#text-post').value;
-    const imageFile = home.querySelector('#image-file');
     if(textPost === ''){
       alert('Ingresar texto')
     }else{
-      const file = imageFile.files.length
-      addPostSubmit(textPost,privacy,file)
-      home.querySelector('#form-post')
+      addPostSubmit(textPost,privacy,imgPost)
+      home.querySelector('#form-post').reset()
     }
   });
+
+  //  cCARGANDO IMAGEN
+  fileButton.addEventListener('change', (e)=> {
+    
+    const  file = e.target.files[0];  
+    getImageLink(file,uploader);      
+    
+  });
 }
+
+
 
 
 // Mostrando todos los Post

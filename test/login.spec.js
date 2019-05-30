@@ -109,6 +109,3 @@ describe('activeUser', () => {
 			signIn('admin@dramafever.com.pe', '123456');	
 	});	
 });
-
-
-

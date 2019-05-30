@@ -31,7 +31,7 @@ export default () => {
 								<img src="https://i.ibb.co/xgLXQrr/ico-gg.png" alt="Google">
 							</a>							
 					</div>
-					<p>Aun no tines cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></p>				
+					<p>Aún no tienes cuenta <span><a href="#/account" id="sing-up">Regístrate</a></span></p>				
 				</article>			
 			</section>
 				

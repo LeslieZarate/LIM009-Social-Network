@@ -10,6 +10,8 @@ body{
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
+
+
 .p1{
   padding: 1%;
 }
@@ -37,6 +39,12 @@ body{
 }
 .mb{
   margin: 0% 1%;
+}
+.mb2{
+  margin: 0% 2%;
+}
+.mb4{
+  margin: 0% 0% 0% 5%;
 }
 .color-text-like{  
   font-weight: bold;
@@ -149,18 +157,20 @@ main{
 
 .form-group button{
   height: 40px;
-  width:50%;
+  width:40%;
   border-radius: 20px;
   border:none;
-  background: #5AC39B;
-  color: #522e4a;  
+  background: #522e4a;
+  color:#5AC39B;
   margin:1rem;
   font-weight: bold;
+  font-size: 17px;
 }
 
 .form-group button:hover{
-  background: #522e4a;
-  color:#5AC39B;
+  
+  background: #5AC39B;
+  color: #522e4a;  
   
 }
 
@@ -251,10 +261,11 @@ header{
   display: flex;
   flex-direction: column;
   align-items: start;
+  
 }
 .profile-content{
   border: 1px solid  #7c817e;
-  width: 100%;
+  width: 98%;
   height: auto;
   color:#5d3e4b;;
 }
@@ -284,19 +295,56 @@ header{
 }
 
 .posts-content{
-  width: 100%;
+  width: 98%;
   height: auto;
   display: flex;
   flex-direction: column;  
-  border: 1px solid  #7c817e;
+ /* border: 1px solid  #7c817e;*/
 }
+
+
+/*barra de progreso *
+
+#uploader {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50%;
+  margin-bottom: 100px;
+  color: red;
+  
+}
+*/
+progress { 
+  height: 20px;  
+  border-radius: 9px;  
+
+}
+
+progress::-webkit-progress-bar { 
+  background-color:white;  
+ 
+  
+ 
+  /* style rules */  
+}  
+progress::-webkit-progress-value {
+  background-color: #5AC39B;  
+  height: 20px;   
+  /* style rules */  
+}  
+
+
+
+
+
+
 
 .public-posts{
   width:100%;
 }
 
 .form-post{
-  width: 98%;
+  width: 100%;
   height: auto;
   border:2px solid #7c817e;
   border-radius: 5px; 
@@ -307,6 +355,20 @@ header{
   resize: none;
   border:1px solid #5AC39B;
   padding: 7px 20px 7px 20px;
+}
+
+.post-image{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+   justify-content: center;
+  
+  
+}
+.post-image img{
+  margin :5%;
+  width: 300px;
+  height: 300px;
 }
 
 
@@ -326,7 +388,7 @@ header{
   border-radius: 5px;
   color:#5AC39B;
 }
-
+/*
 .icons{
   cursor: pointer;
   font-size: 25px;
@@ -334,21 +396,76 @@ header{
 }
 i:hover{
   color: #765c66;
-}
+}*/
+
+ /*
+ 
+ plomo : #7c817e
+
+ #5AC39B
+ 
+ */
+
+
+ .btn-actions{
+  width: 100%;
+  display:flex;
+ }
+ .action-sub1{
+   width: 70%
+ }
+ .action-sub2{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   width: 30%;  
+
+ }
+
+
 
  .separating-line{
   color: #0056b2;
   margin: 0.5rem 0rem 0rem 0rem;
  }
 
+
+ .btn-label {  
+  
+  text-align: center;
+}
+
+.btn-label .btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 8px 0px;
+  border-radius: 50%;
+  background:#5AC39B;
+  border :1px solid  #5AC39B;
+  color:#522e4a ;
+  
+}
+
+.btn-label .btn-circle:hover{
+  background:#7c817e;
+  border :1px solid  #7c817e;
+  color:#522e4a ;
+}
+
+
+
+
+
+
+
+
+
 .icons-action{
   cursor: pointer;
   font-size: 20px;
   
 }
-
-.btn-circle {  
-
+.btn-circle {
   width: 40px;
   height: 40px;
   padding: 6px 0px;
@@ -395,13 +512,32 @@ i:hover{
   width: 100%;
  
 }
+
+.comment-sub1{
+  width: 85%;
+  
+}
+.comment-sub2{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 15%;  
+
+}
+
+
 .form-comment input{
-  width: 91%;
+  width: 100%;
   height: 35px;
   border-radius: 5px;
   border:1px solid #5AC39B;
   padding: 7px 20px 7px 20px;
 }
+
+
+
+
+
 
 .comment-post{  
   background:rgba(41, 15, 32, 0.1);
@@ -505,7 +641,7 @@ i:hover{
 
 
 /*---------------------------------------------------------*/
-          /*DESKTOP */
+          /*DESKPOT */
 /*---------------------------------------------------------*/
 
 @media (min-width: 768px) {
@@ -580,11 +716,19 @@ i:hover{
     }
 
     .posts-content{      
-      border: 1px solid  #7c817e;
+      
       width: 70%;
       height: auto;
     }
 
+    .comment-sub1{
+      width: 93%;
+      
+    }
+    .comment-sub2{
+      width: 7%;  
+    
+    }
 
 
 }
