@@ -7,7 +7,10 @@ import {currentUser} from "../controller/auth.js"
 import{getAllPostComments} from "../controller/posts-actions.js"
 import { itemComment } from "./comments.js";
 
+import { systemDate } from "../view-controller/posts-model.js"
+
 export const itemPost = (objPost) =>{
+  const date = new Date(((objPost.date).seconds )*1000);
   const divElement = document.createElement('div');
   divElement.classList.add('form-post','mp2')
   divElement.innerHTML = `  
@@ -27,7 +30,8 @@ export const itemPost = (objPost) =>{
         </div>
       `}
 
-      <p class ="color-text text-right" >Fecha de Publicación :${objPost.date}</p>
+      <p class ="color-text text-right" >Fecha de Publicación: ${systemDate(date)}</p>
+
 
       <hr class ="separating-line"/>
 

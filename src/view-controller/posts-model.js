@@ -8,7 +8,7 @@ const validate = (number) => {
   }
   return number 
 }
-const systemDate = (fullDate )=>{
+export const systemDate = (fullDate )=>{
   const getDate = validate(fullDate.getDate());
   const getMonth = validate(fullDate.getMonth()+1);
   const getFullYear = fullDate.getFullYear()
@@ -19,7 +19,7 @@ const systemDate = (fullDate )=>{
   
   const myClock = `${hours}:${minutes}:${seconds}`;
   const day = `${getDate}/${getMonth}/${getFullYear}`;
-  const date = `${day} - ${myClock}`
+  const date = `${myClock} - ${day}`
   return date;  
 }
 
@@ -35,8 +35,9 @@ export  const addPostSubmit = (textPost,privacy,imgPost) =>{
   const uploader = document.querySelector(`#uploader`); 
   uploader.classList.remove('display-none')
  
-  const fullDate= new Date();
-  const date = systemDate(fullDate); 
+  // const date = systemDate(fullDate); 
+  const date = firebase.firestore.FieldValue.serverTimestamp();
+  // firebase.firestore.Timestamp.fromDate(new Date());
   const user = firebase.auth().currentUser;  
   if(imgPost === 0){
     addPost(user.uid,user.displayName,user.email,user.photoURL,textPost,privacy,imgPost,date)
