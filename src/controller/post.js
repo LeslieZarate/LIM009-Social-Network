@@ -31,11 +31,6 @@ export const getAllPosts = (callback)=>{
   firebase.firestore().collection('posts').orderBy("date","desc").onSnapshot((querySnapshot)=>{
     const posts =[];
     querySnapshot.forEach((doc) => {
-     /* const dates = doc.data().date;
-      console.log(dates)
-      var myDate = new Date(dates.seconds*1000);
-      console.log(myDate)*/
-
       posts.push({id:doc.id,...doc.data()});                
     });
     callback(posts);
