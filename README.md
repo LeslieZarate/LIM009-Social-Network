@@ -2,7 +2,7 @@
 
 Drama Fever es una red social para aquellos amantes de los Doramas;en esta pueden compartir y comentar sobre sus doramas favoritos,pedir recomendaciones a través de sus publicaciones.
 
-![image](https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/img-/logo.png =50x50)
+![image](https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/img-/logo.png=50x50)
 
 
 # ¿Qué es un Dorama ?
@@ -21,11 +21,10 @@ Home Principal (User Logeado)
 
 Comentarios e Imagenes en Post
 
+Profile User
 ![Imagen 1][1]  ![Imagen 2][2]
 
 ![1]: https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/img-/comment-drama-fever.JPG
-
-Profile User
 
 ![2]: https://github.com/Daianatk/LIM009-Social-Network/blob/master/src/img/img-/profile-drama-fever.JPG
 
