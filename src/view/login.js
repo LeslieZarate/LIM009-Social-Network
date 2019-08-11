@@ -4,7 +4,7 @@ export default () => {
     const form = document.createElement('div');
     const formContent =`
 				<div class="container p1">
-				<section class="img-content center-content m1 p2 ">
+				<section class="img-content center-content m1-rlt p2 ">
 					<img src="img/intro.png">
 				</section>
 				<section class="forms-content  m1 p2 ">

@@ -24,6 +24,9 @@ body{
 .m1{
   margin: 1%;
 }
+.m1-rlt{
+  margin: 1% 1% -10% 1%;
+}
 .m2{
   margin: 2%;
 }
@@ -114,13 +117,14 @@ main{
 }
 .img-content  img{
   width :100%;
-  height:100%;
-/*  border:1px solid yellow; */
+  height:180px;
+  /*border:1px solid yellow; */
 }
 .forms-content{
   width: 98%;
   height: auto;
- /* background: blue;*/
+ /*background: blue;*/
+ font-size: 13px;
 }
 
 .register-login{  
@@ -133,7 +137,7 @@ main{
 }
 .img-logo {
   width :80%;
-  height:15vh;
+  height:8vh;
   margin: 3%;  
 }
 
@@ -143,6 +147,7 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .form-group input{
@@ -150,10 +155,10 @@ main{
    width: 100%;
    border-radius: 20px;
    border: 2px solid #c0e2e4;
-   margin: 0.5rem;
+   margin: 0rem;
    padding: 7px 20px 7px 20px;
+   font-size: 10px;
 }
-
 
 .form-group button{
   height: 40px;
@@ -162,25 +167,20 @@ main{
   border:none;
   background: #522e4a;
   color:#5AC39B;
-  margin:1rem;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 10px;
 }
 
-.form-group button:hover{
-  
+.form-group button:hover{  
   background: #5AC39B;
   color: #522e4a;  
-  
 }
-
 .login-social img{
   margin:1rem;
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
-
 span a{
   color: #5AC39B;
   font-weight: bold;
@@ -642,6 +642,10 @@ i:hover{
 /*---------------------------------------------------------*/
 
 @media (min-width: 768px) {
+
+  .m1-rlt{
+    margin: 1% 1% 1% 1%;
+  }
   /****** LOGIN  *****/
 
 .container{
@@ -666,6 +670,15 @@ i:hover{
   height: 85vh;
   display: flex;
   align-items: center;
+  font-size: 16px;
+}
+.form-group input{
+  font-size: 13px;
+  margin:0.3rem;
+}
+.form-group button{
+ font-size: 17px;
+ margin:0.5rem;
 }
 
 .img-logo {
